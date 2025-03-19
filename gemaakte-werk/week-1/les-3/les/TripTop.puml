@@ -13,13 +13,13 @@ System_Boundary("key_boundary", "TripTop", $tags="") {
     Container(systemboundary_key.db, "Database", $techn="SQL", $descr="De database, is verantwoordelijk voor het opslaan van reisgegevens en planningen", $tags="", $link="")
 }
 
-System_Ext(systemboundary_key.betalingservice, "BetalingsSysteem", "Verwerkt betalingen", $type="external system")
-System_Ext(systemboundary_key.id, "IdentityProviderAPI", "Beheert accounts", $type="external system")
-System_Ext(systemboundary_key.maps, "GoogleMaps", "Toont kaarten en routebeschrijvingen", $type="external system")
-System_Ext(systemboundary_key.vervoer, "VervoerderAPI", "Toont informatie over het vervoer", $type="external system")
-System_Ext(systemboundary_key.activiteiten, "ActiviteitenAPI", "Toont informatie over activiteiten", $type="external system")
-System_Ext(systemboundary_key.overnachtingen, "OvernachtingenAPI", "Toont informatie over overnachtingsmogelijkheden", $type="external system")
-System_Ext(systemboundary_key.auto, "AutoVerhuurAPI", "Toont informatie over autoverhuur", $type="external system")
+System_Ext(systemboundary_key.betalingservice, "BetalingsSysteem", "Betalings Service\nVerzorgt de betalingen voor de\nreizen (Bijv. Stripe, IDEAL, etc.)", $type="external system")
+System_Ext(systemboundary_key.id, "IdentityProviderAPI", "Identity Provider API\nBeheert alle Accounts voor TripTop\n(bijv. Google, Microsoft, etc.)", $type="external system")
+System_Ext(systemboundary_key.maps, "GoogleMaps", "Google Maps API\nBiedt kaarten en routebeschrijvingen", $type="external system")
+System_Ext(systemboundary_key.vervoer, "VervoerderAPI", "Biedt informatie over het (openbaar)\nvervoer in Nederland (bijv. NS, Arriva,\nBreng, KLM, etc.)", $type="external system")
+System_Ext(systemboundary_key.activiteiten, "ActiviteitenAPI", "Biedt informatie over activiteiten in\nNederland (bijv. TripAdvisor,\nGetYourGuide, etc.)", $type="external system")
+System_Ext(systemboundary_key.overnachtingen, "OvernachtingenAPI", "Biedt informatie over\novernachtingsmogelijkheden\nin Nederland (bijv. Booking.com,\nAirbnb, eigen beheer etc.)", $type="external system")
+System_Ext(systemboundary_key.auto, "AutoVerhuurAPI", "Biedt informatie over autoverhuur\nin Nederland (bijv. Hertz,\nEuropcar, etc.)", $type="external system")
 
 Rel(systemboundary_key.backend, systemboundary_key.betalingservice, "Maakt betalingen", $techn="HTTP/JSON", $tags="", $link="")
 Rel(systemboundary_key.backend, systemboundary_key.id, "Authenticatie", $techn="HTTP/JSON", $tags="", $link="")
