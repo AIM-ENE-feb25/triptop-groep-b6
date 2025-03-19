@@ -1,0 +1,40 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+top to bottom direction
+
+Person(Reiziger, "Reiziger", "Wil een reis binnen / naar Nederland maken")
+Person(ReisAgent, "ReisAgent", "Is beschikbaar voor hulp bij het plannen van een reis")
+
+System_Boundary("key_boundary", "ANS Platform", $tags="") {
+    Container(WebApplicatie, "Web Applicatie", "React.js")
+    Container(APIGateway, "API Gateway", "Springboot")
+    Container(Backend, "Backend", "Springboot")
+    Container(Database, "Database", "No-SQL")
+}
+
+System_Ext(BetalingsService, "Stripe API", "Verzorgt de betalingen\nvoor de reizen")
+System_Ext(IdentityProviderApi, "Google Oauth2 API", "Beheert alle accounts\nvoor Triptop")
+System_Ext(MapsApi, "Google Maps API", "Biedt kaarten en\nroutebeschrijvingen aan")
+System_Ext(VervoerderAPI, "NS Reis API", "Biedt informatie over het (openbaar)\nvervoer in Nederland")
+System_Ext(AcitiviteitenAPI, "TripAdvisor API", "Biedt informatie aan over activiteiten\n in Nederland")
+System_Ext(OvernachtingenAPI, "Booking.com API", "Biedt informatie over overnachtingsmogelijkheden\n in Nederland")
+System_Ext(AutoVerhuurAPI, "Hertz API", "Biedt informatie aan over autoverhuur\n in Nederland")
+
+Rel_D(Reiziger, WebApplicatie, "Navigeert naar", $techn="HTTP(S)", $tags="", $link="")
+Rel_D(ReisAgent, WebApplicatie, "Navigeert naar", $techn="HTTP(S)", $tags="", $link="")
+Rel_D(WebApplicatie, APIGateway, "Stuurt HTTP requests naar", $techn="HTTP", $tags="", $link="")
+Rel_D(APIGateway, Backend, "Stuurt verzoeken door naar", $techn="HTTP", $tags="", $link="")
+Rel_L(Backend, Database, "Slaat data op in", $techn="MongoURI", $tags="", $link="")
+
+Rel_D(Backend, IdentityProviderApi, "Verifieert de reiziger\ndoor middel van Oauth2", $techn="HTTP", $tags="", $link="")
+Rel_D(Backend, BetalingsService, "Verwerkt de betalingen van de reiziger", $techn="HTTP", $tags="", $link="")
+Rel_D(Backend, MapsApi, "Haalt een kaart van de locatie op", $techn="HTTP", $tags="", $link="")
+Rel_D(Backend, VervoerderAPI, "Haalt treinreis informatie op", $techn="HTTP", $tags="", $link="")
+Rel_D(Backend, AcitiviteitenAPI, "Haalt activiteiten op met een specifieke locatie", $techn="HTTP", $tags="", $link="")
+Rel_D(Backend, OvernachtingenAPI, "Haalt overnachtingen op met een specifieke locatie", $techn="HTTP", $tags="", $link="")
+Rel_D(Backend, AutoVerhuurAPI, "Haalt huur informatie van auto's op", $techn="HTTP", $tags="", $link="")
+
+@enduml
