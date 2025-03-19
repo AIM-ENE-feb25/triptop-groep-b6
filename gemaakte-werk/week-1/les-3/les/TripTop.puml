@@ -4,24 +4,36 @@
 !include <C4/C4_Context>
 !include <C4/C4_Container>
 
+Person(reiziger, "Reiziger", "Wilt zijn reis plannen en boeken", $type="person", $sprite="users")
+Person(reisbureau, "Reisbureau", "Wilt reisgegevens invoeren/updaten", $type="person", $sprite="users")
 
-
-Person(student, "Student", "Wilt zijn toets maken, heeft een studentenaccount", $sprite="users")
-Person(docent, "Docent", "Wilt toegang tot toetsen om ze te wijzigen en in te zien", $sprite="users")
-
-System_Boundary("key_boundary", "ANSIE", $tags="") {
-    Container(systemboundary_key.webapp, "Webapplicatie", $techn="React.js", $descr="De frontend voor de toetsapplicatie, hierop kan een student zijn antwoorden invoeren", $tags="", $link="")
-    Container(systemboundary_key.backend, "Backend", $techn="Spring Boot", $descr="De backend, is verantwoordelijk voor het opslaan naar de database. Ook laad het de vragen in voor de frontend", $tags="", $link="")
-    Container(systemboundary_key.db, "Database", $techn="SQL", $descr="De database, is verantwoordelijk voor het opslaan van toetsantwoorden", $tags="", $link="")
+System_Boundary("key_boundary", "TripTop", $tags="") {
+    Container(systemboundary_key.webapp, "Webapplicatie", $techn="React.js", $descr="Geeft visueel planning en reisgegeven weer", $tags="", $link="")
+    Container(systemboundary_key.backend, "Backend", $techn="Spring Boot", $descr="Slaat gemaakte planning op en haalt reisgegevens op", $tags="", $link="")
+    Container(systemboundary_key.db, "Database", $techn="SQL", $descr="De database, is verantwoordelijk voor het opslaan van reisgegevens en planningen", $tags="", $link="")
 }
-Container(systemboundary_key.osiris, "Osiris", $techn="?", $descr="Bevat informatie over de student en inschrijving voor toetsen", $tags="", $link="")
-Container(systemboundary_key.schoolyear, "Schoolyear", $techn="?", $descr="Toetsomgeving voor student", $tags="", $link="")
 
-Rel(student, systemboundary_key.webapp, "Verstuurt antwoorden", $techn="HTTP", $tags="", $link="")
-Rel(systemboundary_key.webapp, systemboundary_key.schoolyear, "Verstuurt gebruiker door naar Schoolyear-applicatie", $techn="", $tags="", $link="")
-Rel(systemboundary_key.backend, systemboundary_key.osiris, "Wijzigt gegevens van studenten", $techn="HTTP", $tags="", $link="")
-Rel(systemboundary_key.webapp, systemboundary_key.backend, "Verstuurt antwoorden en vraagt vragen op", $techn="HTTP/JSON", $tags="", $link="")
-Rel(systemboundary_key.backend, systemboundary_key.db, "Leest en schrijft gegevens", $techn="IP/TCP/SQL", $tags="", $link="")
+System_Ext(systemboundary_key.betalingservice, "BetalingsSysteem", "Verwerkt betalingen", $type="external system")
+System_Ext(systemboundary_key.id, "IdentityProviderAPI", "Beheert accounts", $type="external system")
+System_Ext(systemboundary_key.maps, "GoogleMaps", "Toont kaarten en routebeschrijvingen", $type="external system")
+System_Ext(systemboundary_key.vervoer, "VervoerderAPI", "Toont informatie over het vervoer", $type="external system")
+System_Ext(systemboundary_key.activiteiten, "ActiviteitenAPI", "Toont informatie over activiteiten", $type="external system")
+System_Ext(systemboundary_key.overnachtingen, "OvernachtingenAPI", "Toont informatie over overnachtingsmogelijkheden", $type="external system")
+System_Ext(systemboundary_key.auto, "AutoVerhuurAPI", "Toont informatie over autoverhuur", $type="external system")
+
+Rel(systemboundary_key.backend, systemboundary_key.betalingservice, "Maakt betalingen", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.id, "Authenticatie", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.maps, "Haalt routes en map op", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.vervoer, "Haalt verschillende vervoer mogelijkheden op", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.activiteiten, "Haalt activiteiten op", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.overnachtingen, "Haalt overnachtingen op", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.auto, "Haalt verhuur-autos op", $techn="HTTP/JSON", $tags="", $link="")
+
+Rel(reiziger, systemboundary_key.webapp, "Leest reisgegevens en maakt planning", $techn="", $tags="", $link="")
+Rel(reisbureau, systemboundary_key.webapp, "Wijzigt en voert reisgegevens in", $techn="", $tags="", $link="")
+
+Rel(systemboundary_key.webapp, systemboundary_key.backend, "Vraagt/verstuurt reisgegevens en planningen", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.db, "Leest en schrijft reisgegevens", $techn="IP/TCP/SQL", $tags="", $link="")
 
 SHOW_LEGEND()
 @enduml
