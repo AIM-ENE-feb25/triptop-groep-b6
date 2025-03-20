@@ -1,0 +1,40 @@
+@startuml containerdiagram van ... voor het voor triptop systeem
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+top to bottom direction
+
+Title Container diagram van ... voor Triptop systeem
+
+Person(Reiziger, "Reiziger", "Wil een reis binnen Nederland maken")
+Person(Reisagent, "Reisagent", "Is beschikbaar voor hulp bij het plannen van een reis voor een reiziger")
+
+System_Boundary("key_boundary", "triptop applicatie", $tags="") {
+    Container(WebApplicatie, "Web Applicatie", "React.js", "Voor reizigers en reisbureaus om reizen te plannen en beheren via verschillende gebruikersinterfaces.")
+    Container(APIGateway, "API Gateway", "Spring Boot", "Beheert HTTP-verzoeken")
+    Container(Backend, "Backend", "Spring Boot", "Verwerkt reisaanvragen, beheert gebruikersdata en communiceert met externe diensten.")
+    Container(Database, "Database", "SQL H2", "Slaat reis- en gebruikersdata op")
+}
+
+System_Ext(BetalingsAPI, "Stripe API", "Verzorgt de betalingen voor de reizen")
+System_Ext(IdentityProviderAPI, "Google OAuth2 API", "Beheert alle accounts voor Triptop")
+System_Ext(MapsAPI, "Google Maps API", "Biedt kaarten en routebeschrijvingen aan")
+System_Ext(VervoerderAPI, "Google Transit API", "Biedt informatie over het openbaar vervoer in Nederland")
+System_Ext(ActiviteitenAPI, "TripAdvisor API", "Biedt informatie over activiteiten in Nederland")
+System_Ext(OvernachtingenAPI, "Booking.com API", "Biedt informatie over overnachtingen in Nederland")
+System_Ext(AutoVerhuurAPI, "Hertz API", "Biedt informatie over autoverhuur in Nederland")
+
+Rel_D(Reiziger, WebApplicatie, "Navigeert naar", $techn="HTTP(S)")
+Rel_D(Reisagent, WebApplicatie, "Navigeert naar", $techn="HTTP(S)")
+Rel_D(WebApplicatie, APIGateway, "Stuurt HTTP requests naar", $techn="HTTP")
+Rel_D(APIGateway, Backend, "Stuurt verzoeken door naar", $techn="HTTP")
+Rel_L(Backend, Database, "Slaat data op in", $techn="jbdc")
+
+Rel_D(Backend, IdentityProviderAPI, "Verifieert de reiziger\ndoor middel van OAuth2", $techn="HTTP")
+Rel_D(Backend, BetalingsAPI, "Verwerkt de betalingen van de reiziger", $techn="HTTP")
+Rel_D(Backend, MapsAPI, "Haalt een kaart van de locatie op", $techn="HTTP")
+Rel_D(Backend, VervoerderAPI, "Haalt treinreis informatie op", $techn="HTTP")
+Rel_D(Backend, ActiviteitenAPI, "Haalt activiteiten op met een specifieke locatie", $techn="HTTP")
+Rel_D(Backend, OvernachtingenAPI, "Haalt overnachtingen op met een specifieke locatie", $techn="HTTP")
+Rel_D(Backend, AutoVerhuurAPI, "Haalt huur informatie van auto's op", $techn="HTTP")
+
+SHOW_LEGEND()
+@enduml
