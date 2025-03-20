@@ -102,7 +102,6 @@ De applicatie "TripTop" maakt gebruik van externe API's om informatie over reize
 #### Transportmiddelen
 De vervoermogelijkheden binnen de applicatie richten zich voornamelijk op auto's, treinen en bussen. Vliegtuigen, boten en andere transportmiddelen zijn niet relevant voor deze applicatie.
 
-
 #### Locatie
 De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toegankelijk buiten Nederland.
 
