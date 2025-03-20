@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 export default function Map({currentMap}) {
 
     const ShowMap = ReactMapboxGl({
-        accessToken: 'pk.eyJ1IjoiaXRzbWVqdWxpdXMiLCJhIjoiY2t1Mm40MjJ5M3dhNDJvbnFwYnZtYXhzNSJ9.l72sbr6vbkpKe7MWYRMGsA'
+        accessToken: process.env.REACT_APP_MAPBOX_PUBLIC_TOKEN
     })
 
     return (
