@@ -70,8 +70,44 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
 > [!IMPORTANT]
 > Beschrijf zelf de beperkingen die op voorhand bekend zijn die invloed hebben op keuzes die wel of niet gemaakt kunnen of mogen worden.
 
-## 6. Principles
+### Het project
+Hier worden algemene constraints benoemd binnen het project. 
 
+#### Proof of concept
+Het project loopt van 31-03-2025 tot 04-04-2025, waarbij de laatste week gericht is op het bouwen van functionaliteit. Deze korte tijdsduur beperkt de hoeveelheid functionaliteit die uitgewerkt kan worden. Het eindresultaat is een proof of concept, zodat mogelijke uitdagingen en sterke punten gevonden kunnen worden.
+
+De front-end valt buiten de scope van dit project. De focus ligt op de back-end, waarbij de prototypes specifiek hierop gericht zullen zijn.
+
+#### Integratie tussen prototypes
+Door de korte tijdsduur is volledige integratie mogelijk niet haalbaar.
+
+#### Teamgrootte
+Het team bestaat uit 4 leden, bestaande uit studenten:
+- Julius Morselt
+- Thieme Wijgman
+- Bryan Velthuizen
+- Daniel Sung
+
+Dit beperkt de mogelijke functionaliteit die gebouwd kan worden
+
+### De applicatie
+Hier worden de constraints binen de applicatie benoemd.
+
+#### Database
+De gekozen database is een H2-database, een in-memory database. Het nadeel hiervan is dat de gegevens verloren gaan wanneer de applicatie stopt, tenzij we ze expliciet in een bestand opslaan. Dit kan de persistentie beperken in een applicatie die voor het publiek beschikbaar moet zijn.
+
+#### Afhankelijkheid van externe systemen
+De applicatie "TripTop" maakt gebruik van externe API's om informatie over reizen, vervoersmogelijkheden en kaarten op te halen. Bij een storing in deze systemen zijn deze functionaliteiten niet meer beschikbaar.
+
+#### Transportmiddelen
+De vervoermogelijkheden binnen de applicatie richten zich voornamelijk op auto's, treinen en bussen. Vliegtuigen, boten en andere transportmiddelen zijn niet relevant voor deze applicatie.
+
+
+#### Locatie
+De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toegankelijk buiten Nederland.
+
+
+## 6. Principles
 > [!IMPORTANT]
 > Beschrijf zelf de belangrijkste architecturele en design principes die zijn toegepast in de software.
 
