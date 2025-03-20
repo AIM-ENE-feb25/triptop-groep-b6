@@ -8,9 +8,9 @@ Person(reiziger, "Reiziger", "Wilt zijn reis plannen en boeken", $type="person",
 Person(reisbureau, "Reisbureau", "Wilt reisgegevens invoeren/updaten", $type="person", $sprite="users")
 
 System_Boundary("key_boundary", "TripTop", $tags="") {
-    Container(systemboundary_key.webapp, "Webapplicatie", $techn="React.js", $descr="Geeft visueel planning en reisgegeven weer", $tags="", $link="")
+    Container(systemboundary_key.webapp, "Webapplicatie", $techn="React.js", $descr="Geeft visueel planningen en reisgegevens weer", $tags="", $link="")
     Container(systemboundary_key.backend, "Backend", $techn="Spring Boot", $descr="Slaat gemaakte planning op en haalt reisgegevens op", $tags="", $link="")
-    Container(systemboundary_key.db, "Database", $techn="SQL", $descr="De database, is verantwoordelijk voor het opslaan van reisgegevens en planningen", $tags="", $link="")
+    Container(systemboundary_key.db, "Database", $techn="SQL", $descr="Verantwoordelijk voor het opslaan van reisgegevens en planningen", $tags="", $link="")
 }
 
 System_Ext(systemboundary_key.betalingservice, "BetalingsSysteem", "Betalings Service\nVerzorgt de betalingen voor de\nreizen (Bijv. Stripe, IDEAL, etc.)", $type="external system")
