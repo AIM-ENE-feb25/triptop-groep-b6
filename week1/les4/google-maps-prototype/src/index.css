@@ -23,11 +23,7 @@ code {
 
 
 .menuclass {
-  position: absolute;
   z-index: 100;
-  top: 20px;
-  left: 50%;
-  transform: translate(-50%);
   display: inline-block;
   text-align: left;
 }
@@ -105,4 +101,21 @@ code {
   background-color: #f3f4f6;
   color: #111827;
   outline: none;
+}
+
+
+.goto {
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.information {
+  position: absolute;
+  display: flex;
+  gap: 2em;
+  padding: 2em;
+  top: 20px;
+  left: 20px;
 }

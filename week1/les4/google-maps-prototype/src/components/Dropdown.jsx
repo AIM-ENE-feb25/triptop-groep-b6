@@ -10,7 +10,7 @@ export default function Dropdown({setCurrentMap}) {
 		<Menu as="div" className="menuclass">
 			<div>
 				<MenuButton className="menubutton">
-					Options
+					Map
 					<ChevronDownIcon
 						aria-hidden="true"
 						className="iconclass"
