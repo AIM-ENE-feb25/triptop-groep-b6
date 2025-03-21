@@ -1,10 +1,10 @@
 
+# Stripe
+Voor betalingssysteem
 ## Handige Bronnen
-**API:** https://docs.stripe.com/api
+- API: https://docs.stripe.com/api
 
-**Test gegevens:** https://docs.stripe.com/testing 
-
-
+- Test gegevens: https://docs.stripe.com/testing 
 
 ## Curl
 ### Test betaling van 500 gbp
@@ -73,4 +73,14 @@ curl https://api.stripe.com/v1/payment_intents ^
   "transfer_data": null,
   "transfer_group": null
 }
+```
+
+
+### Authentication
+
+**cURL**
+```cmd
+curl https://api.stripe.com/v1/charges ^
+  -u sk_test_51R50t1Q9JjyTDaBHH83oxB3T1Bsk5I5zFZ7id3gGnRNlx4Cdml4wT5Go5Ca7HUSbpzeqzLTOhiuQOPzx4I8KPtQa00tKmBe7wr:
+# The colon prevents curl from asking for a password.
 ```
