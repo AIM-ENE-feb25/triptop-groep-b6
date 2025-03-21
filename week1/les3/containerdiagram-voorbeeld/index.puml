@@ -1,0 +1,32 @@
+startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+top to bottom direction
+
+title Container diagram for ANS
+
+Person(Student, "Student", "Student")
+Person(Teacher, "Teacher", "Teacher")
+
+System_Boundary("key_boundary", "ANS Platform", $tags="") {
+    Container(WebApplication, "WebApplication", "Interface ANS", "Shows the user the exam questions.")
+    Container(AdminApplication, "TeacherApplication", "Interface voor nakijken", "Allows the teacher to create and delete exam questions.")
+    Container(Backend, "Backend", "Sprintboot", "Handles between the API Gateway and the Database.")
+    Container(Database, "Database", "Mongo", "Stores the exam questions and student answers.")
+    Container(APIGateway, "API Gateway", "Springboot", "Handles the communication between the WebApplication and the Backend.")
+ }
+
+System_Ext(Mailer, "Mailer", "Sends emails to students")
+System_Ext(Osiris, "Osiris", "Contains registered students for exams")
+System_Ext(Schoolyear, "Schoolyear", "Secure ANS so it can only be used in a safe browser")
+
+Rel(Student, WebApplication, "Answering exam questions", $techn="HTTP", $tags="", $link="")
+Rel(Teacher, AdminApplication, "Creating and deleting exam questions", $techn="HTTP", $tags="", $link="")
+Rel(WebApplication, APIGateway, "Maakt API verzoek", $tags="", $link="")
+Rel(AdminApplication, APIGateway, "Maakt API verzoek", $tags="", $link="")
+Rel(APIGateway, Backend, "Verstuurt verzoeken door", $techn="HTTP", $tags="", $link="")
+Rel_L(Backend, Database, "Slaat examen vragen en student antwoorden op", $techn="MongoURI", $tags="", $link="")
+
+@enduml
