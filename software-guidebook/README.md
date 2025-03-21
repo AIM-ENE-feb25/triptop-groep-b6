@@ -199,7 +199,7 @@ De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toega
 
 ### 7.1. Containers
 
-![Container Diagram](./diagrammen/container-diagram-Container_diagram_van_____voor_Triptop_systeem.svg)
+![Container Diagram](./diagrammen/containerdiagram_van_____voor_het_voor_triptop_systeem-Container_diagram_van_____voor_Triptop_systeem.svg)
 
 #### 7.1.1 Dynamic Diagram 1: Inloggen
 
