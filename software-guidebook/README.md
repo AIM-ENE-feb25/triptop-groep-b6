@@ -184,6 +184,10 @@ De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toega
 
 ![Container Diagram](./diagrammen/container-diagram-Container_diagram_van_____voor_Triptop_systeem.svg)
 
+#### 7.1.1 Dynamic Diagram 1: Inloggen
+
+![Dynamic diagram Inloggen](./diagrammen/dynamicLogin-Dynamic_diagram_van_Inloggen_voor_de_Triptop_Applicatie.png)
+
 > [!IMPORTANT]
 > Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
 
