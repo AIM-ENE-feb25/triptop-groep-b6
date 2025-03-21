@@ -30,7 +30,7 @@ Rel_L(Backend, Database, "Slaat data op in", $techn="jbdc")
 
 Rel_D(Backend, IdentityProviderAPI, "Verifieert de reiziger\ndoor middel van OAuth2", $techn="HTTP")
 Rel_D(Backend, BetalingsAPI, "Verwerkt de betalingen van de reiziger", $techn="HTTP")
-Rel_D(Backend, MapsAPI, "Haalt een kaart van de locatie op", $techn="HTTP")
+Rel_D(WebApplicatie, MapsAPI, "Haalt een kaart van de locatie op", $techn="HTTP")
 Rel_D(Backend, VervoerderAPI, "Haalt treinreis informatie op", $techn="HTTP")
 Rel_D(Backend, ActiviteitenAPI, "Haalt activiteiten op met een specifieke locatie", $techn="HTTP")
 Rel_D(Backend, OvernachtingenAPI, "Haalt overnachtingen op met een specifieke locatie", $techn="HTTP")
