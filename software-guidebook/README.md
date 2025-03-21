@@ -39,8 +39,8 @@ een brede groep reizigers die zelf hun reis / trip willen samenstellen.
 ### Context diagram
 
 | ![Context diagram](diagrammen/context-diagram-Context_diagram_voor_het_TripTop_systeem.svg) |
-|----------------------------------------------------------- 
-| Het context diagram                                       |
+|--------------------------------------------------------------------------------------------- 
+| Het context diagram                                                                         |
 
 Zoals er in het context diagram te zien is, is de Triptop-applicatie het centrale punt van de software. De applicatie
 heeft meerdere externe systemen waarmee het communiceert, deze sytemen zijn van belang voor het correct functioneren van
@@ -139,18 +139,26 @@ als belangrijk:
 > of mogen worden.
 
 ### Het project
-Hier worden algemene constraints benoemd binnen het project. 
+
+Hier worden algemene constraints benoemd binnen het project.
 
 #### Proof of concept
-Het project loopt van 31-03-2025 tot 04-04-2025, waarbij de laatste week gericht is op het bouwen van functionaliteit. Deze korte tijdsduur beperkt de hoeveelheid functionaliteit die uitgewerkt kan worden. Het eindresultaat is een proof of concept, zodat mogelijke uitdagingen en sterke punten gevonden kunnen worden.
 
-De front-end valt buiten de scope van dit project. De focus ligt op de back-end, waarbij de prototypes specifiek hierop gericht zullen zijn.
+Het project loopt van 31-03-2025 tot 04-04-2025, waarbij de laatste week gericht is op het bouwen van functionaliteit.
+Deze korte tijdsduur beperkt de hoeveelheid functionaliteit die uitgewerkt kan worden. Het eindresultaat is een proof of
+concept, zodat mogelijke uitdagingen en sterke punten gevonden kunnen worden.
+
+De front-end valt buiten de scope van dit project. De focus ligt op de back-end, waarbij de prototypes specifiek hierop
+gericht zullen zijn.
 
 #### Integratie tussen prototypes
+
 Door de korte tijdsduur is volledige integratie mogelijk niet haalbaar.
 
 #### Teamgrootte
+
 Het team bestaat uit 4 leden, bestaande uit studenten:
+
 - Julius Morselt
 - Thieme Wijgman
 - Bryan Velthuizen
@@ -159,22 +167,31 @@ Het team bestaat uit 4 leden, bestaande uit studenten:
 Dit beperkt de mogelijke functionaliteit die gebouwd kan worden
 
 ### De applicatie
+
 Hier worden de constraints binnen de applicatie benoemd.
 
 #### Database
-De gekozen database is een H2-database, een in-memory database. Het nadeel hiervan is dat de gegevens verloren gaan wanneer de applicatie stopt, tenzij we ze expliciet in een bestand opslaan. Dit kan de persistentie beperken in een applicatie die voor het publiek beschikbaar moet zijn.
+
+De gekozen database is een H2-database, een in-memory database. Het nadeel hiervan is dat de gegevens verloren gaan
+wanneer de applicatie stopt, tenzij we ze expliciet in een bestand opslaan. Dit kan de persistentie beperken in een
+applicatie die voor het publiek beschikbaar moet zijn.
 
 #### Afhankelijkheid van externe systemen
-De applicatie "TripTop" maakt gebruik van externe API's om informatie over reizen, vervoersmogelijkheden en kaarten op te halen. Bij een storing in deze systemen zijn deze functionaliteiten niet meer beschikbaar.
+
+De applicatie "TripTop" maakt gebruik van externe API's om informatie over reizen, vervoersmogelijkheden en kaarten op
+te halen. Bij een storing in deze systemen zijn deze functionaliteiten niet meer beschikbaar.
 
 #### Transportmiddelen
-De vervoermogelijkheden binnen de applicatie richten zich voornamelijk op auto's, treinen en bussen. Vliegtuigen, boten en andere transportmiddelen zijn niet relevant voor deze applicatie.
+
+De vervoermogelijkheden binnen de applicatie richten zich voornamelijk op auto's, treinen en bussen. Vliegtuigen, boten
+en andere transportmiddelen zijn niet relevant voor deze applicatie.
 
 #### Locatie
+
 De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toegankelijk buiten Nederland.
 
-
 ## 6. Principles
+
 > [!IMPORTANT]
 > Beschrijf zelf de belangrijkste architecturele en design principes die zijn toegepast in de software.
 
@@ -221,11 +238,10 @@ Wij willen ervoor zorgen dat de eindgebruiker een interactieve map tot zijn of h
 | Per uur    | --          | +      |
 | Kosten     | ++          | ++     |
 
-
-
 #### Decision
 
-Om er voor te zorgen dat de gebruiker op zijn huidige locatie een map heeft om de omgeving te verkenning, gebruiken wij de Mapbox API om deze map in te laden. Het limiet van de gratis tiel is 50.000 requests per uur.
+Om er voor te zorgen dat de gebruiker op zijn huidige locatie een map heeft om de omgeving te verkenning, gebruiken wij
+de Mapbox API om deze map in te laden. Het limiet van de gratis tiel is 50.000 requests per uur.
 
 #### Status
 
@@ -233,150 +249,119 @@ Accepted
 
 #### Consequences
 
-De voordelen van Mapbox tegenover Google Maps: Mapbox bied een breede variatie aan verschillende mappen. Ook kun je veel verzoeken doen op de free tier. De code snippets zijn ook straight forward.
+De voordelen van Mapbox tegenover Google Maps: Mapbox bied een breede variatie aan verschillende mappen. Ook kun je veel
+verzoeken doen op de free tier. De code snippets zijn ook straight forward.
 
-De nadelen van Mapbox tegenover Google Maps: Mapbox heeft [veel verschillende api's om verschillende dingen aan te vragen](https://www.mapbox.com/pricing). Verder zijn er geen nadelen.
+De nadelen van Mapbox tegenover Google Maps: Mapbox
+heeft [veel verschillende api's om verschillende dingen aan te vragen](https://www.mapbox.com/pricing). Verder zijn er
+geen nadelen.
 
-### 8.2. ADR-002 TITLE
+### 8.2. ADR-002: Identity provider API keuze
 
-> [!TIP]
-> These documents have names that are short noun phrases. For example, "ADR 1: Deployment on Ruby on Rails 3.0.10" or "
-> ADR 9: LDAP for Multitenant Integration". The whole ADR should be one or two pages long. We will write each ADR as if
-> it
-> is a conversation with a future developer. This requires good writing style, with full sentences organized into
-> paragraphs. Bullets are acceptable only for visual style, not as an excuse for writing sentence fragments. (Bullets
-> kill
-> people, even PowerPoint bullets.)
+Datum: 21-03-2025
 
-#### Context
+##### Status
 
-> [!TIP]
-> This section describes the forces at play, including technological, political, social, and project local. These forces
-> are probably in tension, and should be called out as such. The language in this section is value-neutral. It is simply
-> describing facts about the problem we're facing and points out factors to take into account or to weigh when making
-> the
-> final decision.
+Accepted
 
-#### Considered Options
+##### Context
 
-> [!TIP]
-> This section describes the options that were considered, and gives some indication as to why the chosen option was
-> selected.
+Er moet een identityprovider komen voor de triptop website. Deze moet moet dus een inlog functie hebben. Het is meer
+werk om zelf een loginsyteem te maken vergeleken met bestaande API’s zoals Google Oauth2, Microsoft Oauth2 of Discord
+Oauth2.
 
-#### Decision
+##### Considered Options
 
-> [!TIP]
-> This section describes our response to the forces/problem. It is stated in full sentences, with active voice. "We
-> will …"
+| Forces                 | Google Oauth2 | Microsoft Oauth2 | Discord Oauth2 |
+|------------------------|---------------|------------------|----------------|
+| Populariteit           | ++            | +                | +`*`           |
+| Gebruikers informatie  | ++            | +                | -              |
+| Beveiliging            | ++            | ++               | 0 `**`         | 
+| Eenvoudige intergratie | +             | 0                | ++             |
+| Kosten                 | 0             | 0                | +              |
 
-#### Status
+`*` -> Populair onder mensen die gebruik maken van discord, alleen ligt bij deze casus buiten de scope.
+`**` -> Geschikter voor informele authenticatie, mist geavanceerde beveiligingsmaatregelen.
 
-> [!TIP]
-> A decision may be "proposed" if the project stakeholders haven't agreed with it yet, or "accepted" once it is agreed.
-> If a later ADR changes or reverses a decision, it may be marked as "deprecated" or "superseded" with a reference to
-> its
-> replacement.
+##### Decision
 
-#### Consequences
+Het gebruik van een identity provider moet goed beveiligd zijn voor een productie-applicatie. Tevens omdat het team nu
+aan het kijken is naar het maken van prototypes ligt beveiliging nu op een lager pitje, maar deze wordt niet vergeten.
+Doordat Google over het algemeen populairder is vergeleken met Discord en Microsoft is de keuze van het team geworden
+dat Google de identityprovider van Triptop wordt.
 
-> [!TIP]
-> This section describes the resulting context, after applying the decision. All consequences should be listed here, not
-> just the "positive" ones. A particular decision may have positive, negative, and neutral consequences, but all of them
-> affect the team and project in the future.
+##### Consequences
 
-### 8.3. ADR-003 TITLE
+* Bij het veranderen van de scope naar een professionelere setting dan een Reisboekings applicatie wordt het door het
+  team aangeraden om te veranderen van Google Oauth2 naar Microsoft Oauth2.
 
-> [!TIP]
-> These documents have names that are short noun phrases. For example, "ADR 1: Deployment on Ruby on Rails 3.0.10" or "
-> ADR 9: LDAP for Multitenant Integration". The whole ADR should be one or two pages long. We will write each ADR as if
-> it
-> is a conversation with a future developer. This requires good writing style, with full sentences organized into
-> paragraphs. Bullets are acceptable only for visual style, not as an excuse for writing sentence fragments. (Bullets
-> kill
-> people, even PowerPoint bullets.)
+### 8.3. ADR-003: Gebruik van public transit API
 
-#### Context
+##### Status
 
-> [!TIP]
-> This section describes the forces at play, including technological, political, social, and project local. These forces
-> are probably in tension, and should be called out as such. The language in this section is value-neutral. It is simply
-> describing facts about the problem we're facing and points out factors to take into account or to weigh when making
-> the
-> final decision.
+Accepted
 
-#### Considered Options
+##### Context
 
-> [!TIP]
-> This section describes the options that were considered, and gives some indication as to why the chosen option was
-> selected.
+Voor ons project hebben we een API nodig die openbaar vervoersgegevens kan leveren, zoals dienstregelingen en routes.
 
-#### Decision
+##### Considered Options
 
-> [!TIP]
-> This section describes our response to the forces/problem. It is stated in full sentences, with active voice. "We
-> will …"
+| Force                             | Google Transit API | NS API | 9292 API |
+|-----------------------------------|--------------------|--------|----------|
+| **Dekking**                       | ++                 | -      | +        |
+| **Realtime data**                 | ++                 | +      | +        |
+| **Kosten**                        | -                  | 0      | 0        |
+| **Gebruiksgemak**                 | ++                 | +      | +        |
+| **Integratiemogelijkheden**       | ++                 | +      | 0        |
+| **Ondersteuning en documentatie** | ++                 | +      | -        |
+| **Schaalbaar**                    | ++                 | +      | 0        |
+| **Nederland-specifieke data**     | 0                  | ++     | ++       |
 
-#### Status
+##### Decision
 
-> [!TIP]
-> A decision may be "proposed" if the project stakeholders haven't agreed with it yet, or "accepted" once it is agreed.
-> If a later ADR changes or reverses a decision, it may be marked as "deprecated" or "superseded" with a reference to
-> its
-> replacement.
+We hebben gekozen voor Google Transit, omdat wij hier de meeste voordelen in zien. Het is niet specifiek voor
+Nederlandse data, maar werkt wel goed in Nederland. Met zicht op de toekomst is dit ook de meest schaalbare API voor
+eventuele internationale ambities. Het is ook de API met de meeste dekking, de beste realtime data, het meest
+gebruiksvriendelijk en met de meeste integratiemogelijkheden en documentatie.
 
-#### Consequences
+##### Consequences
 
-> [!TIP]
-> This section describes the resulting context, after applying the decision. All consequences should be listed here, not
-> just the "positive" ones. A particular decision may have positive, negative, and neutral consequences, but all of them
-> affect the team and project in the future.
+Het gevolg van het kiezen van deze API is dat we gemakkelijk routes met het OV kunnen voorstellen. Aangezien we ook de
+Google Maps API gebruiken, kan dit goed samenwerken met elkaar. Je kan hierdoor een route invullen en dan de daarbij
+horende OV-mogelijkheden bekijken.
 
-### 8.4. ADR-004 TITLE
+### 8.4. ADR-004: Database
 
-> [!TIP]
-> These documents have names that are short noun phrases. For example, "ADR 1: Deployment on Ruby on Rails 3.0.10" or "
-> ADR 9: LDAP for Multitenant Integration". The whole ADR should be one or two pages long. We will write each ADR as if
-> it
-> is a conversation with a future developer. This requires good writing style, with full sentences organized into
-> paragraphs. Bullets are acceptable only for visual style, not as an excuse for writing sentence fragments. (Bullets
-> kill
-> people, even PowerPoint bullets.)
+##### Context
 
-#### Context
+Er moet een database worden gekozen voor de TripTop applicatie, het moet voor een PoC zijn. Hierin worden
+gebruikersgegevens/reisinformatie opgeslagen worden.
 
-> [!TIP]
-> This section describes the forces at play, including technological, political, social, and project local. These forces
-> are probably in tension, and should be called out as such. The language in this section is value-neutral. It is simply
-> describing facts about the problem we're facing and points out factors to take into account or to weigh when making
-> the
-> final decision.
+##### Considered Options
 
-#### Considered Options
+| **Forces**            | Microsoft SQL | No-SQL | H2 in memory |
+|-----------------------|---------------|--------|--------------|
+| Eenvoudigheid         | +             | +      | +            |
+| Snelheid              | -             | +      | ++           |
+| Ease of development   | 0             | 0      | +            |
+| Ervaring met database | ++            | 0      | ++           |
 
-> [!TIP]
-> This section describes the options that were considered, and gives some indication as to why the chosen option was
-> selected.
+##### Decision
 
-#### Decision
+Na een teams-call besloten we te kiezen voor de H2 in memory database. We hebben hiervoor gekozen omdat we allemaal
+gewend zijn aan SQL. Ook is het in memory, wat developen makkelijker maakt. Gegevens worden gewist na afsluiten van de
+applicatie. Persistentie is ook niet nodig, het is puur voor een PoC applicatie.
 
-> [!TIP]
-> This section describes our response to the forces/problem. It is stated in full sentences, with active voice. "We
-> will …"
+##### Status
 
-#### Status
+Accepted
 
-> [!TIP]
-> A decision may be "proposed" if the project stakeholders haven't agreed with it yet, or "accepted" once it is agreed.
-> If a later ADR changes or reverses a decision, it may be marked as "deprecated" or "superseded" with a reference to
-> its
-> replacement.
+##### Consequences
 
-#### Consequences
-
-> [!TIP]
-> This section describes the resulting context, after applying the decision. All consequences should be listed here, not
-> just the "positive" ones. A particular decision may have positive, negative, and neutral consequences, but all of them
-> affect the team and project in the future.
+De gekozen database is in-memory, waardoor deze niet geschikt is voor een volledige applicatie in de praktijk. Dit is
+nadelig als de PoC uitgewerkt wordt. Het voordeel is dat het ontwikkelen van de applicatie versneld, doordat gegevens
+worden gewist na het opnieuw opstarten van de applicatie.
 
 ### 8.5. ADR-005 TITLE
 
