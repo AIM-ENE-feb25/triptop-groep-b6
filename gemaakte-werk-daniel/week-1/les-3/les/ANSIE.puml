@@ -1,0 +1,27 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+
+
+
+Person(student, "Student", "Wilt zijn toets maken, heeft een studentenaccount", $sprite="users")
+Person(docent, "Docent", "Wilt toegang tot toetsen om ze te wijzigen en in te zien", $sprite="users")
+
+System_Boundary("key_boundary", "ANSIE", $tags="") {
+    Container(systemboundary_key.webapp, "Webapplicatie", $techn="React.js", $descr="De frontend voor de toetsapplicatie, hierop kan een student zijn antwoorden invoeren", $tags="", $link="")
+    Container(systemboundary_key.backend, "Backend", $techn="Spring Boot", $descr="De backend, is verantwoordelijk voor het opslaan naar de database. Ook laad het de vragen in voor de frontend", $tags="", $link="")
+    Container(systemboundary_key.db, "Database", $techn="SQL", $descr="De database, is verantwoordelijk voor het opslaan van toetsantwoorden", $tags="", $link="")
+}
+Container(systemboundary_key.osiris, "Osiris", $techn="?", $descr="Bevat informatie over de student en inschrijving voor toetsen", $tags="", $link="")
+Container(systemboundary_key.schoolyear, "Schoolyear", $techn="?", $descr="Toetsomgeving voor student", $tags="", $link="")
+
+Rel(student, systemboundary_key.webapp, "Verstuurt antwoorden", $techn="HTTP", $tags="", $link="")
+Rel(systemboundary_key.webapp, systemboundary_key.schoolyear, "Verstuurt gebruiker door naar Schoolyear-applicatie", $techn="", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.osiris, "Wijzigt gegevens van studenten", $techn="HTTP", $tags="", $link="")
+Rel(systemboundary_key.webapp, systemboundary_key.backend, "Verstuurt antwoorden en vraagt vragen op", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.db, "Leest en schrijft gegevens", $techn="IP/TCP/SQL", $tags="", $link="")
+
+SHOW_LEGEND()
+@enduml
