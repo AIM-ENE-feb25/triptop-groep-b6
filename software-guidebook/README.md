@@ -38,9 +38,9 @@ een brede groep reizigers die zelf hun reis / trip willen samenstellen.
 
 ### Context diagram
 
-| ![Context diagram](../week1/les2/context-diagram-casus/contextdiagram-Context_diagram_voor_TripTop.svg) |
-|--------------------------------------------------------------------------------------------------------- 
-| Het context diagram                                                                                     |
+| ![Context diagram](diagrammen/context-diagram-Context_diagram_voor_het_TripTop_systeem.svg) |
+|----------------------------------------------------------- 
+| Het context diagram                                       |
 
 Zoals er in het context diagram te zien is, is de Triptop-applicatie het centrale punt van de software. De applicatie
 heeft meerdere externe systemen waarmee het communiceert, deze sytemen zijn van belang voor het correct functioneren van
@@ -146,6 +146,8 @@ als belangrijk:
 ## 7. Software Architecture
 
 ### 7.1. Containers
+
+![Container Diagram](./diagrammen/container-diagram-Container_diagram_van_____voor_Triptop_systeem.svg)
 
 > [!IMPORTANT]
 > Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
