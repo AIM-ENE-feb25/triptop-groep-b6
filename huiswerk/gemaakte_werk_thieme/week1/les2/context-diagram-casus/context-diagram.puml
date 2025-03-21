@@ -1,0 +1,39 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include <C4/C4_Container>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+top to bottom direction
+
+
+title Context diagram voor het TripTop systeem
+
+Person(Reiziger, "Reiziger", "Wil een reis binnen Nederland maken")
+Person(ReisAgent, "Reisagent", "Biedt hulp aan bij het plannen van een reis binnen Triptop")
+
+System(TripTop_Applicatie, "TripTop Applicatie", "Het platform waarop de reiziger een reis kan plannen")
+
+System_Ext(BetalingsService, "Betaling API", "Verzorgt de betalingen\nvoor de reizen (Bijv. Stripe, IDEAL, etc.)")
+System_Ext(IdentityProviderApi, "Identityprovider API", "Beheert alle accounts\nvoor Triptop (Bijv. Google, Microsoft, etc.)")
+System_Ext(MapsApi, "Maps API", "Biedt kaarten en\nroutebeschrijvingen aan (Bijv. Google Maps, Apple Maps, etc.)")
+System_Ext(VervoerderAPI, "Vervoerder API", "Biedt informatie over het (openbaar)\nvervoer in Nederland (Bijv. NS, Arriva, Breng, etc.)")
+System_Ext(AcitiviteitenAPI, "Activiteiten API", "Biedt informatie aan over activiteiten\n in Nederland (Bijv. TripAdvisor, GetYourGuide, etc.)")
+System_Ext(OvernachtingenAPI, "Overnachtingen API", "Biedt informatie over overnachtingsmogelijkheden\n in Nederland (Bijv. Booking.com, Airbnb, etc.)")
+System_Ext(AutoVerhuurAPI, "Autoverhuur API", "Biedt informatie aan over autoverhuur\n in Nederland (Bijv. Hertz, Europacar, etc.)")
+
+Rel(Reiziger, TripTop_Applicatie, "Plant een reis naar Nederland")
+Rel(ReisAgent, TripTop_Applicatie, "Biedt hulp aan bij het plannen van een reis")
+
+Rel_D(TripTop_Applicatie, BetalingsService, "Verwerkt betalingen van de reiziger")
+Rel_D(TripTop_Applicatie, IdentityProviderApi, "Beheert accounts van de reiziger")
+Rel_D(TripTop_Applicatie, MapsApi, "Toont kaarten en routebeschrijvingen op basis van een locatie")
+Rel_D(TripTop_Applicatie, VervoerderAPI, "Toont informatie over het (openbaar) vervoer in Nederland")
+Rel_D(TripTop_Applicatie, AcitiviteitenAPI, "Geeft informatie over (leuke) acitviteiten in Nederland")
+Rel_D(TripTop_Applicatie, OvernachtingenAPI, "Toont informatie over de overnachtingsmogelijkheden in Nederland")
+Rel_D(TripTop_Applicatie, AutoVerhuurAPI, "Toont informatie over het huren van een auto in Nederland")
+
+SHOW_LEGEND()
+
+
+
+@enduml
