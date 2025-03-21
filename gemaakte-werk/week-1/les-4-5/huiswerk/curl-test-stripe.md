@@ -1,7 +1,8 @@
 
 ## Handige Bronnen
 **API:** https://docs.stripe.com/api
-**Test requests:** https://docs.stripe.com/testing 
+
+**Test gegevens:** https://docs.stripe.com/testing 
 
 
 
