@@ -9,7 +9,6 @@ Person(Reisagent, "Reisagent", "Is beschikbaar voor hulp bij het plannen van een
 
 System_Boundary("key_boundary", "triptop applicatie", $tags="") {
     Container(WebApplicatie, "Web Applicatie", "React.js", "Voor reizigers en reisbureaus om reizen te plannen en beheren via verschillende gebruikersinterfaces.")
-    Container(APIGateway, "API Gateway", "Spring Boot", "Beheert HTTP-verzoeken")
     Container(Backend, "Backend", "Spring Boot", "Verwerkt reisaanvragen, beheert gebruikersdata en communiceert met externe diensten.")
     Container(Database, "Database", "SQL H2", "Slaat reis- en gebruikersdata op")
 }
@@ -24,8 +23,7 @@ System_Ext(AutoVerhuurAPI, "Hertz API", "Biedt informatie over autoverhuur in Ne
 
 Rel_D(Reiziger, WebApplicatie, "Navigeert naar", $techn="HTTP(S)")
 Rel_D(Reisagent, WebApplicatie, "Navigeert naar", $techn="HTTP(S)")
-Rel_D(WebApplicatie, APIGateway, "Stuurt HTTP requests naar", $techn="HTTP")
-Rel_D(APIGateway, Backend, "Stuurt verzoeken door naar", $techn="HTTP")
+Rel_D(WebApplicatie, Backend, "Stuurt HTTP requests naar", $techn="HTTP")
 Rel_L(Backend, Database, "Slaat data op in", $techn="jbdc")
 
 Rel_D(Backend, IdentityProviderAPI, "Verifieert de reiziger\ndoor middel van OAuth2", $techn="HTTP")
