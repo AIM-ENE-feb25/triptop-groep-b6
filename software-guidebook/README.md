@@ -91,7 +91,7 @@ Het team bestaat uit 4 leden, bestaande uit studenten:
 Dit beperkt de mogelijke functionaliteit die gebouwd kan worden
 
 ### De applicatie
-Hier worden de constraints binen de applicatie benoemd.
+Hier worden de constraints binnen de applicatie benoemd.
 
 #### Database
 De gekozen database is een H2-database, een in-memory database. Het nadeel hiervan is dat de gegevens verloren gaan wanneer de applicatie stopt, tenzij we ze expliciet in een bestand opslaan. Dit kan de persistentie beperken in een applicatie die voor het publiek beschikbaar moet zijn.
