@@ -1,0 +1,27 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+top to bottom direction
+
+title Dynamic diagram van Inloggen voor de Triptop Applicatie
+
+Person(Reiziger, "Reiziger", "Wil een reis binnen Nederland maken")
+
+System_Boundary("key_boundary", "Triptop Applicatie", $tags="") {
+    Container(WebApplicatie, "Web Applicatie", "React.js", "Voor reizigers en reisbureaus om reizen te plannen en beheren via verschillende gebruikersinterfaces.")
+    Container(Backend, "Backend", "Spring Boot", "Verwerkt reisaanvragen, beheert gebruikersdata en communiceert met externe diensten.")
+    Container(Database, "Database", "SQL H2", "Slaat reis- en gebruikersdata op")
+}
+
+System_Ext(IdentityProviderAPI, "Google OAuth2 API", "Beheert alle accounts voor Triptop")
+
+Rel_R(Reiziger, WebApplicatie, "1. Navigeert naar /login", $techn="HTTP(S)")
+
+Rel(WebApplicatie, Backend, "2. Stuurt gebruiker\nnaar de loginEndpoint\nop de backend", $techn="HTTP(S)")
+
+Rel_D(Backend, IdentityProviderAPI, " 3. Stuurt gebruiker\nnaar loginpagina", $techn="OAuth2 Redirect")
+Rel_D(IdentityProviderAPI, Backend, "4. Stuurt terug \nmet OAuth token", $techn="OAuth2 Token")
+Rel_U(Backend, WebApplicatie, "5. Returnt een JWT token in de vorm van een cookie", $techn="HTTP(S) redirect")
+
+Rel_L(Backend, Database, "5. Slaat gebruiker op", $techn="jbdc")
+
+@enduml
