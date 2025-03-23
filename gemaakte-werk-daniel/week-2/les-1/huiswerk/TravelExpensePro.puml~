@@ -7,15 +7,15 @@ LAYOUT_WITH_LEGEND()
 
 title Component diagram voor TravelExpensePro backend
 
-Container(frontend, "TravelExpensePro Frontend", "React, HTML, CSS", "Frontend voor reiskosten invoeren en lezen.")
+Container(frontend, "TravelExpensePro Frontend", "React, HTML, CSS", "Gebruikersinterface voor het reiskosten invoeren en lezen.")
 
 Container_Boundary(api, "Backend") {
     Component(expensecontroller, "EnterExpenseController", "Spring Boot, Java", "Slaat ingevoerde reiskosten op.")
     Component(logincontroller, "LoginController", "Spring Boot, Java", "Authoriseerd gebruiker o.b.v. inloggegevens.")
     Component(retrievecontroller, "RetrieveAllExpensesController", "Spring Boot, Java", "Haalt alle reiskosten op.")
 
-    Component(expensedao, "ExpenseDAO", "Spring Boot, Java, SQL", "Slaat/haalt reiskosten op.")
-    Component(userdao, "UserDAO", "Spring Boot, Java, SQL", "Slaat/haalt gebruikersgegevens op.")
+    Component(expensedao, "ExpenseDAO", "Spring Boot, Java", "Slaat/haalt reiskosten op.")
+    Component(userdao, "UserDAO", "Spring Boot, Java", "Slaat/haalt gebruikersgegevens op.")
 
 '    Component(expense, "Expense", "Spring Boot, Java", "Reiskosten domein object.")
 '    Component(user, "User", "Spring Boot, Java", "Gebruiker domein object.")
