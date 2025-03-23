@@ -1,0 +1,50 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component diagram voor TravelExpensePro backend
+
+Container(frontend, "TravelExpensePro Frontend", "React, HTML, CSS", "Gebruikersinterface voor het reiskosten invoeren en lezen.")
+
+Container_Boundary(api, "Backend") {
+    Component(expensecontroller, "EnterExpenseController", "Spring Boot, Java", "Slaat ingevoerde reiskosten op.")
+    Component(logincontroller, "LoginController", "Spring Boot, Java", "Authoriseerd gebruiker o.b.v. inloggegevens.")
+    Component(retrievecontroller, "RetrieveAllExpensesController", "Spring Boot, Java", "Haalt alle reiskosten op.")
+
+    Component(expensedao, "ExpenseDAO", "Spring Boot, Java", "Slaat/haalt reiskosten op.")
+    Component(userdao, "UserDAO", "Spring Boot, Java", "Slaat/haalt gebruikersgegevens op.")
+
+    Component(expense, "Expense", "Spring Boot, Java", "Reiskosten domein object.")
+    Component(user, "User", "Spring Boot, Java", "Gebruiker domein object.")
+
+    Component(expenserowmapper, "ExpenseRowMapper", "Spring Boot, Java", "Slaat gegevens op in reiskosten domein object.")
+    Component(userrowmapper, "UserRowMapper", "Spring Boot, Java", "Slaat gegevens op in gebruikers domein object.")
+    Component(hashrowmapper, "HashRowMapper", "Spring Boot, Java", "Returnt salt.")
+    Component(loginresponse, "LoginResponse", "Spring Boot, Java", "Response DTO voor inloggen.")
+
+    Component(authservice, "AuthenticationService", "Spring Boot, Java", "Maakt tokens aan, en controleert of tokens geldig zijn.")
+
+    Rel(frontend, expensecontroller, "Stuurt reiskosten request naar", "JSON/HTTPS")
+    Rel(frontend, retrievecontroller, "Stuurt requests naar", "JSON/HTTPS")
+    Rel(frontend, logincontroller, "Stuurt inloggegevens naar", "JSON/HTTPS")
+
+    Rel(expensecontroller, authservice, "Checkt authenticatie/autorisatie", "Java")
+    Rel(logincontroller, authservice, "Logt gebruiker in en checkt authenticatie/autorisatie", "Java")
+    Rel(retrievecontroller, authservice, "Checkt authenticatie/autorisatie", "Java")
+
+    Rel(expensecontroller, expensedao, "Slaat kosten op via", "Java")
+    Rel(expensecontroller, "expenserowmapper", "Mapt kosten met", "Java")
+
+    Rel(retrievecontroller, expensedao, "Haalt kosten op via", "Java")
+
+}
+
+Rel(spa, sign, "Uses", "JSON/HTTPS")
+Rel(spa, accounts, "Uses", "JSON/HTTPS")
+
+Rel(ma, sign, "Uses", "JSON/HTTPS")
+Rel(ma, accounts, "Uses", "JSON/HTTPS")
+@enduml
