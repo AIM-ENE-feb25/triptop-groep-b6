@@ -52,10 +52,11 @@ Container_Boundary(api, "Backend van TravelExpensePro") {
 '
 '    Rel(logincontroller, userdao, "Haalt gebruiker op via", "Java")
 '    Rel(logincontroller, user, "Gebruikt", "Java")
+
 }
 
 
-System_Ext(h2, "H2 Database", "H2, SQL", "Database voor reiskosten en gebruikersgegevens.")
+System_Ext(h2, "H2 Database", "Database voor reiskosten en gebruikersgegevens.", "H2, SQL")
 Rel(expensedao, h2, "Slaat/haalt reiskosten op met", "JDBC, SQL")
 Rel(userdao, h2, "Slaat/haalt gebruikersgegevens op met", "JDBC, SQL")
 
