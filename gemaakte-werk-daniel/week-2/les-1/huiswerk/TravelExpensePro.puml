@@ -5,11 +5,11 @@
 
 LAYOUT_WITH_LEGEND()
 
-title Component diagram voor TravelExpensePro backend
+title Component diagram voor backend van TravelExpensePro
 
 Container(frontend, "TravelExpensePro Frontend", "React, HTML, CSS", "Frontend voor reiskosten invoeren en lezen.")
 
-Container_Boundary(api, "Backend") {
+Container_Boundary(api, "Backend van TravelExpensePro") {
     Component(expensecontroller, "EnterExpenseController", "Spring Boot, Java", "Slaat ingevoerde reiskosten op.")
     Component(logincontroller, "LoginController", "Spring Boot, Java", "Authoriseerd gebruiker o.b.v. inloggegevens.")
     Component(retrievecontroller, "RetrieveAllExpensesController", "Spring Boot, Java", "Haalt alle reiskosten op.")
@@ -20,13 +20,13 @@ Container_Boundary(api, "Backend") {
 '    Component(expense, "Expense", "Spring Boot, Java", "Reiskosten domein object.")
 '    Component(user, "User", "Spring Boot, Java", "Gebruiker domein object.")
 
-    Component(expenserowmapper, "ExpenseRowMapper", "Spring Boot, Java", "Slaat gegevens op in reiskosten domein object.")
-    Component(userrowmapper, "UserRowMapper", "Spring Boot, Java", "Slaat gegevens op in gebruikers domein object.")
-    Component(hashrowmapper, "HashRowMapper", "Spring Boot, Java", "Returnt salt.")
+'    Component(expenserowmapper, "ExpenseRowMapper", "Spring Boot, Java", "Slaat gegevens op in reiskosten domein object.")
+'    Component(userrowmapper, "UserRowMapper", "Spring Boot, Java", "Slaat gegevens op in gebruikers domein object.")
+'    Component(hashrowmapper, "HashRowMapper", "Spring Boot, Java", "Returnt salt.")
 '    Component(loginresponse, "LoginResponse", "Spring Boot, Java", "Response DTO voor inloggen.")
 
     Component(authservice, "AuthenticationService", "Spring Boot, Java", "Maakt tokens aan, en controleert of tokens geldig zijn.")
-    Component(encryptor, "JascryptConfig", "Spring Boot, Java", "Encrypt inloggegevens.")
+'    Component(encryptor, "JascryptConfig", "Spring Boot, Java", "Encrypt inloggegevens.")
 
     Rel(frontend, expensecontroller, "Stuurt reiskosten request naar", "JSON/HTTPS")
     Rel(frontend, retrievecontroller, "Stuurt requests naar", "JSON/HTTPS")
@@ -37,15 +37,15 @@ Container_Boundary(api, "Backend") {
     Rel(retrievecontroller, authservice, "Checkt authenticatie/autorisatie", "Java")
 
     Rel(expensecontroller, expensedao, "Slaat kosten op via", "Java")
-    Rel(expensecontroller, "expenserowmapper", "Mapt kosten met", "Java")
+'    Rel(expensecontroller, "expenserowmapper", "Mapt kosten met", "Java")
 
     Rel(retrievecontroller, expensedao, "Haalt kosten op via", "Java")
 
 
     Rel(authservice, userdao, "Haalt gebruikersgegevens op via", "Spring Boot, Java")
-    Rel(authservice, userrowmapper, "Mapt gebruikersgegevens met", "Java")
-    Rel(authservice, hashrowmapper, "Mapt hash met", "Java")
-    Rel(authservice, encryptor, "Encrypteert inloggegevens", "Java")
+'    Rel(authservice, userrowmapper, "Mapt gebruikersgegevens met", "Java")
+'    Rel(authservice, hashrowmapper, "Mapt hash met", "Java")
+'    Rel(authservice, encryptor, "Encrypteert inloggegevens", "Java")
 
 '    Rel(expensecontroller, expense, "Gebruikt", "Java")
 '    Rel(expensedao, expense, "Gebruikt", "Java")
