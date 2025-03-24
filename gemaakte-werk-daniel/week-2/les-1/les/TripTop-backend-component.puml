@@ -17,7 +17,6 @@ Container_Boundary(api, "Backend van TravelExpensePro") {
 
     Component(bookingsservice, "Booking Service", "Spring Boot, Java", "Verwerkt bookingen.")
     Component(activityservice, "Activity Service", "Spring Boot, Java", "Verwerkt activiteiten.")
-    Component(loginservice, "Login Service", "Spring Boot, Java", "Verwerkt inloggegevens.")
     Component(tripsservice, "Trip Service", "Spring Boot, Java", "Verwerkt geplande reizen.")
 
     Component(bookingrepo, "Booking Repository", "Spring Boot, Java, SQL", "Slaat/haalt bookingen op.")
@@ -26,19 +25,18 @@ Container_Boundary(api, "Backend van TravelExpensePro") {
 
     Component(authservice, "Authentication Service", "Spring Boot, Java", "Controleert authenticatie/autorisatie met de identity provider.")
 
-    Rel(frontend, tripcontroller, "Stuurt reiskosten request naar", "JSON/HTTPS")
-    Rel(frontend, bookingcontroller, "Stuurt requests naar", "JSON/HTTPS")
-    Rel(frontend, activitycontroller, "Stuurt requests naar", "JSON/HTTPS")
+    Rel(frontend, tripcontroller, "Stuurt geplande reizen naar", "JSON/HTTPS")
+    Rel(frontend, bookingcontroller, "Stuurt bookingen naar", "JSON/HTTPS")
+    Rel(frontend, activitycontroller, "Haalt activiteiten op via", "JSON/HTTPS")
     Rel(frontend, logincontroller, "Stuurt inloggegevens naar", "JSON/HTTPS")
 
     Rel(bookingcontroller, bookingsservice, "Gebruikt", "Java")
-    Rel(logincontroller, loginservice, "Gebruikt", "Java")
     Rel(tripcontroller, tripsservice, "Gebruikt", "Java")
     Rel(activitycontroller, activityservice, "Gebruikt", "Java")
 
-    Rel(bookingsservice, bookingrepo, "Gebruikt", "Java")
-    Rel(loginservice, loginrepo, "Gebruikt", "Java")
-    Rel(tripsservice, triprepo, "Gebruikt", "Java")
+    Rel(bookingsservice, bookingrepo, "Slaat op in", "Java")
+    Rel(tripsservice, triprepo, "Slaat op in", "Java")
+    Rel(authservice, loginrepo, "Slaat/haalt gebruikersgegevens op via", "Spring Boot, Java")
 
     Rel(bookingcontroller, authservice, "Checkt authenticatie/autorisatie", "Java")
     Rel(logincontroller, authservice, "Logt gebruiker in en checkt authenticatie/autorisatie", "Java")
