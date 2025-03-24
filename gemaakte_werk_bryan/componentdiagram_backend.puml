@@ -3,27 +3,9 @@
 
 top to bottom direction
 
-Title Component Diagram van de Triptop Applicatie
+Title Component Diagram van de Triptop Applicatie Backend
 
 Container_Boundary(Applicatie, "Triptop Applicatie", "Reisplanner voor Nederland") {
-
-    Container_Boundary(Frontend, "Triptop Webapp", "React") {
-        Component(HomePage, "HomePage", "Overzicht en zoekfunctionaliteit")
-        Component(ZoekPagina, "ZoekPagina", "Zoeken en filteren van reizen")
-        Component(BoekingPagina, "BoekingPagina", "Bevestigen van boekingen")
-        Component(LoginPagina, "LoginPagina", "Login en registratie")
-        Component(ProfielPagina, "ProfielPagina", "Gebruikersprofiel en instellingen")
-
-        Component(ReisServiceFront, "ReisService", "Beheert reisgerelateerde gegevens en API-calls")
-        Component(GebruikersServiceFront, "GebruikersService", "Beheert gebruikersgegevens en authenticatie")
-        Component(BetalingsServiceFront, "BetalingsService", "Behandelt betalingen via Stripe API")
-        Component(VervoerderServiceFront, "VervoerderService", "Vervoersinformatie ophalen")
-        Component(ActiviteitenServiceFront, "ActiviteitenService", "Activiteiten ophalen en tonen")
-        Component(OvernachtingenServiceFront, "OvernachtingenService", "Overnachtingen ophalen en tonen")
-        Component(AutoVerhuurServiceFront, "AutoVerhuurService", "Autoverhuur ophalen en tonen")
-
-        Component(StateManagement, "State Management", "Context API / Redux", "Beheert globale state van de applicatie")
-    }
 
     Container_Boundary(Backend, "Triptop Backend", "Spring Boot") {
         Component(ReisController, "ReisController", "Handelt reisaanvragen af")
@@ -57,28 +39,6 @@ Container_Boundary(Applicatie, "Triptop Applicatie", "Reisplanner voor Nederland
     System_Ext(ActiviteitenAPI, "TripAdvisor API", "Activiteiten in Nederland")
     System_Ext(OvernachtingenAPI, "Booking.com API", "Overnachtingsopties")
     System_Ext(AutoVerhuurAPI, "Hertz API", "Autoverhuur in Nederland")
-
-    Rel(HomePage, ZoekPagina, "Navigeert naar", "React Router")
-    Rel(ZoekPagina, BoekingPagina, "Navigeert naar", "React Router")
-    Rel(LoginPagina, ProfielPagina, "Navigeert naar", "React Router")
-
-    Rel(HomePage, ReisServiceFront, "Vraagt reisaanbevelingen op")
-    Rel(ZoekPagina, ReisServiceFront, "Zoekt en filtert reizen")
-    Rel(BoekingPagina, BetalingsServiceFront, "Start betaling")
-    Rel(LoginPagina, GebruikersServiceFront, "Verstuurt login- en registratieverzoeken")
-    Rel(ProfielPagina, GebruikersServiceFront, "Beheert profielinformatie")
-
-    Rel(StateManagement, ReisServiceFront, "Houdt reisgegevens bij")
-    Rel(StateManagement, GebruikersServiceFront, "Houdt gebruikersgegevens bij")
-    Rel(StateManagement, BetalingsServiceFront, "Beheert betalingsstatus")
-
-    Rel(ReisServiceFront, ReisController, "Maakt API-aanroepen naar")
-    Rel(GebruikersServiceFront, GebruikersController, "Maakt API-aanroepen naar")
-    Rel(BetalingsServiceFront, BetalingsController, "Maakt API-aanroepen naar")
-    Rel(VervoerderServiceFront, VervoerderController, "Maakt API-aanroepen naar")
-    Rel(ActiviteitenServiceFront, ActiviteitenController, "Maakt API-aanroepen naar")
-    Rel(OvernachtingenServiceFront, OvernachtingenController, "Maakt API-aanroepen naar")
-    Rel(AutoVerhuurServiceFront, AutoVerhuurController, "Maakt API-aanroepen naar")
 
     Rel(ReisController, ReisService, "Stuurt reisaanvragen door")
     Rel(GebruikersController, GebruikersService, "Stuurt gebruikersaanvragen door")
