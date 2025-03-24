@@ -1,0 +1,47 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component diagram voor frontend van de TripTop applicatie
+
+Person(user, "User", "Een reiziger met een account, wilt reiskosten invoeren en lezen." )
+
+Container_Boundary(api, "Frontend van TripTop") {
+    Component(login, "Login Component", "React, Javascript, HTML, CSS", "Verwerkt inloggegevens, kan ook uitloggen via hier")
+    Component(booking, "Booking Component", "React, Javascript, HTML, CSS", "Kan bookingen aanmaken")
+    Component(reisoverzicht, "Reisoverzicht Component", "React, Javascript, HTML, CSS", "Toont alle reizen van een gebruiker")
+    Component(betaling, "Betaling Component", "React, Javascript, HTML, CSS", "Verwerkt betalingen")
+    Component(app, "TripTop Applicatie", "React, Javascript, HTML, CSS", "De TripTop applicatie")
+
+'    Component(mappagina, "Map Pagina", "React, Javascript, HTML, CSS", "Toont een kaart met mogelijke bestemmingen")
+'    Component(zoekpagina, "Zoek Pagina", "React, Javascript, HTML, CSS", "Zoeken naar bestemmingen")
+'    Component(overizchtpagina, "Overzicht Pagina", "React, Javascript, HTML, CSS", "Overzicth van de gemaakte planningen")
+'    Component(loginpagina, "Login Pagina", "React, Javascript, HTML, CSS", "Verwerkt inloggegevens, kan ook uitloggen")
+'    Component(registreerpagina, "Registreer Pagina", "React, Javascript, HTML, CSS", "Maakt accounts aan o.b.v. inloggegevens")
+
+    Component(globalestate, "Globale State", "React, Javascript, HTML, CSS", "Bevat gegevens zoals; gebruikersnaam, auth token, etc.")
+
+    Rel(app, login, "Stuurt inloggegevens naar", "Javascript")
+    Rel(login, globalestate, "Slaat token op in", "Javascript")
+
+    Rel(globalestate, booking, "Gebruikt token", "Javascript")
+    Rel(globalestate, reisoverzicht, "Gebruikt token", "Javascript")
+    Rel(globalestate, betaling, "Gebruikt token", "Javascript")
+
+    Rel(app, booking, "Verwerkt booking", "Javascript")
+    Rel(app, reisoverzicht, "Haalt alle planningen op", "Javascript")
+    Rel(app, betaling, "Verwerkt betalingen", "Javascript")
+}
+System_Ext(backend, "Backend", "Verantwoordelijk voor het opslaan en ophalen van reiskosten", "Java, Spring Boot")
+
+Rel(user, app, "Gebruikt", "HTTPS, JSON")
+Rel(login, backend, "Stuurt inloggegevens naar en ontvangt token", "HTTPS, JSON")
+Rel(booking, backend, "Stuurt gemaakte booking naar", "HTTPS, JSON")
+Rel(reisoverzicht, backend, "Haalt alle planningen op", "HTTPS, JSON")
+Rel(betaling, backend, "Verwerkt betalingen", "HTTPS, JSON")
+
+SHOW_LEGEND()
+@enduml
