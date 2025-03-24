@@ -3,63 +3,113 @@
 
 top to bottom direction
 
-Title Component Diagram van de Backend voor Triptop
+Title Component Diagram van de Triptop Applicatie
 
-Container_Boundary(Backend, "Triptop Backend", "Spring Boot") {
-    Component(ReisController, "ReisController", "Handelt reisaanvragen af")
-    Component(GebruikersController, "GebruikersController", "Beheert gebruikers en authenticatie")
-    Component(BetalingsController, "BetalingsController", "Regelt betalingsverzoeken")
-    Component(VervoerderController, "VervoerderController", "Behandelt OV-informatie aanvragen")
-    Component(ActiviteitenController, "ActiviteitenController", "Behandelt activiteiten aanvragen")
-    Component(OvernachtingenController, "OvernachtingenController", "Behandelt overnachtingsaanvragen")
-    Component(AutoVerhuurController, "AutoVerhuurController", "Behandelt autoverhuur aanvragen")
+Container_Boundary(Applicatie, "Triptop Applicatie", "Reisplanner voor Nederland") {
 
-    Component(ReisService, "ReisService", "Verwerkt reisaanvragen")
-    Component(GebruikersService, "GebruikersService", "Beheert gebruikersgegevens en authenticatie")
-    Component(BetalingsService, "BetalingsService", "Afhandelen van betalingen via Stripe API")
-    Component(VervoerderService, "VervoerderService", "Communiceert met Google Transit API")
-    Component(ActiviteitenService, "ActiviteitenService", "Communiceert met TripAdvisor API")
-    Component(OvernachtingenService, "OvernachtingenService", "Communiceert met Booking.com API")
-    Component(AutoVerhuurService, "AutoVerhuurService", "Communiceert met Hertz API")
+    Container_Boundary(Frontend, "Triptop Webapp", "React") {
+        Component(HomePage, "HomePage", "Overzicht en zoekfunctionaliteit")
+        Component(ZoekPagina, "ZoekPagina", "Zoeken en filteren van reizen")
+        Component(BoekingPagina, "BoekingPagina", "Bevestigen van boekingen")
+        Component(LoginPagina, "LoginPagina", "Login en registratie")
+        Component(ProfielPagina, "ProfielPagina", "Gebruikersprofiel en instellingen")
 
-    Component(ReisRepository, "ReisRepository", "Beheert database-operaties voor reizen")
-    Component(GebruikersRepository, "GebruikersRepository", "Beheert database-operaties voor gebruikers")
+        Component(ReisServiceFront, "ReisService", "Beheert reisgerelateerde gegevens en API-calls")
+        Component(GebruikersServiceFront, "GebruikersService", "Beheert gebruikersgegevens en authenticatie")
+        Component(BetalingsServiceFront, "BetalingsService", "Behandelt betalingen via Stripe API")
+        Component(VervoerderServiceFront, "VervoerderService", "Vervoersinformatie ophalen")
+        Component(ActiviteitenServiceFront, "ActiviteitenService", "Activiteiten ophalen en tonen")
+        Component(OvernachtingenServiceFront, "OvernachtingenService", "Overnachtingen ophalen en tonen")
+        Component(AutoVerhuurServiceFront, "AutoVerhuurService", "Autoverhuur ophalen en tonen")
 
-    Component(GlobalExceptionHandler, "GlobalExceptionHandler", "Handelt uitzonderingen af binnen de applicatie")
-}
+        Component(StateManagement, "State Management", "Context API / Redux", "Beheert globale state van de applicatie")
+    }
 
-System_Ext(IdentityProviderAPI, "Google OAuth2 API", "Authenticatie en autorisatie")
-System_Ext(BetalingsAPI, "Stripe API", "Verwerkt betalingen voor reizen")
-System_Ext(VervoerderAPI, "Google Transit API", "Openbaar vervoer informatie")
-System_Ext(ActiviteitenAPI, "TripAdvisor API", "Activiteiten in Nederland")
-System_Ext(OvernachtingenAPI, "Booking.com API", "Overnachtingsopties")
-System_Ext(AutoVerhuurAPI, "Hertz API", "Autoverhuur in Nederland")
+    Container_Boundary(Backend, "Triptop Backend", "Spring Boot") {
+        Component(ReisController, "ReisController", "Handelt reisaanvragen af")
+        Component(GebruikersController, "GebruikersController", "Beheert gebruikers en authenticatie")
+        Component(BetalingsController, "BetalingsController", "Regelt betalingsverzoeken")
+        Component(VervoerderController, "VervoerderController", "Behandelt OV-informatie aanvragen")
+        Component(ActiviteitenController, "ActiviteitenController", "Behandelt activiteiten aanvragen")
+        Component(OvernachtingenController, "OvernachtingenController", "Behandelt overnachtingsaanvragen")
+        Component(AutoVerhuurController, "AutoVerhuurController", "Behandelt autoverhuur aanvragen")
 
-Rel(ReisController, ReisService, "Stuurt reisaanvragen door")
-Rel(GebruikersController, GebruikersService, "Stuurt gebruikersaanvragen door")
-Rel(BetalingsController, BetalingsService, "Stuurt betalingsverzoeken door")
-Rel(VervoerderController, VervoerderService, "Stuurt OV-informatie aanvragen door")
-Rel(ActiviteitenController, ActiviteitenService, "Stuurt activiteiten aanvragen door")
-Rel(OvernachtingenController, OvernachtingenService, "Stuurt overnachtingsaanvragen door")
-Rel(AutoVerhuurController, AutoVerhuurService, "Stuurt autoverhuur aanvragen door")
+        Component(ReisService, "ReisService", "Verwerkt reisaanvragen")
+        Component(GebruikersService, "GebruikersService", "Beheert gebruikersgegevens en authenticatie")
+        Component(BetalingsService, "BetalingsService", "Afhandelen van betalingen via Stripe API")
+        Component(VervoerderService, "VervoerderService", "Communiceert met Google Transit API")
+        Component(ActiviteitenService, "ActiviteitenService", "Communiceert met TripAdvisor API")
+        Component(OvernachtingenService, "OvernachtingenService", "Communiceert met Booking.com API")
+        Component(AutoVerhuurService, "AutoVerhuurService", "Communiceert met Hertz API")
 
-Rel(ReisService, ReisRepository, "Leest/schrijft reisgegevens")
-Rel(GebruikersService, GebruikersRepository, "Leest/schrijft gebruikersgegevens")
+        Component(ReisRepository, "ReisRepository", "Beheert database-operaties voor reizen")
+        Component(GebruikersRepository, "GebruikersRepository", "Beheert database-operaties voor gebruikers")
+        Component(BetalingsRepository, "BetalingsRepository", "Beheert database-operaties voor betalingen")
 
-Rel(GlobalExceptionHandler, ReisController, "Handelt uitzonderingen af voor reizen")
-Rel(GlobalExceptionHandler, GebruikersController, "Handelt uitzonderingen af voor gebruikers")
-Rel(GlobalExceptionHandler, BetalingsController, "Handelt uitzonderingen af voor betalingen")
-Rel(GlobalExceptionHandler, VervoerderController, "Handelt uitzonderingen af voor OV-informatie")
-Rel(GlobalExceptionHandler, ActiviteitenController, "Handelt uitzonderingen af voor activiteiten")
-Rel(GlobalExceptionHandler, OvernachtingenController, "Handelt uitzonderingen af voor overnachtingen")
-Rel(GlobalExceptionHandler, AutoVerhuurController, "Handelt uitzonderingen af voor autoverhuur")
+        Component(GlobalExceptionHandler, "GlobalExceptionHandler", "Handelt uitzonderingen af binnen de applicatie")
+    }
 
-Rel(GebruikersService, IdentityProviderAPI, "Authenticeert gebruikers", "OAuth2")
-Rel(BetalingsService, BetalingsAPI, "Verwerkt betalingen", "HTTP")
-Rel(VervoerderService, VervoerderAPI, "Haalt OV-informatie op", "HTTP")
-Rel(ActiviteitenService, ActiviteitenAPI, "Haalt activiteiten op", "HTTP")
-Rel(OvernachtingenService, OvernachtingenAPI, "Haalt overnachtingen op", "HTTP")
-Rel(AutoVerhuurService, AutoVerhuurAPI, "Haalt huurauto-informatie op", "HTTP")
+    ComponentDb(H2Database, "H2 Database", "Opslag van gebruikers, reizen en betalingen")
 
-SHOW_LEGEND()
+    System_Ext(IdentityProviderAPI, "Google OAuth2 API", "Authenticatie en autorisatie")
+    System_Ext(BetalingsAPI, "Stripe API", "Verwerkt betalingen voor reizen")
+    System_Ext(VervoerderAPI, "Google Transit API", "Openbaar vervoer informatie")
+    System_Ext(ActiviteitenAPI, "TripAdvisor API", "Activiteiten in Nederland")
+    System_Ext(OvernachtingenAPI, "Booking.com API", "Overnachtingsopties")
+    System_Ext(AutoVerhuurAPI, "Hertz API", "Autoverhuur in Nederland")
+
+    Rel(HomePage, ZoekPagina, "Navigeert naar", "React Router")
+    Rel(ZoekPagina, BoekingPagina, "Navigeert naar", "React Router")
+    Rel(LoginPagina, ProfielPagina, "Navigeert naar", "React Router")
+
+    Rel(HomePage, ReisServiceFront, "Vraagt reisaanbevelingen op")
+    Rel(ZoekPagina, ReisServiceFront, "Zoekt en filtert reizen")
+    Rel(BoekingPagina, BetalingsServiceFront, "Start betaling")
+    Rel(LoginPagina, GebruikersServiceFront, "Verstuurt login- en registratieverzoeken")
+    Rel(ProfielPagina, GebruikersServiceFront, "Beheert profielinformatie")
+
+    Rel(StateManagement, ReisServiceFront, "Houdt reisgegevens bij")
+    Rel(StateManagement, GebruikersServiceFront, "Houdt gebruikersgegevens bij")
+    Rel(StateManagement, BetalingsServiceFront, "Beheert betalingsstatus")
+
+    Rel(ReisServiceFront, ReisController, "Maakt API-aanroepen naar")
+    Rel(GebruikersServiceFront, GebruikersController, "Maakt API-aanroepen naar")
+    Rel(BetalingsServiceFront, BetalingsController, "Maakt API-aanroepen naar")
+    Rel(VervoerderServiceFront, VervoerderController, "Maakt API-aanroepen naar")
+    Rel(ActiviteitenServiceFront, ActiviteitenController, "Maakt API-aanroepen naar")
+    Rel(OvernachtingenServiceFront, OvernachtingenController, "Maakt API-aanroepen naar")
+    Rel(AutoVerhuurServiceFront, AutoVerhuurController, "Maakt API-aanroepen naar")
+
+    Rel(ReisController, ReisService, "Stuurt reisaanvragen door")
+    Rel(GebruikersController, GebruikersService, "Stuurt gebruikersaanvragen door")
+    Rel(BetalingsController, BetalingsService, "Stuurt betalingsverzoeken door")
+    Rel(VervoerderController, VervoerderService, "Stuurt OV-informatie aanvragen door")
+    Rel(ActiviteitenController, ActiviteitenService, "Stuurt activiteiten aanvragen door")
+    Rel(OvernachtingenController, OvernachtingenService, "Stuurt overnachtingsaanvragen door")
+    Rel(AutoVerhuurController, AutoVerhuurService, "Stuurt autoverhuur aanvragen door")
+
+    Rel(ReisService, ReisRepository, "Leest/schrijft reisgegevens")
+    Rel(GebruikersService, GebruikersRepository, "Leest/schrijft gebruikersgegevens")
+    Rel(BetalingsService, BetalingsRepository, "Leest/schrijft betalingsgegevens")
+
+    Rel(ReisRepository, H2Database, "Opslag van reizen", "JPA")
+    Rel(GebruikersRepository, H2Database, "Opslag van gebruikers", "JPA")
+    Rel(BetalingsRepository, H2Database, "Opslag van betalingen", "JPA")
+
+    Rel(GlobalExceptionHandler, ReisController, "Handelt uitzonderingen af voor reizen")
+    Rel(GlobalExceptionHandler, GebruikersController, "Handelt uitzonderingen af voor gebruikers")
+    Rel(GlobalExceptionHandler, BetalingsController, "Handelt uitzonderingen af voor betalingen")
+    Rel(GlobalExceptionHandler, VervoerderController, "Handelt uitzonderingen af voor OV-informatie")
+    Rel(GlobalExceptionHandler, ActiviteitenController, "Handelt uitzonderingen af voor activiteiten")
+    Rel(GlobalExceptionHandler, OvernachtingenController, "Handelt uitzonderingen af voor overnachtingen")
+    Rel(GlobalExceptionHandler, AutoVerhuurController, "Handelt uitzonderingen af voor autoverhuur")
+
+    Rel(GebruikersService, IdentityProviderAPI, "Authenticeert gebruikers", "OAuth2")
+    Rel(BetalingsService, BetalingsAPI, "Verwerkt betalingen", "HTTP")
+    Rel(VervoerderService, VervoerderAPI, "Haalt OV-informatie op", "HTTP")
+    Rel(ActiviteitenService, ActiviteitenAPI, "Haalt activiteiten op", "HTTP")
+    Rel(OvernachtingenService, OvernachtingenAPI, "Haalt overnachtingen op", "HTTP")
+    Rel(AutoVerhuurService, AutoVerhuurAPI, "Haalt huurauto-informatie op", "HTTP")
+
+    SHOW_LEGEND()
 @enduml
