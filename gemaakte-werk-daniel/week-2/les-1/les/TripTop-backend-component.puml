@@ -1,0 +1,56 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component diagram voor backend van TripTop
+
+Container(frontend, "TripTop Frontend", "React, HTML, CSS", "Maakt planningen en bookingen aan en verstuurt deze.")
+
+Container_Boundary(api, "Backend van TravelExpensePro") {
+    Component(bookingcontroller, "BookingController", "Spring Boot, Java", "Slaat ingevoerde reiskosten op.")
+    Component(activitycontroller, "ActivityController", "Spring Boot, Java", "Authoriseerd gebruiker o.b.v. inloggegevens.")
+    Component(logincontroller, "LoginController", "Spring Boot, Java", "Haalt alle reiskosten op.")
+
+    Component(expensedao, "ExpenseDAO", "Spring Boot, Java, SQL", "Slaat/haalt reiskosten op.")
+    Component(userdao, "UserDAO", "Spring Boot, Java, SQL", "Slaat/haalt gebruikersgegevens op.")
+
+    Component(authservice, "AuthenticationService", "Spring Boot, Java", "Maakt tokens aan, en controleert of tokens geldig zijn.")
+'    Component(encryptor, "JascryptConfig", "Spring Boot, Java", "Encrypt inloggegevens.")
+
+    Rel(frontend, expensecontroller, "Stuurt reiskosten request naar", "JSON/HTTPS")
+    Rel(frontend, retrievecontroller, "Stuurt requests naar", "JSON/HTTPS")
+    Rel(frontend, logincontroller, "Stuurt inloggegevens naar", "JSON/HTTPS")
+
+    Rel(expensecontroller, authservice, "Checkt authenticatie/autorisatie", "Java")
+    Rel(logincontroller, authservice, "Logt gebruiker in en checkt authenticatie/autorisatie", "Java")
+    Rel(retrievecontroller, authservice, "Checkt authenticatie/autorisatie", "Java")
+
+    Rel(expensecontroller, expensedao, "Slaat kosten op via", "Java")
+'    Rel(expensecontroller, "expenserowmapper", "Mapt kosten met", "Java")
+
+    Rel(retrievecontroller, expensedao, "Haalt kosten op via", "Java")
+
+
+    Rel(authservice, userdao, "Haalt gebruikersgegevens op via", "Spring Boot, Java")
+'    Rel(authservice, userrowmapper, "Mapt gebruikersgegevens met", "Java")
+'    Rel(authservice, hashrowmapper, "Mapt hash met", "Java")
+'    Rel(authservice, encryptor, "Encrypteert inloggegevens", "Java")
+
+'    Rel(expensecontroller, expense, "Gebruikt", "Java")
+'    Rel(expensedao, expense, "Gebruikt", "Java")
+'
+'    Rel(logincontroller, userdao, "Haalt gebruiker op via", "Java")
+'    Rel(logincontroller, user, "Gebruikt", "Java")
+
+}
+
+
+System_Ext(h2, "H2 Database", "Database voor reiskosten en gebruikersgegevens.", "H2, SQL")
+Rel(expensedao, h2, "Slaat/haalt reiskosten op met", "JDBC, SQL")
+Rel(userdao, h2, "Slaat/haalt gebruikersgegevens op met", "JDBC, SQL")
+
+SHOW_LEGEND()
+@enduml
