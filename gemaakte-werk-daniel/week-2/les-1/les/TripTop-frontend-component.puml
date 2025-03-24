@@ -11,9 +11,11 @@ Person(user, "User", "Een reiziger met een account, wilt reiskosten invoeren en 
 
 Container_Boundary(api, "Frontend van TripTop") {
     Component(login, "Login Component", "React, Javascript, HTML, CSS", "Verwerkt inloggegevens, kan ook uitloggen via hier")
+    Component(registreer, "Registreer Component", "React, Javascript, HTML, CSS", "Maakt accounts aan")
     Component(booking, "Booking Component", "React, Javascript, HTML, CSS", "Kan bookingen aanmaken")
     Component(reisoverzicht, "Reisoverzicht Component", "React, Javascript, HTML, CSS", "Toont alle reizen van een gebruiker")
     Component(betaling, "Betaling Component", "React, Javascript, HTML, CSS", "Verwerkt betalingen")
+    Component(maps, "Maps Component", "React, Javascript, HTML, CSS", "Een map van bestemmingen, kan ook zoeken naar bestemmingen")
     Component(app, "TripTop Applicatie", "React, Javascript, HTML, CSS", "De TripTop applicatie")
 
 '    Component(mappagina, "Map Pagina", "React, Javascript, HTML, CSS", "Toont een kaart met mogelijke bestemmingen")
@@ -28,16 +30,24 @@ Container_Boundary(api, "Frontend van TripTop") {
     Rel(login, globalestate, "Slaat token op in", "Javascript")
 
     Rel(globalestate, booking, "Gebruikt token", "Javascript")
+    Rel(globalestate, maps, "Gebruikt token", "Javascript")
     Rel(globalestate, reisoverzicht, "Gebruikt token", "Javascript")
     Rel(globalestate, betaling, "Gebruikt token", "Javascript")
 
     Rel(app, booking, "Verwerkt booking", "Javascript")
+    Rel(app, maps, "Toont kaart", "Javascript")
     Rel(app, reisoverzicht, "Haalt alle planningen op", "Javascript")
     Rel(app, betaling, "Verwerkt betalingen", "Javascript")
+    Rel(app, registreer, "Maakt account aan", "Javascript")
 }
 System_Ext(backend, "Backend", "Verantwoordelijk voor het opslaan en ophalen van reiskosten", "Java, Spring Boot")
+System_Ext(mapsapi, "Maps API", "Verantwoordelijk voor de kaarten", "?")
+
+Rel(maps, mapsapi, "Haalt kaart op", "HTTPS, JSON")
 
 Rel(user, app, "Gebruikt", "HTTPS, JSON")
+
+Rel(registreer, backend, "Maakt account aan", "HTTPS, JSON")
 Rel(login, backend, "Stuurt inloggegevens naar en ontvangt token", "HTTPS, JSON")
 Rel(booking, backend, "Stuurt gemaakte booking naar", "HTTPS, JSON")
 Rel(reisoverzicht, backend, "Haalt alle planningen op", "HTTPS, JSON")
