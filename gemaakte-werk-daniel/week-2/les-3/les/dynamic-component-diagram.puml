@@ -5,7 +5,7 @@
 
 LAYOUT_WITH_LEGEND()
 
-title Component diagram voor backend van TripTop
+title Dynamic component diagram voor backend van TripTop
 
 Container(frontend, "TripTop Frontend", "React, HTML, CSS", "Maakt planningen en betalingen aan en verstuurt deze.")
 

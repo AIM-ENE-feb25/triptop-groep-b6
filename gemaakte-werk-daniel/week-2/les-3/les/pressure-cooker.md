@@ -25,12 +25,14 @@ Lijst van componenten:
 
 ## 2. Interfaces beschrijven
 
+| Interfaces              | Methodes       | Parameters              | Return          |
+| ----------------------- | -------------- | ----------------------- | --------------- |
+| PaymentServiceInterface | isEnoughMoney  | Payment (domein object) | Bool true/false |
+|                         |                | currentTaxPercentage    |                 |
+|                         |                | Price (domein object)   |                 |
+|                         | processPayment | Payment                 | void            |
+|                         | checkPayment   | Payment                 | Bool true/false |
 
-| Interfaces              | Methodes      | Parameters              | Return          |
-| ----------------------- | ------------- | ----------------------- | --------------- |
-| PaymentServiceInterface | IsEnoughMoney | Payment (domein object) | Bool true/false |
-|                         |               | currentTaxPercentage    |                 |
-|                         |               | Price (domein object)   |                 |
 
 
 ## 3. Volgorde van aanroepen
