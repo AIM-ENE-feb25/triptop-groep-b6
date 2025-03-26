@@ -1,0 +1,36 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component diagram voor backend van TripTop
+
+Container(frontend, "TripTop Frontend", "React, HTML, CSS", "Maakt planningen en betalingen aan en verstuurt deze.")
+
+Container_Boundary(api, "Backend van TravelExpensePro") {
+    Component(paymentcontroller, "PaymentController", "Spring Boot, Java", "Ontvangt betaalrequests.")
+    Component(paymentrepo, "Payment Repository", "Spring Boot, Java, SQL", "Slaat/haalt betalingen op.")
+    Component(paymentsservice, "Payment Service", "Spring Boot, Java", "Verwerkt betalingen.")
+    Component(authservice, "Authentication Service", "Spring Boot, Java", "Controleert authenticatie/autorisatie met de identity provider.")
+
+    Rel(frontend, paymentcontroller, "1. Stuurt betalingen naar", "JSON/HTTPS")
+    Rel(paymentsservice, authservice, "3. Checkt authenticatie/autorisatie van request", "Java")
+    Rel(authservice, paymentsservice, "4. Stuurt succes naar", "Java")
+    Rel(paymentcontroller, paymentsservice, "2. Stuurt betaalgegevens door naar", "Java")
+    Rel(paymentsservice, paymentrepo, "7. Slaat op gemaakte betaling op in", "Java")
+
+    Rel(paymentsservice, paymentcontroller, "8. Stuurt succes naar")
+    Rel(paymentcontroller, frontend, "9. Stuurt succes response naar", "JSON/HTTPS")
+}
+System_Ext(h2, "H2 Database", "Database voor reiskosten en gebruikersgegevens.", "H2, SQL")
+System_Ext(activityapi, Activity API, "Activity API", "API voor activiteiten.", "REST")
+System_Ext(stripe, "Stripe API", "Verwerkt betalingen", "?")
+
+Rel(paymentrepo, h2, "8. Slaat betalingen op", "JDBC")
+Rel(paymentsservice, stripe, "5. Stuurt betaalgegevens door naar", "JSON, HTTP")
+Rel(stripe, paymentsservice, "6. Stuurt succes response", "JSON, HTTP")
+
+SHOW_LEGEND()
+@enduml

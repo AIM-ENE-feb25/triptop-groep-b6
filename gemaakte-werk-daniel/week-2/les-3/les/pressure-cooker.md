@@ -12,13 +12,27 @@ Lijst van componenten:
 Lijst van componenten:
 - Een externe API (Stripe)
     - Verantwoordelijkheid: Het verwerken van een betaling met de gegeven betalingsgegevens
-    - Principe:
+    - Principle: Single responsibility
 - Service class (PaymentService)
     - Verantwoordelijkheid: Logica in de backend voor het verwerken van betalingen.
-    - Principe: Law of demeter
+    - Principle: Law of demeter
 - Een controller (PaymentController)
     - Verantwoordelijkheid: Ontvangen en verwerken van requests. Hoort de bijbehorende logica van de service laag aan te roepen
-    - Principe: Information hiding
+    - Principle: Information hiding
 - Een repository? (PaymentRepository)
     - Verantwoordelijkheid: Slaat betalingsgegevens op in de database.
-    - Principe:
+    - Principle: Single responsibility
+
+## 2. Interfaces beschrijven
+
+
+| Interfaces              | Methodes      | Parameters              | Return          |
+| ----------------------- | ------------- | ----------------------- | --------------- |
+| PaymentServiceInterface | IsEnoughMoney | Payment (domein object) | Bool true/false |
+|                         |               | currentTaxPercentage    |                 |
+|                         |               | Price (domein object)   |                 |
+
+
+## 3. Volgorde van aanroepen
+
+Zie [diagram](dynamic-component-diagram.puml)
