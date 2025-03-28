@@ -67,4 +67,6 @@ IdentityService "1" -- "1" AuthStrategy : uses
 AuthStrategy <|-- GoogleAuthStrategy
 AuthStrategy <|-- MicrosoftAuthStrategy
 
+IdentityController "1" -- "1" IdentityServiceInterface : uses
+
 @enduml
