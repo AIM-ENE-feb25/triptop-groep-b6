@@ -19,33 +19,33 @@ Class PaymentService {
     - paymentAdapterInterface: PaymentAdapterInterface
     - stripeBaseURL: String
     + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
-    + processPayment(payment: Payment): void
+    + processPayment(payment: Payment, userId: UUID): void
     + checkPayment(payment: Payment): Boolean
 }
 
 Class StripeAdapter {
     + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
-    + processPayment(payment: Payment): void
+    + processPayment(payment: Payment, userId: UUID): void
     + checkPayment(payment: Payment): Boolean
 }
 
 Interface PaymentAdapterInterface {
     + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
-    + processPayment(payment: Payment): void
+    + processPayment(payment: Payment, userId: UUID): void
     + checkPayment(payment: Payment): Boolean
 }
 
 Class PaymentRepository {
     + CRUDrepositoryImplementation: CRUDrepository
 }
-note right of PaymentRepository
+note left of PaymentRepository
   implementatie van de crude repo
 end note
 
 PaymentController --> PaymentService
 PaymentService --> PaymentRepository
 PaymentService --> Payment
-PaymentAdapterInterface ..|> PaymentService
+PaymentService -->  PaymentAdapterInterface
 StripeAdapter ..|> PaymentAdapterInterface
 StripeAdapter --> Payment
 
