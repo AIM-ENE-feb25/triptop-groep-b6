@@ -2,9 +2,15 @@
 
 title Class diagram voor betalingssysteem binnen TripTop
 
+Class Payment {
+    - amount: double
+    - currency: String
+    - userId: UUID
+}
+
 class PaymentController {
     - paymentService: PaymentService
-    + processPayment(payment: Payment): void
+    + processPayment(amount: Double, currency: String, userId: UUID): void
 }
 
 Class PaymentService {
@@ -16,7 +22,6 @@ Class PaymentService {
     + processPayment(payment: Payment): void
     + checkPayment(payment: Payment): Boolean
 }
-
 
 Class StripeAdapter {
     + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
@@ -31,7 +36,7 @@ Interface PaymentAdapterInterface {
 }
 
 Class PaymentRepository {
-    
+    + CRUDrepositoryImplementation: CRUDrepository
 }
 note right of PaymentRepository
   implementatie van de crude repo
@@ -39,8 +44,10 @@ end note
 
 PaymentController --> PaymentService
 PaymentService --> PaymentRepository
+PaymentService --> Payment
 PaymentAdapterInterface ..|> PaymentService
 StripeAdapter ..|> PaymentAdapterInterface
+StripeAdapter --> Payment
 
 @enduml
 
