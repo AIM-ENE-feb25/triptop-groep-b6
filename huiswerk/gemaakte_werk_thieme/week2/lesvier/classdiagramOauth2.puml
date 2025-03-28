@@ -1,0 +1,70 @@
+@startuml
+
+interface AuthStrategy {
+    + authenticate(credentials : String) : User
+}
+
+class GoogleAuthStrategy {
+    + authenticate(credentials : String) : User
+}
+
+class MicrosoftAuthStrategy {
+    + authenticate(credentials : String) : User
+}
+
+class IdentityService {
+    - authStrategy : AuthStrategy
+    + setAuthStrategy(strategy : AuthStrategy) : void
+    + authenticate(credentials : String) : User
+}
+
+class IdentityController {
+    + login() : Redirect
+    + redirectFromAPILink() : String
+    + logout() : ResponseStatus
+    + getUserInfo(token : String) : User
+    - identityService : IdentityServiceInterface
+}
+
+class IdentityRepository {
+    - jdbcTemplate : JdbcTemplate
+    + createNewAccount(user : User) : boolean
+    + findAccountByID(id : int) : User
+    + updateAccountDetails(user : User) : boolean
+}
+
+interface IdentityServiceInterface {
+    + authenticate(credentials : String) : User
+    + setAuthStrategy(strategy : AuthStrategy) : void
+}
+
+interface IdentityRepositoryInterface {
+    + createNewAccount(user : User) : boolean
+    + findAccountByID(id : int) : User
+    + updateAccountDetails(user : User) : boolean
+}
+
+class User {
+    - id : int
+    - voornaam : String
+    - tussenvoegsels : String
+    - achternaam : String
+    - email : Email
+    + getID() : int
+    + getVoornaam() : String
+    + getTussenvoegsels() : String
+    + getAchternaam() : String
+    + getEmail() : Email
+}
+
+IdentityService -|> IdentityServiceInterface : implements >
+IdentityRepository -|> IdentityRepositoryInterface : implements >
+
+IdentityService "1" -- "1" IdentityRepositoryInterface : uses
+IdentityService "1" -- "1" User : uses
+
+IdentityService "1" -- "1" AuthStrategy : uses
+AuthStrategy <|-- GoogleAuthStrategy
+AuthStrategy <|-- MicrosoftAuthStrategy
+
+@enduml
