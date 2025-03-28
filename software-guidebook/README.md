@@ -199,7 +199,9 @@ De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toega
 
 ### 7.1. Containers
 
-![Container Diagram](./diagrammen/containerdiagram_van_____voor_het_voor_triptop_systeem-Container_diagram_van_____voor_Triptop_systeem.svg)
+![Container Diagram](./diagrammen/container-diagram-Container_diagram_van_____voor_Triptop_systeem.png)
+
+
 
 #### 7.1.1 Dynamic Diagram 1: Inloggen
 
@@ -210,8 +212,21 @@ De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toega
 
 ### 7.2. Components
 
+#### 7.2.1. Frontend component diagram
+
+![Frontend component diagram](./diagrammen/FEcomponentdiagram-C4_Component_diagram_FSWD.svg)
+
 > [!IMPORTANT]
 > Voeg toe: Component Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
+
+
+#### 7.2.2 Backend component diagram
+
+![Backend component diagram]()
+
+#### 7.2.3. Dynamic diagram 2: Google Oauth2
+
+![](./diagrammen/dynamicdiagramOauth2-Dynamic_diagram_Oauth2_0_Google.png)
 
 ### 7.3. Design & Code
 
