@@ -1,0 +1,39 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+left to right direction
+
+title Dynamic Diagram - TripTop (Facade Pattern)
+
+Person(User, "User", "Gebruiker van de TripTop-applicatie")
+
+System(Frontend, "Frontend", "React.js")
+
+System_Boundary("triptop_boundary", "TripTop Applicatie", $tags="") {
+    Container(Backend, "Backend", "Spring Boot", "Backend van de applicatie")
+    Component(TripTopController, "TripTopController", "Spring Boot", "Verwerkt gebruikersverzoeken")
+    Component(TripTopFacade, "TripTopFacade", "Spring Boot", "Centrale toegang tot services en externe API’s")
+    Component(AuthProviderService, "AuthProviderService", "Spring Boot", "Beheert authenticatie met OAuth2")
+    Component(MapsService, "MapsService", "Spring Boot", "Haalt routegegevens op via Google Maps API")
+}
+
+System_Ext(GoogleOAuth, "Google OAuth2 API", "Externe service voor authenticatie")
+System_Ext(GoogleMapsAPI, "Google Maps API", "Externe service voor kaarten en routes")
+
+Rel_D(User, Frontend, "1. Gebruiker vraagt routegegevens op", $techn="HTTP(S)")
+Rel(Frontend, Backend, "2. Verstuurt verzoek naar backend", $techn="HTTP(S)")
+Rel_D(Backend, TripTopController, "3. Handelt verzoek af en stuurt naar Facade")
+Rel_D(TripTopController, TripTopFacade, "4. Roept Facade aan voor verwerking")
+Rel_D(TripTopFacade, AuthProviderService, "5. Controleert authenticatie", "OAuth2")
+Rel_U(AuthProviderService, GoogleOAuth, "6. Verifieert gebruiker via Google OAuth2", "HTTP/JSON")
+Rel_U(GoogleOAuth, AuthProviderService, "7. Retourneert token en gebruikersgegevens", "JSON")
+Rel_L(AuthProviderService, TripTopFacade, "8. Valideert gebruiker en geeft door")
+
+Rel_D(TripTopFacade, MapsService, "9. Vraagt routegegevens op")
+Rel_D(MapsService, GoogleMapsAPI, "10. Roept Google Maps API aan", "HTTP/JSON")
+Rel_U(GoogleMapsAPI, MapsService, "11. Retourneert routegegevens", "JSON")
+Rel_U(MapsService, TripTopFacade, "12. Verwerkt en retourneert data")
+Rel_U(TripTopFacade, TripTopController, "13. Stuurt gegevens terug naar controller")
+Rel_U(TripTopController, Frontend, "14. Stuurt gegevens naar de gebruiker")
+Rel_U(Frontend, User, "15. Toont route op de kaart")
+
+@enduml

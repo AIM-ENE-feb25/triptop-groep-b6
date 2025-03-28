@@ -1,0 +1,71 @@
+@startuml
+title Class Diagram - TripTop (Facade Pattern)
+
+class TripTopController {
+    +getRouteData(request: RouteRequest): RouteResponse
+}
+
+class TripTopFacade {
+    +getRouteData(request: RouteRequest): RouteResponse
+}
+
+class AuthProviderService {
+    +authenticateUser(token: String): User
+}
+
+class MapsService {
+    +fetchRouteData(origin: String, destination: String): RouteData
+}
+
+class TripTopConfigProvider {
+    +getGoogleMapsApiKey(): String
+}
+
+class User {
+    -id: Long
+    -name: String
+    -email: String
+    -role: String
+}
+
+class RouteRequest {
+    -origin: String
+    -destination: String
+}
+
+class RouteResponse {
+    -route: List<String>
+    -estimatedTime: int
+}
+
+class RouteData {
+    -routeSteps: List<String>
+    -totalTime: int
+}
+
+interface ExternalApiService {
+    +callApi(endpoint: String, params: Map<String, String>): String
+}
+
+class GoogleOAuthService {
+    +validateToken(token: String): User
+}
+
+class GoogleMapsApiService {
+    +getRoute(origin: String, destination: String): RouteData
+}
+
+TripTopController --> TripTopFacade : "delegates to"
+TripTopFacade --> AuthProviderService : "authenticates via"
+TripTopFacade --> MapsService : "fetches route data from"
+MapsService --> TripTopConfigProvider : "retrieves API key"
+TripTopFacade --> RouteRequest
+TripTopFacade --> RouteResponse
+MapsService --> RouteData
+AuthProviderService --> User
+GoogleOAuthService -|> ExternalApiService
+GoogleMapsApiService -|> ExternalApiService
+GoogleOAuthService --> AuthProviderService : "OAuth authentication"
+GoogleMapsApiService --> MapsService : "fetches data from"
+
+@enduml
