@@ -1,0 +1,59 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component diagram voor backend van TripTop
+
+Container(frontend, "TripTop Frontend", "React, HTML, CSS", "Maakt planningen en bookingen aan en verstuurt deze.")
+
+Container_Boundary(api, "Backend van TravelExpensePro") {
+    Component(bookingcontroller, "BookingController", "Spring Boot, Java", "Slaat ingevoerde reiskosten op.")
+    Component(activitycontroller, "ActivityController", "Spring Boot, Java", "Authoriseerd gebruiker o.b.v. inloggegevens.")
+    Component(logincontroller, "LoginController", "Spring Boot, Java", "Haalt alle reiskosten op.")
+    Component(tripcontroller, "TripController", "Spring Boot, Java", "Ontvangt/geeft geplande reizen.")
+
+    Component(bookingsservice, "Booking Service", "Spring Boot, Java", "Verwerkt bookingen.")
+    Component(activityservice, "Activity Service", "Spring Boot, Java", "Verwerkt activiteiten.")
+    Component(tripsservice, "Trip Service", "Spring Boot, Java", "Verwerkt geplande reizen.")
+
+    Component(bookingrepo, "Booking Repository", "Spring Boot, Java, SQL", "Slaat/haalt bookingen op.")
+    Component(triprepo, "Trip Repository", "Spring Boot, Java, SQL", "Slaat/haalt geplande reizen op.")
+    Component(loginrepo, "Login Repository", "Spring Boot, Java, SQL", "Slaat/haalt gebruikersgegevens op.")
+
+    Component(authservice, "Authentication Service", "Spring Boot, Java", "Controleert authenticatie/autorisatie met de identity provider.")
+
+    Rel(frontend, tripcontroller, "Stuurt geplande reizen naar", "JSON/HTTPS")
+    Rel(frontend, bookingcontroller, "Stuurt bookingen naar", "JSON/HTTPS")
+    Rel(frontend, activitycontroller, "Haalt activiteiten op via", "JSON/HTTPS")
+    Rel(frontend, logincontroller, "Stuurt inloggegevens naar", "JSON/HTTPS")
+
+    Rel(bookingcontroller, bookingsservice, "Gebruikt", "Java")
+    Rel(tripcontroller, tripsservice, "Gebruikt", "Java")
+    Rel(activitycontroller, activityservice, "Gebruikt", "Java")
+
+    Rel(bookingsservice, bookingrepo, "Slaat op in", "Java")
+    Rel(tripsservice, triprepo, "Slaat op in", "Java")
+    Rel(authservice, loginrepo, "Slaat/haalt gebruikersgegevens op via", "Spring Boot, Java")
+
+    Rel(bookingcontroller, authservice, "Checkt authenticatie/autorisatie", "Java")
+    Rel(logincontroller, authservice, "Logt gebruiker in en checkt authenticatie/autorisatie", "Java")
+    Rel(tripcontroller, authservice, "Checkt authenticatie/autorisatie", "Java")
+    Rel(activitycontroller, authservice, "Checkt authenticatie/autorisatie", "Java")
+}
+System_Ext(idprovider, "Identity Provider", "Identity provider voor authenticatie/autorisatie.", "?")
+System_Ext(h2, "H2 Database", "Database voor reiskosten en gebruikersgegevens.", "H2, SQL")
+System_Ext(activityapi, Activity API, "Activity API", "API voor activiteiten.", "REST")
+
+Rel(bookingrepo, h2, "Slaat/haalt bookingen op", "JDBC")
+Rel(triprepo, h2, "Slaat/haalt geplande reizen op", "JDBC")
+Rel(loginrepo, h2, "Slaat/haalt gebruikersgegevens op", "JDBC")
+Rel(activityservice, activityapi, "Haalt activiteiten op via", "Java")
+
+Rel(authservice, idprovider, "Stuurt inloggegevens naar", "JSON/HTTPS")
+
+
+SHOW_LEGEND()
+@enduml
