@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PaymentController {
     @PostMapping("/process")
     public ResponseEntity processPayment() {
-
+        return null;
     }
 
 }
