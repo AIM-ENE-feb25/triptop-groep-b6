@@ -42,7 +42,7 @@ Interface CRUDrepository {
 }
 
 note left of PaymentRepository
-  Implementatie van de crud repo
+  Implementatie van de CRUD repo
 end note
 
 PaymentController --> PaymentService
