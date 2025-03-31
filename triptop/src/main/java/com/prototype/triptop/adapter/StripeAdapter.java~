@@ -1,57 +1,32 @@
 package com.prototype.triptop.adapter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prototype.triptop.domain.Payment;
-
-import java.io.BufferedReader;
+import org.springframework.beans.factory.annotation.Value;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.net.URL;
 
 public class StripeAdapter implements PaymentAdapterInterface {
-    private String stripeBaseURL;
+    @Value("${STRIPE_API_KEY}")
+    private String stripeApiKey;
+    private final String stripeUrl = "https://api.stripe.com/v1/payment_intents";
 
-    public StripeAdapter() {
+
+    ObjectMapper mapper = new ObjectMapper();
+    //TODO: add curl requests!
+
+    @Override
+    public void processPayment(Payment payment) throws IOException {
+        URL url = new URL(stripeUrl);
+        //TODO: finish this ()
     }
 
-    //TODO: add curl requests!
 
     //TODO: is not necessary in adapter?
 //    @Override
 //    public boolean isEnoughMoney(Payment payment, int currentTaxPercentage, double price) {
 //        return false;
 //    }
-
-    @Override
-    public void processPayment(Payment payment) {
-        String testCurl =
-                "curl https://api.stripe.com/v1/payment_intents ^\n" +
-                        "  -u \"sk_test_51R50t1Q9JjyTDaBHH83oxB3T1Bsk5I5zFZ7id3gGnRNlx4Cdml4wT5Go5Ca7HUSbpzeqzLTOhiuQOPzx4I8KPtQa00tKmBe7wr:\" ^\n" +
-                        "  -d amount=500 ^\n" +
-                        "  -d currency=gbp ^\n" +
-                        "  -d payment_method=pm_card_visa ^\n" +
-                        "  -d \"payment_method_types[]\"=card";
-
-        Process process;
-
-        try {
-            process = Runtime.getRuntime().exec(testCurl);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        StringBuilder response = new StringBuilder();
-
-        String line;
-        try {
-            while ((line = reader.readLine()) != null) {
-                response.append(line).append("\n");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        System.out.println("response: " + response.toString().trim());
-    }
 
     //TODO: is not necessary in adapter?
 //    @Override

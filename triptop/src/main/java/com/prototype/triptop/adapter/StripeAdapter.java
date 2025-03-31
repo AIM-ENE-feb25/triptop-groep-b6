@@ -1,28 +1,32 @@
 package com.prototype.triptop.adapter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prototype.triptop.domain.Payment;
-
-import java.io.BufferedReader;
+import org.springframework.beans.factory.annotation.Value;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.net.URL;
 
 public class StripeAdapter implements PaymentAdapterInterface {
-    private String stripeBaseURL;
+    @Value("${STRIPE_API_KEY}")
+    private String stripeApiKey;
+    private final String stripeUrl = "https://api.stripe.com/v1/payment_intents";
 
-    public StripeAdapter() {
+
+    ObjectMapper mapper = new ObjectMapper();
+    //TODO: add curl requests!
+
+    @Override
+    public void processPayment(Payment payment) throws IOException {
+        URL url = new URL(stripeUrl);
+        //TODO: finish this (https://www.baeldung.com/java-http-request)
     }
 
-    //TODO: add curl requests!
 
     //TODO: is not necessary in adapter?
 //    @Override
 //    public boolean isEnoughMoney(Payment payment, int currentTaxPercentage, double price) {
 //        return false;
 //    }
-
-    @Override
-    public void processPayment(Payment payment) {
-    }
 
     //TODO: is not necessary in adapter?
 //    @Override
