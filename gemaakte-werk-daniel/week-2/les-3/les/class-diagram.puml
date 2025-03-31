@@ -1,0 +1,39 @@
+@startuml
+
+title Class diagram voor betalingssysteem binnen TripTop
+
+class PaymentController {
+    - paymentService: PaymentService
+    
+    + PaymentController(paymentService: PaymentService)
+    + processPayment(payment: Payment): void
+}
+
+Class PaymentService {
+    - authService: AuthService
+    - paymentRepository: PaymentRepository
+    - stripeBaseURL: String
+    + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
+    + processPayment(payment: Payment): void
+    + checkPayment(payment: Payment): Boolean
+}
+
+Interface PaymentServiceInterface {
+    + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
+    + processPayment(payment: Payment): void
+    + checkPayment(payment: Payment): Boolean
+}
+
+Class PaymentRepository {
+    + CRUDrepositoryImplementation: CRUDrepository
+}
+note right of PaymentRepository::CRUDrepositoryImplementation
+  implementatie van de crude repo
+end note
+
+PaymentController --> PaymentService
+PaymentService --> PaymentRepository
+PaymentServiceInterface ..|> PaymentService
+
+@enduml
+

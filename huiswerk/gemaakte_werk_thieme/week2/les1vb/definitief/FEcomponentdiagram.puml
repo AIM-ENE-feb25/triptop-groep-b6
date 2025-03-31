@@ -1,0 +1,53 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title C4 Component diagram FSWD
+top to bottom direction
+
+!$rc = "React Component"
+!$wgi = "Wordt geplaatst in"
+
+Person(Reiziger, "Reiziger", "Wil een reis binnen Nederland maken")
+Person(Reisagent, "Reisagent", "Is beschikbaar voor hulp bij het plannen van een reis voor een reiziger")
+
+System_Boundary(app, "Triptop applicatie") {
+
+Container_Boundary(FEapplication, "Triptop webapplicatie") {
+    Component(App, "App", $rc)
+    Component(Login, "Login pagina", $rc, "Een pagina die de gebruiker doorstuurt naar de backend voor authenticatie")
+    Component(Maps, "Map pagina", $rc, "Een pagina die de gebruiker doorstuurt naar de Google Maps API")
+    Component(Transit, "Transit component", $rc, "")
+    Component(BetalingComponent, "Betaling component", $rc, "")
+    Component(BookingComponent, "Booking component", $rc, "")
+    Component(Statemanagement, "State management", $rc, "Een component dat de state van de applicatie beheert")
+    Component(ReisOverzicht, "Reisoverzicht component", $rc, "Een component dat de reizen van de gebruiker weergeeft")
+    Component(Search, "Search component", $rc, "Een component dat de gebruiker doorstuurt naar de backend voor het zoeken van reizen")
+}
+
+System_Ext(Backend, "Backend", "Verwerkt reisaanvragen, beheert gebruikersdata en communiceert met externe diensten.")
+}
+System_Ext(MapBoxAPI, "MapBox API", "Biedt kaarten en routebeschrijvingen aan")
+
+
+Rel(Reiziger, App, "Navigeert naar", "HTTP")
+Rel(Reisagent, App, "Navigeert naar", "HTTP")
+Rel(App, Login, "Navigeert naar", "HTTP")
+Rel(App, Maps, "Navigeert naar", "HTTP")
+Rel(App, BetalingComponent, "Navigeert naar", "HTTP")
+Rel(App, BookingComponent, "Navigeert naar", "HTTP")
+Rel_R(Statemanagement, App, "Beheerdt de state van", "Redux")
+Rel(App, ReisOverzicht, "Navigeert naar", "HTTP")
+Rel_R(Maps, Transit, "Renders")
+Rel(App, Search, "Renders")
+
+Rel_D(Maps, MapBoxAPI, "Haalt kaarten op van", "HTTP/JSON")
+Rel_D(Login, Backend, " [POST] Stuurt authenticatie verzoeken naar", "HTTP/JSON")
+Rel_D(Transit, Backend, " [GET] Stuurt een verzoek tot het inzien van alle reizen", "HTTP/JSON")
+Rel_D(BetalingComponent, Backend, " [POST] Stuurt een verzoek tot het betalen van een reis", "HTTP/JSON")
+Rel_D(BookingComponent, Backend, " [POST] Stuurt een verzoek tot het boeken van een reis\n [GET] het verzoek van inzien van alle beschikbare hotels", "HTTP/JSON")
+Rel_D(ReisOverzicht, Backend, " [GET] Stuurt een verzoek tot het inzien van alle reizen van de gebruiker", "HTTP/JSON")
+
+SHOW_LEGEND()
+
+
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+
+title Class diagram voor betalingssysteem binnen TripTop
+
+Class Payment {
+    - amount: double
+    - currency: String
+    - userId: UUID
+}
+
+class PaymentController {
+    - paymentService: PaymentService
+    + processPayment(amount: Double, currency: String, userId: UUID): void
+}
+
+Class PaymentService {
+    - authService: AuthService
+    - paymentRepository: PaymentRepository
+    - paymentAdapterInterface: PaymentAdapterInterface
+    - stripeBaseURL: String
+    + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
+    + processPayment(payment: Payment, userId: UUID): void
+    + checkPayment(payment: Payment): Boolean
+}
+
+Class StripeAdapter {
+    + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
+    + processPayment(payment: Payment, userId: UUID): void
+    + checkPayment(payment: Payment): Boolean
+}
+
+Interface PaymentAdapterInterface {
+    + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
+    + processPayment(payment: Payment, userId: UUID): void
+    + checkPayment(payment: Payment): Boolean
+}
+
+Class PaymentRepository {
+    + CRUDrepositoryImplementation: CRUDrepository
+}
+note left of PaymentRepository
+  implementatie van de crude repo
+end note
+
+PaymentController --> PaymentService
+PaymentService --> PaymentRepository
+PaymentService --> Payment
+PaymentService -->  PaymentAdapterInterface
+StripeAdapter ..|> PaymentAdapterInterface
+StripeAdapter --> Payment
+
+@enduml
+

@@ -1,0 +1,30 @@
+@startuml
+
+interface IAuthentication {
+    +login(email: String, password: String): AuthToken
+    +logout(token: AuthToken): Boolean
+    +register(email: String, password: String): User
+    +refreshToken(oldToken: AuthToken): AuthToken
+}
+
+class AuthService implements IAuthentication {
+    +login(email: String, password: String): AuthToken
+    +logout(token: AuthToken): Boolean
+    +register(email: String, password: String): User
+    +refreshToken(oldToken: AuthToken): AuthToken
+}
+
+class AuthToken {
+    +token: String
+    +expiresAt: Date
+}
+
+class User {
+    +id: String
+    +email: String
+    +name: String
+}
+
+' IAuthentication <|.. AuthService
+
+@enduml

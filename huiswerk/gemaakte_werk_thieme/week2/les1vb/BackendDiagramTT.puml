@@ -1,0 +1,72 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title C4 Component diagram FSWD
+
+
+Container_Boundary(Application, "Triptop Applicatie", "Reisplanner voor nederland") {
+
+    Component(GlobalExceptionHandler, "GlobalExceptionHandler", "Spring Boot/Java", "Handeld uitzonderingen of foutmeldingen binnen de applicatie af")
+
+    Component(ReisController, "ReisController", "Spring Boot/Java", "Verwerkt reisaanvragen")
+    Component(UserController, "GebruikersController", "Spring Boot/Java", "Verwerkt gebruikersdata")
+    Component(BetalingsController, "BetalingsController", "Spring Boot/Java", "Verwerkt betalingen")
+    Component(VervoerderController, "VervoerderController", "Spring Boot/Java", "Haalt informatie over het openbaar vervoer in Nederland op")
+    Component(ActiviteitenController, "ActiviteitenController", "Spring Boot/Java", "Haalt informatie over activiteiten in Nederland op")
+    Component(OvernachtingenController, "OvernachtingenController", "Spring Boot/Java", "Haalt informatie over overnachtingen in Nederland op")
+    Component(AutoVerhuurController, "AutoVerhuurController", "Spring Boot/Java", "Haalt informatie over autoverhuur in Nederland op")
+
+    Component(ReisService, "ReisService", "Spring Boot/Java", "Verwerkt reisaanvragen")
+    Component(UserService, "GebruikersService", "Spring Boot/Java", "Verwerkt gebruikersdata")
+    Component(BetalingsService, "BetalingsService", "Spring Boot/Java", "Verwerkt betalingen")
+    Component(VervoerderService, "VervoerderService", "Spring Boot/Java", "Haalt informatie over het openbaar vervoer in Nederland op")
+    Component(ActiviteitenService, "ActiviteitenService", "Spring Boot/Java", "Haalt informatie over activiteiten in Nederland op")
+    Component(OvernachtingenService, "OvernachtingenService", "Spring Boot/Java", "Haalt informatie over overnachtingen in Nederland op")
+    Component(AutoVerhuurService, "AutoVerhuurService", "Spring Boot/Java", "Haalt informatie over autoverhuur in Nederland op")
+
+    Component(ReisRepository, "ReisRepository", "Spring Boot/Java", "Slaat reisdata op")
+    Component(UserRepository, "GebruikersRepository", "Spring Boot/Java", "Slaat gebruikersdata op")
+    Component(BetalingsRepository, "BetalingsRepository", "Spring Boot/Java", "Slaat betalingsdata op")
+}
+
+
+System_Ext(IdentityProviderAPI, "Google OAuth2 API", "Beheert alle accounts voor Triptop")
+System_Ext(VervoerderAPI, "Google Transit API", "Biedt informatie over het openbaar vervoer in Nederland")
+System_Ext(ActiviteitenAPI, "TripAdvisor API", "Biedt informatie over activiteiten in Nederland")
+ComponentDb(H2Db, "H2 Database", "SQL", "Slaat reis-, betalings- en gebruikersdata op")
+System_Ext(OvernachtingenAPI, "Booking.com API", "Biedt informatie over overnachtingen in Nederland")
+System_Ext(BetalingsAPI, "Stripe API", "Verzorgt de betalingen voor de reizen")
+System_Ext(AutoVerhuurAPI, "Hertz API", "Biedt informatie over autoverhuur in Nederland")
+
+Rel(GlobalExceptionHandler, ReisController, "Handeld uitzonderingen af voor reisaanvragen")
+Rel(GlobalExceptionHandler, UserController, "Handeld uitzonderingen af voor gebruikersdata")
+Rel(GlobalExceptionHandler, BetalingsController, "Handeld uitzonderingen af voor betalingen")
+Rel(GlobalExceptionHandler, VervoerderController, "Handeld uitzonderingen af voor vervoersinformatie")
+Rel(GlobalExceptionHandler, ActiviteitenController, "Handeld uitzonderingen af voor activiteiteninformatie")
+Rel(GlobalExceptionHandler, OvernachtingenController, "Handeld uitzonderingen af voor overnachtingsinformatie")
+Rel(GlobalExceptionHandler, AutoVerhuurController, "Handeld uitzonderingen af voor autoverhuurinformatie")
+
+Rel(ReisController, ReisService, "Verwerkt reisaanvragen")
+Rel(UserController, UserService, "Verwerkt het inloggen van een gebruiker")
+Rel(BetalingsController, BetalingsService, "Verwerkt betalingen")
+Rel(VervoerderController, VervoerderService, "Delegeert de taak om vervoersinformatie op te halen")
+Rel(ActiviteitenController, ActiviteitenService, "Delegeert de taak om activiteiteninformatie op te halen obv een locatie")
+Rel(OvernachtingenController, OvernachtingenService, "Delegeert de taak om overnachtingsinformatie op te halen obv een locatie")
+Rel(AutoVerhuurController, AutoVerhuurService, "Delegeert de taak om autoverhuurinformatie op te halen obv een locatie")
+
+Rel(ReisService, ReisRepository, "Slaat reisdata op")
+Rel(UserService, UserRepository, "Slaat gebruikersdata op")
+Rel(BetalingsService, BetalingsRepository, "Slaat betalingsdata op")
+
+Rel_D(ReisService, IdentityProviderAPI, "Verifieert de reiziger door middel van OAuth2")
+Rel_D(BetalingsService, BetalingsAPI, "Verwerkt de betalingen van de reiziger")
+Rel_D(VervoerderService, VervoerderAPI, "Haalt treinreis informatie op")
+Rel_D(ActiviteitenService, ActiviteitenAPI, "Haalt activiteiten op met een specifieke locatie")
+Rel_D(OvernachtingenService, OvernachtingenAPI, "Haalt overnachtingen op met een specifieke locatie")
+Rel_D(AutoVerhuurService, AutoVerhuurAPI, "Haalt huur informatie van auto's op")
+
+Rel_D(ReisRepository, H2Db, "Slaat reisdata op")
+Rel_D(UserRepository, H2Db, "Slaat gebruikersdata op")
+Rel_D(BetalingsRepository, H2Db, "Slaat betalingsdata op")
+
+
+@enduml

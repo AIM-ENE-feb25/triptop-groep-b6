@@ -1,0 +1,39 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+
+Person(reiziger, "Reiziger", "Wilt zijn reis plannen en boeken", $type="person", $sprite="users")
+Person(reisbureau, "Reisbureau", "Wilt reisgegevens invoeren/updaten", $type="person", $sprite="users")
+
+System_Boundary("key_boundary", "TripTop", $tags="") {
+    Container(systemboundary_key.webapp, "Webapplicatie", $techn="React.js", $descr="Geeft visueel planningen en reisgegevens weer", $tags="", $link="")
+    Container(systemboundary_key.backend, "Backend", $techn="Spring Boot", $descr="Slaat gemaakte planning op en haalt reisgegevens op", $tags="", $link="")
+    Container(systemboundary_key.db, "Database", $techn="SQL", $descr="Verantwoordelijk voor het opslaan van reisgegevens en planningen", $tags="", $link="")
+}
+
+System_Ext(systemboundary_key.betalingservice, "BetalingsSysteem", "Betalings Service\nVerzorgt de betalingen voor de\nreizen (Bijv. Stripe, IDEAL, etc.)", $type="external system")
+System_Ext(systemboundary_key.id, "IdentityProviderAPI", "Identity Provider API\nBeheert alle Accounts voor TripTop\n(bijv. Google, Microsoft, etc.)", $type="external system")
+System_Ext(systemboundary_key.maps, "GoogleMaps", "Google Maps API\nBiedt kaarten en routebeschrijvingen", $type="external system")
+System_Ext(systemboundary_key.vervoer, "VervoerderAPI", "Biedt informatie over het (openbaar)\nvervoer in Nederland (bijv. NS, Arriva,\nBreng, KLM, etc.)", $type="external system")
+System_Ext(systemboundary_key.activiteiten, "ActiviteitenAPI", "Biedt informatie over activiteiten in\nNederland (bijv. TripAdvisor,\nGetYourGuide, etc.)", $type="external system")
+System_Ext(systemboundary_key.overnachtingen, "OvernachtingenAPI", "Biedt informatie over\novernachtingsmogelijkheden\nin Nederland (bijv. Booking.com,\nAirbnb, eigen beheer etc.)", $type="external system")
+System_Ext(systemboundary_key.auto, "AutoVerhuurAPI", "Biedt informatie over autoverhuur\nin Nederland (bijv. Hertz,\nEuropcar, etc.)", $type="external system")
+
+Rel(systemboundary_key.backend, systemboundary_key.betalingservice, "Maakt betalingen", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.id, "Authenticatie", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.maps, "Haalt routes en map op", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.vervoer, "Haalt verschillende vervoer mogelijkheden op", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.activiteiten, "Haalt activiteiten op", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.overnachtingen, "Haalt overnachtingen op", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.auto, "Haalt verhuur-autos op", $techn="HTTP/JSON", $tags="", $link="")
+
+Rel(reiziger, systemboundary_key.webapp, "Leest reisgegevens en maakt planning", $techn="", $tags="", $link="")
+Rel(reisbureau, systemboundary_key.webapp, "Wijzigt en voert reisgegevens in", $techn="", $tags="", $link="")
+
+Rel(systemboundary_key.webapp, systemboundary_key.backend, "Vraagt/verstuurt reisgegevens en planningen", $techn="HTTP/JSON", $tags="", $link="")
+Rel(systemboundary_key.backend, systemboundary_key.db, "Leest en schrijft reisgegevens", $techn="IP/TCP/SQL", $tags="", $link="")
+
+SHOW_LEGEND()
+@enduml

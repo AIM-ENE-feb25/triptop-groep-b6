@@ -1,0 +1,35 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+top to bottom direction
+
+title Component diagram van Julius voor Backend FSWD
+
+package "controller" {
+    [BaseController]
+    [CreateExpenseController]
+    [ExpenseController]
+    [LoginController]
+}
+
+
+package "dao" {
+    [ExpenseDao]
+    [TokenDao]
+}
+
+package "domain" {
+    [Expense]
+    [User]
+}
+
+
+package "rowMapper" {
+    [ExpenseRowmapper]
+    [UserRowMapper]
+}
+
+
+package "login" {
+    [AuthenticationService]
+    [UserToken]
+}

@@ -1,0 +1,29 @@
+@startuml
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(studentAlias, "Student", "A student who uses the system to make exams")
+Person(teacherAlias, "Teacher", "A teacher who needs privileges")
+
+System_Boundary("key_boundary", "ANSIE", $tags="") {
+    Container(frontendContainerAlias, "Frontend Application", "React")
+    Container(backendContainerAlias, "Backend Application", "Spring")
+    Container(databaseContainerAlias, "Database", "Cassandra DB")
+    Container(teacherInterfaceContainerAlias, "Admin Panel", "React")
+    Container(restApiContainerInterface, "Rest API", "HTTP/JSON")
+}
+
+Container(osirisContainerAlias, "Osiris")
+Container(schoolYearContainerAlias, "Schoolyear")
+Container(mailproviderContainerAlias, "Mail Provider")
+
+Rel(studentAlias, frontendContainerAlias, "Maakt Gebruik Van")
+Rel(teacherAlias, frontendContainerAlias, "Maakt Gebruik Van")
+Rel(teacherAlias, teacherInterfaceContainerAlias, "Maakt Gebruik Van")
+Rel(frontendContainerAlias, schoolYearContainerAlias, "Secure Browsing")
+Rel(frontendContainerAlias, restApiContainerInterface, "Maakt Verzoek")
+Rel(backendContainerAlias, mailproviderContainerAlias, "Maakt Gebruik Van")
+Rel(backendContainerAlias, osirisContainerAlias, "Lijst publiceren")
