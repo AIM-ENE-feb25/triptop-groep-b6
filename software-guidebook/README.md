@@ -143,6 +143,7 @@ als belangrijk:
 Hier worden algemene constraints benoemd binnen het project.
 
 #### Proof of concept
+Het project loopt van 31-03-2025 tot 04-04-2025, waarbij de laatste week gericht is op het bouwen van functionaliteit. Deze korte tijdsduur beperkt de hoeveelheid functionaliteit die uitgewerkt kan worden. Het eindresultaat is een proof of concept, zodat mogelijke uitdagingen en sterke punten gevonden kunnen worden.
 
 Het project loopt van 31-03-2025 tot 04-04-2025, waarbij de laatste week gericht is op het bouwen van functionaliteit.
 Deze korte tijdsduur beperkt de hoeveelheid functionaliteit die uitgewerkt kan worden. Het eindresultaat is een proof of
@@ -415,6 +416,66 @@ dynamisch de juiste implementatie kiezen op basis van de configuratie.
 
 * Verhoogde flexibiliteit en minder impact bij API-wijzigingen.
 * Extra complexiteit in het beheren van strategieën en configuraties.
+
+### 8.6. ADR-006 Design Strategy Pattern
+
+#### Context
+
+Ons systeem maakt gebruik van externe API’s zoals Google Maps, Stripe, Google OAuth2, Booking, Autoverhuur en Activiteiten. Directe communicatie vanuit de front-end verhoogt de complexiteit, brengt beveiligingsrisico’s met zich mee en kan de performance beïnvloeden. Een alternatieve aanpak is om de back-end als tussenlaag te laten fungeren, waarbij het Facade Design Pattern wordt toegepast.
+
+#### Considered Options
+
+| Eigenschap                      | Front-end direct | Back-end via Facade |
+|---------------------------------|------------------|---------------------|
+| Beveiliging                     | --               | ++                  |
+| Onderhoudbaarheid               | --               | ++                  |
+| Front-end complexiteit          | --               | ++                  |
+| API-wijzigingen doorvoeren      | --               | ++                  |
+| Serverbelasting                 | ++               | --                  |
+| Responsiviteit                  | ++               | --                  |
+
+#### Decision
+
+We implementeren een facade in de back-end om externe API-aanroepen af te handelen. Dit biedt betere beveiliging, verlaagt de complexiteit in de front-end en maakt onderhoud eenvoudiger.
+
+#### Status
+
+Geaccepteerd
+
+#### Consequences
+
+Deze aanpak verhoogt de beveiliging en onderhoudbaarheid en zorgt voor een gestandaardiseerde communicatie met externe services. De front-end hoeft zich niet bezig te houden met API-authenticatie of wijzigingen. De keerzijde is dat er extra serverbelasting en ontwikkeltijd nodig is voor de facade-implementatie.
+
+### 8.7. ADR-007 Factory Design Pattern
+
+#### Context
+
+Ons systeem moet dynamisch kunnen beslissen of een bouwsteen geboekt wordt via een externe service of intern beheerd wordt. Dit vereist een flexibele architectuur die afhankelijk van de situatie de juiste methode kiest. Directe koppelingen maken de code minder onderhoudbaar en beperken de uitbreidbaarheid. Een Factory Design Pattern kan deze complexiteit verminderen door een centrale instantie verantwoordelijk te maken voor het aanmaken van de juiste boekingsstrategie.
+
+#### Considered Options
+
+| Eigenschap                      | Hardgecodeerde logica| Factory Design Pattern |
+|---------------------------------|----------------------|------------------------|
+| Flexibiliteit                   | --                   | ++                     |
+| Onderhoudbaarheid               | --                   | ++                     |
+| Uitbreidbaarheid                | --                   | ++                     |
+| Complexiteit                    | ++                   | --                     |
+| Testbaarheid                    | --                   | ++                     |
+
+#### Decision
+
+We implementeren het Factory Design Pattern om dynamisch te bepalen of een bouwsteen via een externe service of intern beheerd wordt. Dit zorgt voor betere onderhoudbaarheid en uitbreidbaarheid zonder de kernlogica van het systeem te wijzigen.
+
+#### Status
+
+Geaccepteerd
+
+#### Consequences
+
+Deze aanpak verhoogt de flexibiliteit en testbaarheid, waardoor toekomstige uitbreidingen eenvoudiger worden. De code blijft modulair en gestructureerd, wat onderhoud vergemakkelijkt. De keerzijde is dat de initiële implementatie complexer is dan een hardgecodeerde oplossing.
+
+
+
 
 ## 9. Deployment, Operation and Support
 
