@@ -1,0 +1,35 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title C4 Component diagram FSWD
+left to right direction
+
+Person(Reiziger, "Reiziger", "Wil een reis binnen Nederland maken")
+Person(Reisagent, "Reisagent", "Is beschikbaar voor hulp bij het plannen van een reis voor een reiziger")
+System_Ext(Backend, "Backend", "Verwerkt reisaanvragen, beheert gebruikersdata en communiceert met externe diensten.")
+
+Container_Boundary(cb1, "Triptop Webapplicatie") {
+    Component(App, "App", "React Component", "")
+    Component(ExpenseForm, "ExpenseForm", "React Component", "")
+    Component(ExpenseList, "ExpenseList", "React Component", "")
+    Component(Sidebar, "Sidebar", "React Component", "")
+    Component(LoginForm, "LoginForm", "React Component", "")
+    Component(FormInput, "FormInput", "React Component", "")
+}
+System_Ext(Backend, "Backend", "Spring Boot", "", "Backend of the application")
+Rel(App, "Sidebar", "Renders")
+Rel(App, "LoginForm", "Navigates to")
+Rel(App, "ExpenseForm", "Navigates to")
+Rel(App, "ExpenseList", "Navigates to")
+
+Rel(LoginForm, "FormInput", "Renders")
+Rel("ExpenseForm", "FormInput", "Renders")
+Rel("LoginForm", Backend, "Sends login request to", "HTTP/JSON")
+Rel("ExpenseForm", Backend, "POST expense", "HTTP/JSON")
+Rel("ExpenseList", Backend, "GET expenses", "HTTP/JSON")
+
+
+SHOW_LEGEND()
+
+
+@enduml

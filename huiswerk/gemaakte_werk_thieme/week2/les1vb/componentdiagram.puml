@@ -1,0 +1,38 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title C4 Component diagram FSWD
+
+Container("Frontend", "Frontend", "React.js", "Handles user interaction and displays data")
+
+Container_Boundary(c1, "FSWD") {
+    Component("LoginController", "LoginController", "Spring Boot", "Handles login requests")
+    Component("EnterExpenseController", "EnterExpenseController", "Spring Boot", "Handles entering expenses")
+    Component("ExpenseOverviewController", "ExpenseOverviewController", "Spring Boot", "Handles overview of expenses")
+
+    Component("ExpenseService", "ExpenseService", "Spring Boot", "Handles business logic for expenses")
+    Component("UserService", "UserService", "Spring Boot", "Handles business logic for users")
+    Component("EnterExpenseService", "EnterExpenseService", "Spring Boot", "Handles business logic for entering expenses")
+
+    Component("UserRepository", "UserRepository", "Spring Boot", "Handles database interaction for users")
+    Component("ExpenseRepository", "ExpenseRepository", "Spring Boot", "Handles database interaction for expenses")
+}
+
+ComponentDb("Database", "Database", "SQL", "Stores user and expense data")
+Rel_D(Frontend, LoginController, "Calls the LoginController to log a user in.", "HTTP")
+Rel_D(Frontend, EnterExpenseController, "Calls the EnterExpenseController to create a new expense", "HTTP")
+Rel_D(Frontend, ExpenseOverviewController, "Calls the ExpenseOverview to view all current expenses", "HTTP")
+
+Rel(ExpenseRepository, Database, "Saves a new expense to the database and fetches expenses from the database", "TCP/IP SQL")
+Rel(UserRepository, Database, " Fetches user data from the database", "TCP/IP SQL")
+
+Rel_D(ExpenseOverviewController, ExpenseService, "Deligates the request to fetch all expenses to the ExpenseService")
+Rel_D(LoginController, UserService, "Deligates the request to log a user into the UserService")
+Rel_D(EnterExpenseController, EnterExpenseService, "Deligates the request to create a new expense to the EnterExpenseService")
+
+Rel(ExpenseService, ExpenseRepository, "Fetches expenses from the ExpenseRepository")
+Rel(UserService, UserRepository, "Fetches user data from the UserRepository")
+Rel(EnterExpenseService, ExpenseRepository, "Saves the new expense to the ExpenseRepository")
+
+SHOW_LEGEND()
+
+@enduml

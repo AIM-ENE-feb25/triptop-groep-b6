@@ -1,0 +1,68 @@
+@startuml
+
+class IdentityController {
+    + login() : Redirect
+    + redirectFromAPILink() : String
+    + logout() : ResponseStatus
+    + getUserInfo(token : String) : User
+    - identityService : IdentityServiceInterface
+}
+
+class IdentityService {
+    - identityRepository : IdentityRepositoryInterface
+    + redirectToGoogleAPI() : String
+    + redirectFromAPILink(code : String) : String
+    - createJWTToken(user : User) : String
+    + checkJWTToken(user : User) : boolean
+    + findUserAccountInfoByID(token : String) : User
+    + logout(token : String) : boolean
+}
+
+class IdentityRepository {
+    - jdbcTemplate : JdbcTemplate
+    + createNewAccount(user : User) : boolean
+    + findAccountByID(id : int) : User
+    + updateAccountDetails(user : User) : boolean
+}
+
+interface IdentityServiceInterface {
+    + redirectToGoogleAPI() : String
+    + redirectFromAPILink(code : String) : String
+    + createJWTToken(user : User) : String
+    + checkJWTToken(user : User) : boolean
+    + findUserAccountInfoByID(token : String) : User
+    + logout(token : String) : boolean
+}
+
+interface IdentityRepositoryInterface {
+    + createNewAccount(user : User) : boolean
+    + findAccountByID(id : int) : User
+    + updateAccountDetails(user : User) : boolean
+}
+
+class User {
+    - id : int
+    - voornaam : String
+    - tussenvoegsels : String
+    - achternaam : String
+    - email : Email
+    + getID() : int
+    + getVoornaam() : String
+    + getTussenvoegsels() : String
+    + getAchternaam() : String
+    + getEmail() : Email
+}
+
+class UserMapper {
+    + mapRow(rs : ResultSet, rowNum : int) : User
+}
+
+IdentityService -|> IdentityServiceInterface : implements >
+IdentityRepository -|> IdentityRepositoryInterface : implements >
+
+IdentityController "1" -- "1" IdentityServiceInterface : uses
+IdentityService "1" -- "1" IdentityRepositoryInterface : uses
+IdentityService "1" -- "1" UserMapper : uses
+UserMapper "1" -- "1" User : uses
+
+@enduml
