@@ -5,41 +5,44 @@ title Class diagram voor betalingssysteem binnen TripTop
 Class Payment {
     - amount: double
     - currency: String
-    - userId: UUID
+    - userId: int
 }
 
 class PaymentController {
     - paymentService: PaymentService
-    + processPayment(amount: Double, currency: String, userId: UUID): void
+    + processPayment(amount: Double, currency: String, userId: int): void
 }
 
 Class PaymentService {
     - authService: AuthService
     - paymentRepository: PaymentRepository
     - paymentAdapterInterface: PaymentAdapterInterface
-    - stripeBaseURL: String
-    + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
-    + processPayment(payment: Payment, userId: UUID): void
-    + checkPayment(payment: Payment): Boolean
+    + pay(payment: Payment): void
 }
 
 Class StripeAdapter {
+    - stripeBaseURL: String
     + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
-    + processPayment(payment: Payment, userId: UUID): void
+    + processPayment(payment: Payment, userId: int): void
     + checkPayment(payment: Payment): Boolean
 }
 
 Interface PaymentAdapterInterface {
     + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
-    + processPayment(payment: Payment, userId: UUID): void
+    + processPayment(payment: Payment, userId: int): void
     + checkPayment(payment: Payment): Boolean
 }
 
 Class PaymentRepository {
     + CRUDrepositoryImplementation: CRUDrepository
 }
+
+Interface CRUDrepository {
+    
+}
+
 note left of PaymentRepository
-  implementatie van de crude repo
+  Implementatie van de crud repo
 end note
 
 PaymentController --> PaymentService
@@ -48,6 +51,7 @@ PaymentService --> Payment
 PaymentService -->  PaymentAdapterInterface
 StripeAdapter ..|> PaymentAdapterInterface
 StripeAdapter --> Payment
+PaymentRepository ..|> CRUDrepository
 
 @enduml
 
