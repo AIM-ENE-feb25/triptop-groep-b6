@@ -266,52 +266,35 @@ Geaccepteerd
 
 Deze aanpak verhoogt de beveiliging en onderhoudbaarheid en zorgt voor een gestandaardiseerde communicatie met externe services. De front-end hoeft zich niet bezig te houden met API-authenticatie of wijzigingen. De keerzijde is dat er extra serverbelasting en ontwikkeltijd nodig is voor de facade-implementatie.
 
-### 8.4. ADR-004 TITLE
-
-> [!TIP]
-> These documents have names that are short noun phrases. For example, "ADR 1: Deployment on Ruby on Rails 3.0.10" or "
-> ADR 9: LDAP for Multitenant Integration". The whole ADR should be one or two pages long. We will write each ADR as if
-> it
-> is a conversation with a future developer. This requires good writing style, with full sentences organized into
-> paragraphs. Bullets are acceptable only for visual style, not as an excuse for writing sentence fragments. (Bullets
-> kill
-> people, even PowerPoint bullets.)
+### 8.4. ADR-004 Factory Design Pattern
 
 #### Context
 
-> [!TIP]
-> This section describes the forces at play, including technological, political, social, and project local. These forces
-> are probably in tension, and should be called out as such. The language in this section is value-neutral. It is simply
-> describing facts about the problem we're facing and points out factors to take into account or to weigh when making
-> the
-> final decision.
+Ons systeem moet dynamisch kunnen beslissen of een bouwsteen geboekt wordt via een externe service of intern beheerd wordt. Dit vereist een flexibele architectuur die afhankelijk van de situatie de juiste methode kiest. Directe koppelingen maken de code minder onderhoudbaar en beperken de uitbreidbaarheid. Een Factory Design Pattern kan deze complexiteit verminderen door een centrale instantie verantwoordelijk te maken voor het aanmaken van de juiste boekingsstrategie.
 
 #### Considered Options
 
-> [!TIP]
-> This section describes the options that were considered, and gives some indication as to why the chosen option was
-> selected.
+| Eigenschap                      | Hardgecodeerde logica| Factory Design Pattern |
+|---------------------------------|----------------------|------------------------|
+| Flexibiliteit                   | --                   | ++                     |
+| Onderhoudbaarheid               | --                   | ++                     |
+| Uitbreidbaarheid                | --                   | ++                     |
+| Complexiteit                    | ++                   | --                     |
+| Testbaarheid                    | --                   | ++                     |
 
 #### Decision
 
-> [!TIP]
-> This section describes our response to the forces/problem. It is stated in full sentences, with active voice. "We
-> will …"
+We implementeren het Factory Design Pattern om dynamisch te bepalen of een bouwsteen via een externe service of intern beheerd wordt. Dit zorgt voor betere onderhoudbaarheid en uitbreidbaarheid zonder de kernlogica van het systeem te wijzigen.
 
 #### Status
 
-> [!TIP]
-> A decision may be "proposed" if the project stakeholders haven't agreed with it yet, or "accepted" once it is agreed.
-> If a later ADR changes or reverses a decision, it may be marked as "deprecated" or "superseded" with a reference to
-> its
-> replacement.
+Geaccepteerd
 
 #### Consequences
 
-> [!TIP]
-> This section describes the resulting context, after applying the decision. All consequences should be listed here, not
-> just the "positive" ones. A particular decision may have positive, negative, and neutral consequences, but all of them
-> affect the team and project in the future.
+Deze aanpak verhoogt de flexibiliteit en testbaarheid, waardoor toekomstige uitbreidingen eenvoudiger worden. De code blijft modulair en gestructureerd, wat onderhoud vergemakkelijkt. De keerzijde is dat de initiële implementatie complexer is dan een hardgecodeerde oplossing.
+
+
 
 ### 8.5. ADR-005 TITLE
 
