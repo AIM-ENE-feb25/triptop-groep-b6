@@ -1,0 +1,55 @@
+@startuml
+
+title Class Diagram - TripTop (Facade Pattern)
+
+class TripTopController {
+    +searchHotels(request: HotelSearchRequest): HotelSearchResponse
+}
+
+class TripTopFacade {
+    +searchHotels(request: HotelSearchRequest): HotelSearchResponse
+}
+
+class BookingApiService {
+    +searchHotels(params: Map<String, String>): HotelSearchResponse
+}
+
+class TripTopConfigProvider {
+    +getBookingApiKey(): String
+    +getApiUrl(): String
+}
+
+class HotelSearchRequest {
+    -destinationId: String
+    -adults: int
+    -childrenAges: List<int>
+    -roomQuantity: int
+    -pageNumber: int
+    -currency: String
+}
+
+class HotelSearchResponse {
+    -hotels: List<Hotel>
+}
+
+class Hotel {
+    -id: String
+    -name: String
+    -location: String
+    -price: double
+    -rating: double
+}
+
+interface ExternalApiService {
+    +callApi(endpoint: String, params: Map<String, String>): String
+}
+
+BookingApiService -|> ExternalApiService
+TripTopController --> TripTopFacade : "delegates to"
+TripTopFacade --> BookingApiService : "fetches hotel data from"
+BookingApiService --> TripTopConfigProvider : "retrieves API key and URL"
+TripTopFacade --> HotelSearchRequest
+TripTopFacade --> HotelSearchResponse
+HotelSearchResponse --> Hotel
+
+@enduml

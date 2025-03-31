@@ -21,3 +21,4 @@ We hebben gekozen voor Google Transit, omdat wij hier de meeste voordelen in zie
 
 ## Consequences
 Het gevolg van het kiezen van deze API is dat we gemakkelijk routes met het OV kunnen voorstellen. Aangezien we ook de Google Maps API gebruiken, kan dit goed samenwerken met elkaar. Je kan hierdoor een route invullen en dan de daarbij horende OV-mogelijkheden bekijken.
+
