@@ -1,6 +1,11 @@
 package com.prototype.triptop.domain;
 
+import org.springframework.data.annotation.Id;
+
+
 public class Payment {
+    @Id
+    private int id;
     private double amount;
     private String currency;
     private int userId;
