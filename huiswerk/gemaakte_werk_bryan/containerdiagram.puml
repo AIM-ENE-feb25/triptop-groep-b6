@@ -23,8 +23,8 @@ System_Ext(AutoVerhuurAPI, "Hertz API", "Biedt informatie over autoverhuur in Ne
 
 Rel_D(Reiziger, WebApplicatie, "Navigeert naar", $techn="HTTP(S)")
 Rel_D(Reisagent, WebApplicatie, "Navigeert naar", $techn="HTTP(S)")
-Rel_D(WebApplicatie, Backend, "Stuurt HTTP requests naar", $techn="HTTP")
 Rel_L(Backend, Database, "Slaat data op in", $techn="jbdc")
+Rel_D(WebApplicatie, Backend, "Stuurt HTTP requests naar", $techn="HTTP")
 
 Rel_D(Backend, IdentityProviderAPI, "Verifieert de reiziger\ndoor middel van OAuth2", $techn="HTTP")
 Rel_D(Backend, BetalingsAPI, "Verwerkt de betalingen van de reiziger", $techn="HTTP")
