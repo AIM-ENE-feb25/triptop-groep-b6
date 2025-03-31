@@ -1,0 +1,29 @@
+@startuml
+
+title Sequence Diagram - TripTop (Booking.com API)
+
+actor User
+participant "Frontend (React.js)" as Frontend
+participant "Backend (Spring Boot)" as Backend
+participant "TripTopController" as Controller
+participant "TripTopFacade" as Facade
+participant "BookingService" as BookingService
+participant "BookingAPIClient" as BookingAPIClient
+participant "Booking.com API" as BookingAPI
+
+User -> Frontend: 1. Voert zoekopdracht in
+Frontend -> Backend: 2. Verstuurt zoekopdracht naar backend (HTTP)
+Backend -> Controller: 3. Verzoek ontvangen en doorsturen
+Controller -> Facade: 4. Roept de facade aan voor verwerking
+Facade -> BookingService: 5. Vraagt hotelgegevens op
+BookingService -> BookingAPIClient: 6. Roept Booking.com API aan
+BookingAPIClient -> BookingAPI: 7. Vraagt hotelgegevens op (HTTP/JSON)
+BookingAPI --> BookingAPIClient: 8. Retourneert hotelgegevens (JSON)
+BookingAPIClient --> BookingService: 9. Verwerkt en retourneert data
+BookingService --> Facade: 10. Geeft hotelgegevens terug
+Facade --> Controller: 11. Stuur resultaten terug naar controller
+Controller --> Backend: 12. Geeft antwoord terug aan backend
+Backend --> Frontend: 13. Retourneert hotelgegevens (HTTP/JSON)
+Frontend --> User: 14. Toont hotels op de pagina
+
+@enduml

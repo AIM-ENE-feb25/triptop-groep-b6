@@ -1,71 +1,55 @@
 @startuml
+
 title Class Diagram - TripTop (Facade Pattern)
 
 class TripTopController {
-    +getRouteData(request: RouteRequest): RouteResponse
+    +searchHotels(request: HotelSearchRequest): HotelSearchResponse
 }
 
 class TripTopFacade {
-    +getRouteData(request: RouteRequest): RouteResponse
+    +searchHotels(request: HotelSearchRequest): HotelSearchResponse
 }
 
-class AuthProviderService {
-    +authenticateUser(token: String): User
-}
-
-class MapsService {
-    +fetchRouteData(origin: String, destination: String): RouteData
+class BookingApiService {
+    +searchHotels(params: Map<String, String>): HotelSearchResponse
 }
 
 class TripTopConfigProvider {
-    +getGoogleMapsApiKey(): String
+    +getBookingApiKey(): String
+    +getApiUrl(): String
 }
 
-class User {
-    -id: Long
+class HotelSearchRequest {
+    -destinationId: String
+    -adults: int
+    -childrenAges: List<int>
+    -roomQuantity: int
+    -pageNumber: int
+    -currency: String
+}
+
+class HotelSearchResponse {
+    -hotels: List<Hotel>
+}
+
+class Hotel {
+    -id: String
     -name: String
-    -email: String
-    -role: String
-}
-
-class RouteRequest {
-    -origin: String
-    -destination: String
-}
-
-class RouteResponse {
-    -route: List<String>
-    -estimatedTime: int
-}
-
-class RouteData {
-    -routeSteps: List<String>
-    -totalTime: int
+    -location: String
+    -price: double
+    -rating: double
 }
 
 interface ExternalApiService {
     +callApi(endpoint: String, params: Map<String, String>): String
 }
 
-class GoogleOAuthService {
-    +validateToken(token: String): User
-}
-
-class GoogleMapsApiService {
-    +getRoute(origin: String, destination: String): RouteData
-}
-
+BookingApiService -|> ExternalApiService
 TripTopController --> TripTopFacade : "delegates to"
-TripTopFacade --> AuthProviderService : "authenticates via"
-TripTopFacade --> MapsService : "fetches route data from"
-MapsService --> TripTopConfigProvider : "retrieves API key"
-TripTopFacade --> RouteRequest
-TripTopFacade --> RouteResponse
-MapsService --> RouteData
-AuthProviderService --> User
-GoogleOAuthService -|> ExternalApiService
-GoogleMapsApiService -|> ExternalApiService
-GoogleOAuthService --> AuthProviderService : "OAuth authentication"
-GoogleMapsApiService --> MapsService : "fetches data from"
+TripTopFacade --> BookingApiService : "fetches hotel data from"
+BookingApiService --> TripTopConfigProvider : "retrieves API key and URL"
+TripTopFacade --> HotelSearchRequest
+TripTopFacade --> HotelSearchResponse
+HotelSearchResponse --> Hotel
 
 @enduml
