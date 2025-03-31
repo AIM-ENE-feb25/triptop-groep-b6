@@ -1,0 +1,53 @@
+@startuml
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!$frontend = "ReactJS, TailwindCSS"
+!$useprotocol = "HTTP/JSON"
+
+Person(gebruikerAlias, "Gebruiker", "Wilt een reis boeken")
+Person(adminAlias, "Administrator", "Wilt het systeem kunnen beheren")
+
+System_Boundary("key_boundary", "TripTop", $tags="") {
+    Container(frontendContainer, "Web Application", $frontend)
+    Container(adminContainer, "Admin Panel", $frontend)
+    Container(restGatewayContainer, "Rest Gateway", "JavaScript")
+    
+    Container(backendContainer, "Backend Application", "Spring Boot")
+    Container(databaseContainer, "Database", "Cassandra DB")
+}
+
+Rel(gebruikerAlias, frontendContainer, "Gebruikt om reis te plannen")
+Rel(adminAlias, frontendContainer, "Gebruikt om te controleren")
+Rel(adminAlias, adminContainer, "Gebruikt voor applicatie beheer")
+Rel(frontendContainer, restGatewayContainer, "Stuurt HTTP Request")
+Rel(adminAlias, restGatewayContainer, "Stuurt HTTP Request")
+Rel(restGatewayContainer, backendContainer, "Stuurt HTTP Request door naar")
+Rel(backendContainer, databaseContainer, "Zet dingen in")
+
+
+
+System_Ext(googleMapsApi, "Google Maps API", "Geeft Google Maps data terug.")
+System_Ext(stripeApi, "Stripe API", "Bied de mogelijkheid om gemakkelijk een betalingssysteem te integreren.")
+System_Ext(googleOauthApi, "Google Oauth2 API", "Bied de mogelijkheid om de gebruiker te authenticeren.")
+System_Ext(bookingApi, "Booking API", "Geeft overnachtingsplekken terug en biedt de mogelijkheid om te reserveren.")
+System_Ext(autoVerhuurApi, "Autoverhuur API", "Bied de mogelijkheid om auto's te huren.")
+System_Ext(activityApi, "Activiteiten API", "Geeft aan waar leuke activiteiten te doen zijn in jouw huidige omgeving.")
+
+Rel(backendContainer, stripeApi, "Wilt betaling laten afhandelen.", $useprotocol)
+Rel(backendContainer, googleMapsApi, "Wilt een map inladen.", $useprotocol)
+Rel(backendContainer, activityApi, "Wilt activeiten ophalen.", $useprotocol)
+Rel(backendContainer, bookingApi, "Wilt mogelijke overnachtingsplekken weten.", $useprotocol)
+Rel(backendContainer, bookingApi, "Wilt overnachting boeken.", $useprotocol)
+Rel(backendContainer, googleOauthApi, "Wilt gebruiker authenticeren.", $useprotocol)
+Rel(backendContainer, autoVerhuurApi, "Wilt weten waar auto's te huur zijn.", $useprotocol)
+
+Rel(googleMapsApi, backendContainer, "Zorgt ervoor dat de juiste data verstuurt wordt.", $useprotocol)
+Rel(activityApi, backendContainer, "Stuurt mogelijke activiteiten terug", $useprotocol)
+Rel(bookingApi, backendContainer, "Stuurt mogelijke overnachtingsplekken terug", $useprotocol)
+Rel(autoVerhuurApi, backendContainer, "Geeft mogelijke auto's terug", $useprotocol)
+
+@enduml

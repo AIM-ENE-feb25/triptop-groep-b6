@@ -1,0 +1,40 @@
+Gevonden API's:
+
+
+
+Car rental:
+
+Nummer 1 (RapidApi)
+https://rapidapi.com/tipsters/api/booking-com/
+
+curl --request GET \
+        --url 'https://booking-com.p.rapidapi.com/v1/metadata/exchange-rates?locale=en-gb&currency=AED' \
+        --header 'x-rapidapi-host: booking-com.p.rapidapi.com' \
+        --header 'x-rapidapi-key: a074e1a2e5msh00771683f45ee6bp1aa067jsncc90ae852fdb'
+
+
+
+Nummer 2 (Booking.com)
+https://developers.booking.com/demand/docs/open-api/demand-api/cars
+
+
+
+
+Betalings service
+
+Nummer 1 (Molly)
+https://docs.mollie.com/reference/authentication
+
+
+
+Nummer 2 (Stripe)
+https://docs.stripe.com/api/errors
+
+curl https://api.stripe.com/v1/charges \
+  -u sk_test_Gx4mWEgHtCMr4DYMUIqfIrsz:
+
+
+Overnachtingen
+
+https://developers.google.com/hotels/hotel-prices/api-reference
+
