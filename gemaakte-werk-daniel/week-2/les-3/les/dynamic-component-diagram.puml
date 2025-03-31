@@ -22,7 +22,7 @@ Container_Boundary(api, "Backend van TravelExpensePro") {
     Rel(paymentcontroller, paymentsservice, "2. Stuurt betaalgegevens door naar", "Java")
     Rel(paymentsservice, paymentrepo, "9. Slaat op gemaakte betaling op in", "Java")
 
-    Rel(paymentsservice, paymentcontroller, "11. Stuurt succes naar")
+    Rel(paymentsservice, paymentcontroller, "11. Stuurt succes naar", "Java")
     Rel(paymentcontroller, frontend, "12. Stuurt succes response naar", "JSON/HTTPS")
 }
 System_Ext(h2, "H2 Database", "Database voor reiskosten en gebruikersgegevens.", "H2, SQL")
