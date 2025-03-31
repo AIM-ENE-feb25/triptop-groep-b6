@@ -36,6 +36,6 @@ public class Payment {
     }
 
     public String toString() {
-        return "Payment{" + "amount=" + amount + ", currency='" + currency + '\'' + ", userId=" + userId + '}';
+        return "Payment{" + "amount=" + amount + ", currency='" + currency  + ", userId=" + userId + '}';
     }
 }
