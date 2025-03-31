@@ -9,7 +9,10 @@ import java.util.Optional;
 //TODO: should be "extends"?
 public interface PaymentRepository extends CrudRepository<Payment, Integer> {
 
-//    @Query("SELECT * FROM Betaling WHERE gebruiker_id = :userId")
-    Payment findPaymentByUserId(int userId);
+    @Query("SELECT * FROM Betaling WHERE gebruiker_id = :userId")
+    public Payment getPaymentByUserId(int userId);
 
 }
+
+
+paymentRepository.getPaymentByUserId(userId);
