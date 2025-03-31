@@ -1,0 +1,29 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Dynamic diagram Oauth2.0 Google
+
+Person(User, "User", "User of the application")
+
+System(Frontend, "Frontend", "React.js")
+
+System_Boundary("key_boundary", "Triptop Applicatie", $tags="") {
+Container(Backend, "Backend", "Spring Boot", "Backend of the application")
+Component(IdentityController, "IdentityController", "Spring Boot", "Controller for Identity")
+Component(IdentityService, "IdentityService", "Spring Boot", "Service for Identity")
+Component(IdentityRepository, "IdentityRepository", "Spring Boot", "Repository for Identity")
+}
+System_Ext(Google, "Google Oauth2", "Google Oauth2", "Google Oauth2")
+
+
+Rel_D(User, Frontend, "1. User navigates to /login", $techn="HTTP(S)")
+Rel(Frontend, Backend, "2. Sends user to the loginEndpoint on the backend", $techn="HTTP(S)")
+Rel_D(Backend, IdentityController, "3. Sends user to the login endpoint")
+Rel_D(IdentityController, IdentityService, "4. Calls the identity service to redirect the user to Google Oauth2")
+Rel_D(IdentityService, Google, "5. Redirects the user to Google Oauth2", "HTTP/JSON")
+Rel_U(Google, IdentityService, "6. Google Oauth2 sends back an OAuth token", "JSON")
+Rel_D(IdentityService, Google, "7. Calls Google Oauth2 to get the users information with the Oauth token", "HTTP/JSON")
+Rel_U(Google, IdentityService, "8. Google Oauth2 sends back the users information", "JSON")
+Rel_L(IdentityService, IdentityRepository, "9. Saves the user in the database", "JDBC")
+
+@enduml

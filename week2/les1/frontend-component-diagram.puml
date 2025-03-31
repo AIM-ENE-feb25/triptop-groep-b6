@@ -1,0 +1,45 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+top to bottom direction
+
+!$rc = 'React Component'
+!$wgi = 'Wordt geplaatst in'
+
+Component(searchComponent, "Search", $rc)
+Component(inputComponent, "FormInput", $rc)
+Component(formComponent, "Form", $rc)
+Component(mapComponent, "Map", $rc)
+Component(buttonComponent, "Button", $rc)
+Component(containerComponent, "Container", $rc)
+Component(headerComponent, "Header", $rc)
+Component(footerComponent, "Footer", $rc)
+Component(loginComponent, "Login", $rc)
+Component(registerComponent, "Register", $rc)
+Component(profileComponent, "Profile", $rc)
+Component(bookingComponent, "Booking", $rc)
+Component(transitComponent, "Transit", $rc)
+Component(carComponent, "Car", $rc)
+Component(navbarComponent, "Nav Bar", $rc)
+
+Rel(headerComponent, containerComponent, $wgi)
+Rel(searchComponent, headerComponent, $wgi)
+Rel(navbarComponent, headerComponent, $wgi)
+Rel(inputComponent, formComponent, $wgi)
+Rel(buttonComponent, formComponent, $wgi)
+Rel(formComponent, loginComponent, $wgi)
+Rel(formComponent, registerComponent, $wgi)
+Rel(formComponent, transitComponent, $wgi)
+Rel(formComponent, bookingComponent, $wgi)
+Rel(formComponent, carComponent, $wgi)
+Rel(mapComponent, containerComponent, $wgi)
+Rel(transitComponent, containerComponent, $wgi)
+Rel(loginComponent, containerComponent, $wgi)
+Rel(registerComponent, containerComponent, $wgi)
+Rel(footerComponent, containerComponent, $wgi)
+Rel(profileComponent, containerComponent, $wgi)
+Rel(formComponent, profileComponent, $wgi)
+Rel(bookingComponent, containerComponent, $wgi)
+Rel(carComponent, containerComponent, $wgi)
+
+
+SHOW_LEGEND()

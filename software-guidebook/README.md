@@ -143,6 +143,7 @@ als belangrijk:
 Hier worden algemene constraints benoemd binnen het project.
 
 #### Proof of concept
+Het project loopt van 31-03-2025 tot 04-04-2025, waarbij de laatste week gericht is op het bouwen van functionaliteit. Deze korte tijdsduur beperkt de hoeveelheid functionaliteit die uitgewerkt kan worden. Het eindresultaat is een proof of concept, zodat mogelijke uitdagingen en sterke punten gevonden kunnen worden.
 
 Het project loopt van 31-03-2025 tot 04-04-2025, waarbij de laatste week gericht is op het bouwen van functionaliteit.
 Deze korte tijdsduur beperkt de hoeveelheid functionaliteit die uitgewerkt kan worden. Het eindresultaat is een proof of
@@ -199,7 +200,9 @@ De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toega
 
 ### 7.1. Containers
 
-![Container Diagram](./diagrammen/containerdiagram_van_____voor_het_voor_triptop_systeem-Container_diagram_van_____voor_Triptop_systeem.svg)
+![Container Diagram](./diagrammen/container-diagram-Container_diagram_van_____voor_Triptop_systeem.png)
+
+
 
 #### 7.1.1 Dynamic Diagram 1: Inloggen
 
@@ -210,8 +213,21 @@ De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toega
 
 ### 7.2. Components
 
+#### 7.2.1. Frontend component diagram
+
+![Frontend component diagram](./diagrammen/FEcomponentdiagram-C4_Component_diagram_FSWD.svg)
+
 > [!IMPORTANT]
 > Voeg toe: Component Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
+
+
+#### 7.2.2 Backend component diagram
+
+![Backend component diagram]()
+
+#### 7.2.3. Dynamic diagram 2: Google Oauth2
+
+![](./diagrammen/dynamicdiagramOauth2-Dynamic_diagram_Oauth2_0_Google.png)
 
 ### 7.3. Design & Code
 
@@ -363,52 +379,103 @@ De gekozen database is in-memory, waardoor deze niet geschikt is voor een volled
 nadelig als de PoC uitgewerkt wordt. Het voordeel is dat het ontwikkelen van de applicatie versneld, doordat gegevens
 worden gewist na het opnieuw opstarten van de applicatie.
 
-### 8.5. ADR-005 TITLE
+### 8.5. ADR-005: Design pattern keuze 1: Strategy
 
-> [!TIP]
-> These documents have names that are short noun phrases. For example, "ADR 1: Deployment on Ruby on Rails 3.0.10" or "
-> ADR 9: LDAP for Multitenant Integration". The whole ADR should be one or two pages long. We will write each ADR as if
-> it
-> is a conversation with a future developer. This requires good writing style, with full sentences organized into
-> paragraphs. Bullets are acceptable only for visual style, not as an excuse for writing sentence fragments. (Bullets
-> kill
-> people, even PowerPoint bullets.)
-
-#### Context
-
-> [!TIP]
-> This section describes the forces at play, including technological, political, social, and project local. These forces
-> are probably in tension, and should be called out as such. The language in this section is value-neutral. It is simply
-> describing facts about the problem we're facing and points out factors to take into account or to weigh when making
-> the
-> final decision.
-
-#### Considered Options
-
-> [!TIP]
-> This section describes the options that were considered, and gives some indication as to why the chosen option was
-> selected.
-
-#### Decision
-
-> [!TIP]
-> This section describes our response to the forces/problem. It is stated in full sentences, with active voice. "We
-> will …"
 
 #### Status
 
-> [!TIP]
-> A decision may be "proposed" if the project stakeholders haven't agreed with it yet, or "accepted" once it is agreed.
-> If a later ADR changes or reverses a decision, it may be marked as "deprecated" or "superseded" with a reference to
-> its
-> replacement.
+Accepted
+
+#### Context
+
+Bij het ontwikkelen van de Triptop applicatie zijn we afhankelijk van externe services, zoals Google, Stripe, etc. Door
+wijzigingen in de API van deze services kan het zo zijn dat er aanzienlijke aanpassingen gedaan moeten worden aan de
+applicatie. Met name in de architectuur zoals we het nu hebben opgezet (Frontend - Backend) kan een verandering in bijv.
+de Google Oauth API impact hebben op de frontend als de backend deze wijziging niet opvangt.
+
+Om de impact hiervan te minimaliseren en flexibiliteit in de backend te waarborgen, is er een design pattern nodig dat
+de API-interacties loskoppelt van de interne logica en de frontend.
+
+#### Considered Options
+
+| Forces                                                                       | Strategy Pattern | Adapter Pattern | Observer Pattern |
+|------------------------------------------------------------------------------|------------------|-----------------|------------------|
+| Flexibiliteit; Hoe past het patroon zich aan bij API-wijzigingen?            | ++               | +               | ++               |
+| Onderhoudbaarheid; Hoe eenvoudig is het om uitbreidingen te maken?           | +                | ++              | +                |  
+| Complexiteit; Hoeveel extra code en beheer is er nodig?                      | -                | 0               | -                |
+| Runtime-selectie; Ondersteunt het een dynamische selectie van implementaties | ++               | -               | ++               |
+
+#### Decision
+
+Het Strategy Pattern is gekozen omdat het de meeste flexibiliteit biedt en de onderhoudbaarheid van de code bevordert.
+Het Strategy Pattern zorgt ervoor dat de API-interacties losgekoppeld worden van de interne logica en de frontend. Dit
+maakt het mogelijk om de API-interacties te wijzigen zonder dat de frontend hier iets van merkt. De backend kan
+dynamisch de juiste implementatie kiezen op basis van de configuratie.
 
 #### Consequences
 
-> [!TIP]
-> This section describes the resulting context, after applying the decision. All consequences should be listed here, not
-> just the "positive" ones. A particular decision may have positive, negative, and neutral consequences, but all of them
-> affect the team and project in the future.
+* Verhoogde flexibiliteit en minder impact bij API-wijzigingen.
+* Extra complexiteit in het beheren van strategieën en configuraties.
+
+### 8.6. ADR-006 Design Strategy Pattern
+
+#### Context
+
+Ons systeem maakt gebruik van externe API’s zoals Google Maps, Stripe, Google OAuth2, Booking, Autoverhuur en Activiteiten. Directe communicatie vanuit de front-end verhoogt de complexiteit, brengt beveiligingsrisico’s met zich mee en kan de performance beïnvloeden. Een alternatieve aanpak is om de back-end als tussenlaag te laten fungeren, waarbij het Facade Design Pattern wordt toegepast.
+
+#### Considered Options
+
+| Eigenschap                      | Front-end direct | Back-end via Facade |
+|---------------------------------|------------------|---------------------|
+| Beveiliging                     | --               | ++                  |
+| Onderhoudbaarheid               | --               | ++                  |
+| Front-end complexiteit          | --               | ++                  |
+| API-wijzigingen doorvoeren      | --               | ++                  |
+| Serverbelasting                 | ++               | --                  |
+| Responsiviteit                  | ++               | --                  |
+
+#### Decision
+
+We implementeren een facade in de back-end om externe API-aanroepen af te handelen. Dit biedt betere beveiliging, verlaagt de complexiteit in de front-end en maakt onderhoud eenvoudiger.
+
+#### Status
+
+Geaccepteerd
+
+#### Consequences
+
+Deze aanpak verhoogt de beveiliging en onderhoudbaarheid en zorgt voor een gestandaardiseerde communicatie met externe services. De front-end hoeft zich niet bezig te houden met API-authenticatie of wijzigingen. De keerzijde is dat er extra serverbelasting en ontwikkeltijd nodig is voor de facade-implementatie.
+
+### 8.7. ADR-007 Factory Design Pattern
+
+#### Context
+
+Ons systeem moet dynamisch kunnen beslissen of een bouwsteen geboekt wordt via een externe service of intern beheerd wordt. Dit vereist een flexibele architectuur die afhankelijk van de situatie de juiste methode kiest. Directe koppelingen maken de code minder onderhoudbaar en beperken de uitbreidbaarheid. Een Factory Design Pattern kan deze complexiteit verminderen door een centrale instantie verantwoordelijk te maken voor het aanmaken van de juiste boekingsstrategie.
+
+#### Considered Options
+
+| Eigenschap                      | Hardgecodeerde logica| Factory Design Pattern |
+|---------------------------------|----------------------|------------------------|
+| Flexibiliteit                   | --                   | ++                     |
+| Onderhoudbaarheid               | --                   | ++                     |
+| Uitbreidbaarheid                | --                   | ++                     |
+| Complexiteit                    | ++                   | --                     |
+| Testbaarheid                    | --                   | ++                     |
+
+#### Decision
+
+We implementeren het Factory Design Pattern om dynamisch te bepalen of een bouwsteen via een externe service of intern beheerd wordt. Dit zorgt voor betere onderhoudbaarheid en uitbreidbaarheid zonder de kernlogica van het systeem te wijzigen.
+
+#### Status
+
+Geaccepteerd
+
+#### Consequences
+
+Deze aanpak verhoogt de flexibiliteit en testbaarheid, waardoor toekomstige uitbreidingen eenvoudiger worden. De code blijft modulair en gestructureerd, wat onderhoud vergemakkelijkt. De keerzijde is dat de initiële implementatie complexer is dan een hardgecodeerde oplossing.
+
+
+
 
 ## 9. Deployment, Operation and Support
 

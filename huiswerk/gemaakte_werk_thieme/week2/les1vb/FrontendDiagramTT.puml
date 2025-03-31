@@ -1,0 +1,35 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title C4 Component diagram FSWD
+left to right direction
+
+Person(Reiziger, "Reiziger", "Wil een reis binnen Nederland maken")
+Person(Reisagent, "Reisagent", "Is beschikbaar voor hulp bij het plannen van een reis voor een reiziger")
+
+Container(Backend, "Backend", "Spring Boot", "Verwerkt reisaanvragen, beheert gebruikersdata en communiceert met externe diensten.")
+
+Container_Boundary(cb1, "Triptop Webapplicatie") {
+    Component(App, "App", "React Component", "")
+    Component(StateMangement, "StateMangement", "React Component", "")
+
+    Component(Maps, "Google Maps pagina", "React Component", "")
+    Component(Activiteiten, "Activiteiten pagina", "React Component", "")
+    Component(Overnachtingen, "Overnachtingen pagina", "React Component", "")
+    Component(AutoVerhuur, "AutoVerhuur pagina", "React Component", "")
+    Component(LoginPage, "Login pagina ", "React Component", "")
+}
+
+System_Ext(MapsAPI, "Google Maps API", "Biedt kaarten en routebeschrijvingen aan")
+
+Rel(App, "StateMangement", "Renders")
+Rel(App, "LoginPage", "Navigates to")
+Rel(App, "Maps", "Navigates to")
+Rel(App, "Activiteiten", "Navigates to")
+Rel(App, "Overnachtingen", "Navigates to")
+Rel(App, "AutoVerhuur", "Navigates to")
+
+
+
+
+@enduml
