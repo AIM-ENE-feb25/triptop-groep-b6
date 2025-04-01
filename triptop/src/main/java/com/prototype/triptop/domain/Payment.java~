@@ -3,8 +3,7 @@ package com.prototype.triptop.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-//TODO: change sql to fit this
-//@Table("Payment")
+@Table("Payment")
 public class Payment {
     @Id
     private int paymentId;

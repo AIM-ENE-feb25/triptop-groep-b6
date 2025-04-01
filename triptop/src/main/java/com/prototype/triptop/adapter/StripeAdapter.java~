@@ -1,36 +1,39 @@
 package com.prototype.triptop.adapter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.prototype.triptop.TriptopPrototypeApplication;
 import com.prototype.triptop.domain.Payment;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
-import java.net.URL;
 
 public class StripeAdapter implements PaymentAdapterInterface {
-    @Value("${STRIPE_API_KEY}")
-    private String stripeApiKey;
+
+    private String stripeApiKey = TriptopPrototypeApplication.dotenv.get("STRIPE_API_KEY");
+
     private final String stripeUrl = "https://api.stripe.com/v1/payment_intents";
 
-
-    ObjectMapper mapper = new ObjectMapper();
-    //TODO: add curl requests!
-
+    //TODO: finish this (https://www.baeldung.com/spring-resttemplate-post-json)
     @Override
-    public void processPayment(Payment payment) throws IOException {
-        URL url = new URL(stripeUrl);
-        //TODO: finish this ()
+    public ResponseEntity<String> processPayment(Payment payment) throws IOException {
+        RestTemplate template = new RestTemplate();
+        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+        requestBody.add("amount", payment.getAmountAsString());
+        requestBody.add("currency", payment.getCurrency());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.set("Authorization", "Bearer " + stripeApiKey);
+
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+
+        ResponseEntity<String> response = template.postForEntity(stripeUrl, requestEntity, String.class);
+
+        System.out.println("Stripe response: " + response.getStatusCode());
+        return response;
     }
-
-
-    //TODO: is not necessary in adapter?
-//    @Override
-//    public boolean isEnoughMoney(Payment payment, int currentTaxPercentage, double price) {
-//        return false;
-//    }
-
-    //TODO: is not necessary in adapter?
-//    @Override
-//    public boolean checkPayment(Payment payment) {
-//        return false;
-//    }
 }

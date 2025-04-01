@@ -1,6 +1,10 @@
 package com.prototype.triptop.controller;
 
+
+import com.prototype.triptop.adapter.StripeAdapter;
 import com.prototype.triptop.domain.Payment;
+import com.prototype.triptop.exception.InvalidPaymentException;
+import com.prototype.triptop.repository.PaymentRepository;
 import com.prototype.triptop.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
