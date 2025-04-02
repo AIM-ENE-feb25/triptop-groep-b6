@@ -19,9 +19,14 @@ public interface PaymentRepository extends CrudRepository<Payment, Integer> {
 //    @Query("SELECT * FROM Betaling WHERE gebruiker_id = :userId")
     List<Payment> findPaymentByUserId(int userId);
 
-    @Query(
-            "INSERT INTO Betaling (amount, currency, userId) " +
-                    "VALUES (:amount, :currency, :userId)"
-    )
+//    @Query(
+//            "INSERT INTO Betaling (amount, currency, userId) " +
+//                    "VALUES (:amount, :currency, :userId)"
+//    )
+//    void insertPayment(@Param("amount") int amount, @Param("currency") String currency, @Param("userId") int userId);
+
+
+    @Query("INSERT INTO Betaling (bedrag, valuta, gebruikersId) VALUES (:amount, :currency, :userId)")
     void insertPayment(@Param("amount") int amount, @Param("currency") String currency, @Param("userId") int userId);
+
 }
