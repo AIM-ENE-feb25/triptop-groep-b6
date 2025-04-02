@@ -9,9 +9,9 @@ CREATE TABLE TriptopGebruiker
 
 CREATE TABLE Betaling
 (
-    betalingId INT PRIMARY KEY,
+    betalingId INT IDENTITY(1,1) PRIMARY KEY,
     gebruikersId INT NOT NULL,
-    valuta varchar(265) NOT NULL,
+    valuta VARCHAR(265) NOT NULL,
     bedrag DECIMAL(18,2) NOT NULL,
     FOREIGN KEY (gebruikersId) REFERENCES TriptopGebruiker(gebruikersId)
-)
+);

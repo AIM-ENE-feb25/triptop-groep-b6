@@ -32,13 +32,14 @@ public class PaymentService {
             ResponseEntity<String> response = adapter.processPayment(payment);
             if (response.getStatusCode().is2xxSuccessful()) { //Post success
 //                    TODO: Saving doesnt work yet, need to fix sql
-//                    paymentRepository.save(payment);
-//                    paymentRepository.findPaymentByUserId(payment.getUserId());
+                    paymentRepository.insertPayment(payment.getAmount(), payment.getCurrency(), payment.getUserId());
+                    paymentRepository.findPaymentByUserId(payment.getUserId());
                 return ResponseEntity.ok(response.getBody());
             } else { //Post worked, but wasnt 200 code
                 throw new PaymentRequestException("Unexpected response code: " + response.getStatusCode());
             }
         } catch (Exception e) { //Post failed
+            //TODO: fix this, may accidentally be activated by the repository functions
             throw new PaymentRequestException("Payment request failed: " + e.getMessage());
         }
     }

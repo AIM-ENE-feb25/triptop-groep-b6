@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 //TODO: change sql to fit this? might be unnecessary if payments dont need to be saved
-//@Table("Payment")
+@Table("Betaling")
 public class Payment {
     @Id
     private int paymentId;
@@ -19,7 +19,7 @@ public class Payment {
         this.userId = userId;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
