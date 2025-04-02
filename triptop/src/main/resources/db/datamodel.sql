@@ -9,7 +9,7 @@ CREATE TABLE TriptopGebruiker
 
 CREATE TABLE Betaling
 (
-    betalingId INT IDENTITY(1,1) PRIMARY KEY,
+    betalingId INT AUTO_INCREMENT PRIMARY KEY,
     gebruikersId INT NOT NULL,
     valuta VARCHAR(265) NOT NULL,
     bedrag DECIMAL(18,2) NOT NULL,

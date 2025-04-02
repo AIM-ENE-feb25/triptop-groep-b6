@@ -33,7 +33,7 @@ public class PaymentService {
             if (response.getStatusCode().is2xxSuccessful()) { //Post success
 //                    TODO: Saving doesnt work yet, need to fix sql
                     paymentRepository.insertPayment(payment.getAmount(), payment.getCurrency(), payment.getUserId());
-                    paymentRepository.findPaymentByUserId(payment.getUserId());
+//                    paymentRepository.findPaymentByUserId(payment.getUserId());
                 return ResponseEntity.ok(response.getBody());
             } else { //Post worked, but wasnt 200 code
                 throw new PaymentRequestException("Unexpected response code: " + response.getStatusCode());
