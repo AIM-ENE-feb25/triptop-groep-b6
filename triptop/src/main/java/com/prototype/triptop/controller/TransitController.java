@@ -32,6 +32,9 @@ public class TransitController {
 
                 Response response = client.newCall(request).execute();
                 return response.body().string();
+
+                // Request:
+                // http://localhost:8080/api/getAllDepartures?fromLatitude=51.606776&fromLongitude=-0.185723&departure=2025-05-20T13:01:00
         }
 
         @GetMapping("api/getRoutes")
@@ -52,6 +55,9 @@ public class TransitController {
 
                 Response response = client.newCall(request).execute();
                 return response.body().string();
+
+                // Request:
+                // http://localhost:8080/api/getRoutes?fromLatitude=52.377956&fromLongitude=4.897070&toLatitude=52.092876&toLongitude=5.104480
         }
 
 }
