@@ -1,6 +1,8 @@
-package com.prototype.triptop.identityprovider;
+package com.prototype.triptop.identityprovider.strategy;
 
-import java.util.List;
+import com.prototype.triptop.identityprovider.domain.Authorizationtokens;
+import com.prototype.triptop.identityprovider.domain.UserInfo;
+
 import java.util.Map;
 
 public interface AuthStrategy {

@@ -1,4 +1,4 @@
-package com.prototype.triptop.identityprovider;
+package com.prototype.triptop.identityprovider.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

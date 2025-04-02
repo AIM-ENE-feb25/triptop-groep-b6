@@ -1,8 +1,7 @@
 package com.prototype.triptop;
 
-import com.prototype.triptop.identityprovider.InvalidRequestOriginException;
-import com.prototype.triptop.identityprovider.NoAuthCodeException;
-import com.sun.jdi.request.InvalidRequestStateException;
+import com.prototype.triptop.identityprovider.exceptions.InvalidRequestOriginException;
+import com.prototype.triptop.identityprovider.exceptions.NoAuthCodeException;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

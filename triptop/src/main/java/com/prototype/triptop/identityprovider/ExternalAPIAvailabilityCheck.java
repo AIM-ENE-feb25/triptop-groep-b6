@@ -31,9 +31,9 @@ public class ExternalAPIAvailabilityCheck {
 //                return false;
 //            }
 //            else
-//                if (uri.contains("google")) {
-//                return false;
-//            }
+                if (uri.contains("google")) {
+                return false;
+            }
             System.out.println("API: " + uri + " is up and running");
             return response.getStatusCode().is2xxSuccessful();
         } catch (Exception e) {

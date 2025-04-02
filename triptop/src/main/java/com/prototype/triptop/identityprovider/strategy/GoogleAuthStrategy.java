@@ -1,10 +1,12 @@
-package com.prototype.triptop.identityprovider;
+package com.prototype.triptop.identityprovider.strategy;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prototype.triptop.TriptopPrototypeApplication;
-import org.springframework.beans.factory.annotation.Value;
+import com.prototype.triptop.identityprovider.domain.Authorizationtokens;
+import com.prototype.triptop.identityprovider.domain.GoogleUserInfo;
+import com.prototype.triptop.identityprovider.domain.UserInfo;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -13,12 +15,11 @@ import java.net.URLEncoder;
 import java.util.Map;
 
 @Component
-public class DiscordAuthStrategy implements AuthStrategy {
+public class GoogleAuthStrategy implements AuthStrategy {
 
-    @Value("${discord.client.id}")
-    private String clientId = TriptopPrototypeApplication.dotenv.get("DISCORD_CLIENT_ID");
+    private String clientId = TriptopPrototypeApplication.dotenv.get("GOOGLE_CLIENT_ID");
 
-    private String clientSecret = TriptopPrototypeApplication.dotenv.get("DISCORD_CLIENT_SECRET");
+    private String clientSecret = TriptopPrototypeApplication.dotenv.get("GOOGLE_CLIENT_SECRET");
 
     private String encodeURI(String URI) {
         try {
@@ -32,23 +33,24 @@ public class DiscordAuthStrategy implements AuthStrategy {
 
     @Override
     public String getAuthorizationURL() {
-        System.out.println("Discord Client ID: " + clientId);
-        return "https://discord.com/api/oauth2/authorize?client_id=" + clientId
-                + "&response_type=code&redirect_uri=" + encodedRedirectURI
-                + "&scope=identify%20email&prompt=consent&state=discord";
+        return "https://accounts.google.com/o/oauth2/v2/auth?" +
+                "client_id=" + clientId +
+                "&response_type=code" +
+                "&redirect_uri=" + encodedRedirectURI +
+                "&scope=openid%20profile%20email" +
+                "&state=google";
     }
 
     @Override
     public Authorizationtokens getTokens(String code) {
 
-        String tokenURL = "https://discord.com/api/oauth2/token";
+        String tokenURL = "https://oauth2.googleapis.com/token";
 
         String body = "client_id=" + clientId +
                 "&client_secret=" + clientSecret +
                 "&grant_type=authorization_code" +
                 "&code=" + code +
-                "&redirect_uri=" + encodedRedirectURI +
-                "&scope=identify%20email";
+                "&redirect_uri=" + encodedRedirectURI;
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -60,7 +62,7 @@ public class DiscordAuthStrategy implements AuthStrategy {
         ResponseEntity<String> response = restTemplate.exchange(tokenURL, HttpMethod.POST, entity, String.class);
 
         if (response.getStatusCode() != HttpStatus.OK) {
-            throw new RuntimeException("Failed to get tokens from Discord");
+            throw new RuntimeException("Failed to get tokens from Google");
         }
 
         String responseBody = response.getBody();
@@ -77,7 +79,7 @@ public class DiscordAuthStrategy implements AuthStrategy {
 
     @Override
     public UserInfo getUserInfo(String accessToken) {
-        String userInfoURL = "https://discord.com/api/users/@me";
+        String userInfoURL = "https://www.googleapis.com/oauth2/v3/userinfo";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
@@ -85,17 +87,21 @@ public class DiscordAuthStrategy implements AuthStrategy {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<DiscordUserInfo> response = restTemplate.exchange(
+        ResponseEntity<GoogleUserInfo> response = restTemplate.exchange(
                 userInfoURL,
                 HttpMethod.GET,
                 entity,
-                DiscordUserInfo.class
+                GoogleUserInfo.class
         );
 
-        if (response.getStatusCode() != HttpStatus.OK) {
-            throw new RuntimeException("Failed to get user info from Discord");
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody().toUserInfo();
+
+        } else {
+            System.out.println("Error: " + response.getStatusCode());
         }
-        return response.getBody().toUserInfo();
+        return null;
     }
 
     @Override
