@@ -5,12 +5,16 @@ public class HotelSearchRequest {
         private int adults;
         private int children;
         private int rooms;
+        private String checkInDate;
+        private String checkOutDate;
 
-        public HotelSearchRequest(String destinationId, int adults, int children, int rooms) {
+        public HotelSearchRequest(String destinationId, int adults, int children, int rooms, String checkInDate, String checkOutDate) {
             this.destinationId = destinationId;
             this.adults = adults;
             this.children = children;
             this.rooms = rooms;
+            this.checkInDate = checkInDate;
+            this.checkOutDate = checkOutDate;
         }
 
     public String getDestinationId() {
@@ -43,5 +47,21 @@ public class HotelSearchRequest {
 
     public void setRooms(int rooms) {
         this.rooms = rooms;
+    }
+
+    public String getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(String checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public String getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(String checkOutDate) {
+        this.checkOutDate = checkOutDate;
     }
 }

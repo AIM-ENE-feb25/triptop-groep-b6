@@ -1,3 +1,4 @@
+// BookingController.java
 package com.prototype.triptop.controller;
 
 import com.prototype.triptop.domain.HotelSearchRequest;
@@ -25,16 +26,14 @@ public class BookingController {
             @RequestParam String destinationId,
             @RequestParam int adults,
             @RequestParam int children,
-            @RequestParam int rooms) {
+            @RequestParam int rooms,
+            @RequestParam String checkInDate,
+            @RequestParam String checkOutDate) {
 
-        HotelSearchRequest request = new HotelSearchRequest(destinationId, adults, children, rooms);
+        HotelSearchRequest request = new HotelSearchRequest(destinationId, adults, children, rooms, checkInDate, checkOutDate);
         HotelSearchResponse response = bookingFacade.searchHotels(request);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/hotels")
-    public ResponseEntity<HotelSearchResponse> searchHotels(@RequestBody HotelSearchRequest request) {
-        HotelSearchResponse response = bookingFacade.searchHotels(request);
-        return ResponseEntity.ok(response);
-    }
+
 }

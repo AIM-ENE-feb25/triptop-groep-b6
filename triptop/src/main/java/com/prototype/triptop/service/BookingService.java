@@ -1,23 +1,24 @@
+// BookingService.java
 package com.prototype.triptop.service;
 
-import com.prototype.triptop.config.TripTopConfigProvider;
 import com.prototype.triptop.domain.HotelSearchRequest;
 import com.prototype.triptop.domain.HotelSearchResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookingService {
 
-    private final ExternalApiService externalApiService;
-    private final TripTopConfigProvider configProvider;
+    @Value("${booking.api.key}")
+    private String rapidApiKey;
 
-    public BookingService(ExternalApiService externalApiService, TripTopConfigProvider configProvider) {
+    private final ExternalApiService externalApiService;
+
+    public BookingService(ExternalApiService externalApiService) {
         this.externalApiService = externalApiService;
-        this.configProvider = configProvider;
     }
 
     public HotelSearchResponse searchHotels(HotelSearchRequest request) {
-        String apiKey = configProvider.getBookingApiKey();
-        return externalApiService.searchHotels(request, apiKey);
+        return externalApiService.searchHotels(request, rapidApiKey);
     }
 }
