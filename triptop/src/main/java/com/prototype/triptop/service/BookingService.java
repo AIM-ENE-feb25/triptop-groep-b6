@@ -1,4 +1,3 @@
-// BookingService.java
 package com.prototype.triptop.service;
 
 import com.prototype.triptop.domain.HotelSearchRequest;
@@ -19,6 +18,7 @@ public class BookingService {
     }
 
     public HotelSearchResponse searchHotels(HotelSearchRequest request) {
+        // Call the external API service to perform the hotel search
         return externalApiService.searchHotels(request, rapidApiKey);
     }
 }
