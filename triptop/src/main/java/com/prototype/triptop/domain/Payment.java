@@ -19,6 +19,8 @@ public class Payment {
         this.userId = userId;
     }
 
+    public Payment() {};
+
     public int getAmount() {
         return amount;
     }
@@ -49,5 +51,9 @@ public class Payment {
 
     public String toString() {
         return "Payment{" + "amount=" + amount + ", currency='" + currency  + ", userId=" + userId + '}';
+    }
+
+    public void setId(int paymentId) {
+        this.paymentId = paymentId;
     }
 }

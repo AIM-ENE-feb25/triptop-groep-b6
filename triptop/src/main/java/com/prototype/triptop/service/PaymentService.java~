@@ -38,7 +38,6 @@ public class PaymentService {
             if (response.getStatusCode().is2xxSuccessful()) { //Post success
 //                    TODO: Saving doesnt work yet, need to fix sql
                     paymentDAO.insertPayment(payment.getAmount(), payment.getCurrency(), payment.getUserId());
-                    paymentDAO.findPaymentByUserId(payment.getUserId());
 //                    paymentRepository.findPaymentByUserId(payment.getUserId());
                 return ResponseEntity.ok(response.getBody());
             } else { //Post worked, but wasnt 200 code
