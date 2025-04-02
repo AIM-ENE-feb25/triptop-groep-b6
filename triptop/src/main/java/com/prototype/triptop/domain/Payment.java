@@ -45,15 +45,11 @@ public class Payment {
         this.userId = userId;
     }
 
-    public String getAmountAsString() {
-        return String.valueOf(amount);
-    }
-
     public String toString() {
         return "Payment{" + "amount=" + amount + ", currency='" + currency  + ", userId=" + userId + '}';
     }
 
-    public void setId(int paymentId) {
+    public void setPaymentId(int paymentId) {
         this.paymentId = paymentId;
     }
 }

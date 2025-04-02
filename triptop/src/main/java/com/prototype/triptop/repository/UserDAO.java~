@@ -1,0 +1,23 @@
+package com.prototype.triptop.repository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+@Bean
+public class UserDAO {
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    public void insertUser(String firstName, String lastName, String prefix, String email) {
+        String sql = "INSERT INTO Gebruiker (voornaam, achternaam, tussenvoegsels, email) VALUES (?, ?, ?, ?);";
+        jdbcTemplate.update(sql, firstName, lastName, prefix, email);
+    }
+}
+
+//    voornaam       varchar(265) NOT NULL,
+//    achternaam     varchar(265) NOT NULL,
+//    tussenvoegsels varchar(265) NULL,
+//    email          varchar(265) NOT NULL,
+//    gebruikersId   INT PRIMARY KEY

@@ -14,13 +14,13 @@ import java.io.IOException;
 public class StripeAdapter implements PaymentAdapterInterface {
 
     private final String STRIPE_API_KEY = TriptopPrototypeApplication.dotenv.get("STRIPE_API_KEY");
-    private final String STRIPE_URL = "https://api.stripe.com/v1/paymenta_intents";
+    private final String STRIPE_URL = "https://api.stripe.com/v1/payment_intents";
 
     @Override
-    public ResponseEntity<String> processPayment(Payment payment) throws IOException {
+    public ResponseEntity<String> processPayment(Payment payment) {
         RestTemplate template = new RestTemplate();
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
-        requestBody.add("amount", payment.getAmountAsString());
+        requestBody.add("amount", String.valueOf(payment.getAmount()));
         requestBody.add("currency", payment.getCurrency());
 
         HttpHeaders headers = new HttpHeaders();
@@ -29,10 +29,9 @@ public class StripeAdapter implements PaymentAdapterInterface {
 
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
 
-        template.postForEntity(STRIPE_URL, requestEntity, String.class);
+        ResponseEntity<String> response = template.postForEntity(STRIPE_URL, requestEntity, String.class);
 
-//        System.out.println("Stripe response: " + response.getStatusCode());
-//        return response;
-        return null;
+        System.out.println("Stripe response: " + response.getStatusCode());
+        return response;
     }
 }

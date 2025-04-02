@@ -13,7 +13,6 @@ import java.util.List;
 public class PaymentDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
     private PaymentRowMapper rowMapper = new PaymentRowMapper();
 
     public void insertPayment(int amount, String currency, int userId) {
@@ -21,11 +20,9 @@ public class PaymentDAO {
         jdbcTemplate.update(sql, amount, currency, userId);
     }
 
-    public List<Payment> findPaymentByUserId(int userId) {
-        String sql = "SELECT * FROM Betaling WHERE gebruikersId = ?";
-        List<Payment> payments = jdbcTemplate.queryForList(sql, new Object[]{userId}, rowMapper);
+    public List<Payment> getAllPayments() {
+        String sql = "SELECT * FROM Betaling";
+        List<Payment> payments = jdbcTemplate.query(sql, rowMapper);
         return payments;
     }
-
-
 }

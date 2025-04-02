@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 public class PaymentRowMapper implements RowMapper<Payment> {
     public Payment mapRow(ResultSet rs, int rowNum) throws SQLException {
         Payment payment = new Payment();
-        payment.setId(rs.getInt("id"));
+        payment.setPaymentId(rs.getInt("betalingId"));
         payment.setAmount(rs.getInt("bedrag"));
         payment.setCurrency(rs.getString("valuta"));
         payment.setUserId(rs.getInt("gebruikersId"));

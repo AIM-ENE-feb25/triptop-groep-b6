@@ -16,7 +16,6 @@ public class DBConfig {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("classpath:db/datamodel.sql")
-                .addScript("classpath:db/insertscript.sql")
                 .build();
     }
 }
