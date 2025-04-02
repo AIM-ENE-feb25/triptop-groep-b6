@@ -5,65 +5,50 @@ import com.prototype.triptop.adapter.StripeAdapter;
 import com.prototype.triptop.domain.Currencies;
 import com.prototype.triptop.domain.Payment;
 import com.prototype.triptop.exception.InvalidPaymentException;
+import com.prototype.triptop.exception.PaymentRequestException;
 import com.prototype.triptop.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-
 @Service
 public class PaymentService {
-    private final PaymentRepository paymentRepository;
     private PaymentAdapterInterface adapter = new StripeAdapter();
-    private PaymentRepository repository;
-
+    private PaymentRepository paymentRepository; //WIP
 
     @Autowired
-    public PaymentService(PaymentRepository repository, PaymentRepository paymentRepository) {
-        this.repository = repository;
+    public PaymentService(PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
     }
 
     public ResponseEntity pay(Payment payment) {
-        if (isValid(payment)) {
-            try {
-                ResponseEntity<String> response = adapter.processPayment(payment);
-                if (response.getStatusCode().is2xxSuccessful()) { //Post success
-//                    Saving doesnt work yet, need to fix sql
+        verifyPayment(payment);
+        return handlePaymentRequest(payment);
+    }
+
+    //Sends payment to adapter, also handles failed payments (e.g. external api is down)
+    private ResponseEntity<String> handlePaymentRequest(Payment payment) {
+        try {
+            ResponseEntity<String> response = adapter.processPayment(payment);
+            if (response.getStatusCode().is2xxSuccessful()) { //Post success
+//                    TODO: Saving doesnt work yet, need to fix sql
 //                    paymentRepository.save(payment);
 //                    paymentRepository.findPaymentByUserId(payment.getUserId());
-                    return ResponseEntity.ok(response.getBody());
-                } else { //Post worked, but wasnt 200 code
-                    return ResponseEntity.internalServerError().body(createErrorResponse("Something went wrong", String.valueOf(response.getStatusCode()), response.getBody()));
-                }
-            } catch (Exception e) { //Post failed
-                return ResponseEntity.internalServerError().body(createErrorResponse("Internal server error", "none", e.getMessage()));
-
+                return ResponseEntity.ok(response.getBody());
+            } else { //Post worked, but wasnt 200 code
+                throw new PaymentRequestException("Unexpected response code: " + response.getStatusCode());
             }
-        } else {
-//            throw new InvalidPaymentException("Invalid payment: " + payment.toString());
-            return ResponseEntity.badRequest().body(createErrorResponse("Payment is not valid", "none", payment.toString()));
+        } catch (Exception e) { //Post failed
+            throw new PaymentRequestException("Payment request failed: " + e.getMessage());
         }
     }
 
-    public HashMap<String, String> createErrorResponse(String message, String statusCode, String error) {
-        HashMap<String, String> errorResponse = new HashMap<>();
-        errorResponse.put("errorMessage", message);
-        errorResponse.put("receivedStatusCode", statusCode);
-        errorResponse.put("error", error);
-        return errorResponse;
-    }
-
     //TODO: should check if user exists
-    public boolean isValid(Payment payment) {
+    public void verifyPayment(Payment payment) {
         if (payment.getAmount() <= 0) {
-            return false;
+            throw new InvalidPaymentException("Amount must be greater than 0");
         } else if (!isCurrencyValid(payment.getCurrency())) {
-            return false;
-        } else {
-            return true;
+            throw new InvalidPaymentException("Currency is invalid: " + payment.getCurrency());
         }
     }
 

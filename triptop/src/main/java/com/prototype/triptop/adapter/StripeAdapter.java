@@ -13,9 +13,8 @@ import java.io.IOException;
 
 public class StripeAdapter implements PaymentAdapterInterface {
 
-    private String stripeApiKey = TriptopPrototypeApplication.dotenv.get("STRIPE_API_KEY");
-
-    private final String stripeUrl = "https://api.stripe.com/v1/payment_intents";
+    private final String STRIPE_API_KEY = TriptopPrototypeApplication.dotenv.get("STRIPE_API_KEY");
+    private final String STRIPE_URL = "https://api.stripe.com/v1/payment_intents";
 
     @Override
     public ResponseEntity<String> processPayment(Payment payment) throws IOException {
@@ -26,11 +25,11 @@ public class StripeAdapter implements PaymentAdapterInterface {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        headers.set("Authorization", "Bearer " + stripeApiKey);
+        headers.set("Authorization", "Bearer " + STRIPE_API_KEY);
 
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
 
-        ResponseEntity<String> response = template.postForEntity(stripeUrl, requestEntity, String.class);
+        ResponseEntity<String> response = template.postForEntity(STRIPE_URL, requestEntity, String.class);
 
         System.out.println("Stripe response: " + response.getStatusCode());
         return response;

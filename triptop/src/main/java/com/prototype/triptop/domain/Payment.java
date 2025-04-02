@@ -3,7 +3,7 @@ package com.prototype.triptop.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-//TODO: change sql to fit this
+//TODO: change sql to fit this? might be unnecessary if payments dont need to be saved
 //@Table("Payment")
 public class Payment {
     @Id

@@ -20,7 +20,7 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    // TODO: needs authorization/ authentication
+    // TODO: needs authorization/ authentication?
     @PostMapping("/process")
     public ResponseEntity<?> processPayment(@RequestBody Payment payment) {
         return paymentService.pay(payment);
