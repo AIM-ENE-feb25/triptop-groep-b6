@@ -44,8 +44,8 @@ public class PaymentService {
 
     //TODO: should check if user exists
     public void verifyPayment(Payment payment) {
-        if (payment.getAmount() <= 0) {
-            throw new InvalidPaymentException("Amount must be greater than 0");
+        if (payment.getAmount() < 50) {
+            throw new InvalidPaymentException("Amount must be 50 or more");
         } else if (!isCurrencyValid(payment.getCurrency())) {
             throw new InvalidPaymentException("Currency is invalid: " + payment.getCurrency());
         }
