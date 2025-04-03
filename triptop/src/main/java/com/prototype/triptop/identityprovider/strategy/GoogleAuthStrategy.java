@@ -21,6 +21,8 @@ public class GoogleAuthStrategy implements AuthStrategy {
 
     private String clientSecret = TriptopPrototypeApplication.dotenv.get("GOOGLE_CLIENT_SECRET");
 
+    private RestTemplate restTemplate = new RestTemplate();
+
     private String encodeURI(String URI) {
         try {
             return URLEncoder.encode(URI, "UTF-8");
@@ -51,8 +53,6 @@ public class GoogleAuthStrategy implements AuthStrategy {
                 "&grant_type=authorization_code" +
                 "&code=" + code +
                 "&redirect_uri=" + encodedRedirectURI;
-
-        RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -86,7 +86,6 @@ public class GoogleAuthStrategy implements AuthStrategy {
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<GoogleUserInfo> response = restTemplate.exchange(
                 userInfoURL,
                 HttpMethod.GET,

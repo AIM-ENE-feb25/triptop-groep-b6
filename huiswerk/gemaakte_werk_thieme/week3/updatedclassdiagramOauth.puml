@@ -61,6 +61,7 @@ class DiscordAuthStrategy {
     - clientId : String
     - clientSecret : String
     - encodedRedirectURI : String
+    - restTemplate : RestTemplate
     - encodeURI(URI : String) :String
     + getAuthorizationURL() : String
     + getTokens(code : String) : AuthorizationTokens
@@ -72,6 +73,7 @@ class GoogleAuthStrategy {
     - clientId : String
     - clientSecret : String
     - encodedRedirectURI : String
+    - restTemplate : RestTemplate
     - encodeURI(URI : String) :String
     + getAuthorizationURL() : String
     + getTokens(code : String) : AuthorizationTokens

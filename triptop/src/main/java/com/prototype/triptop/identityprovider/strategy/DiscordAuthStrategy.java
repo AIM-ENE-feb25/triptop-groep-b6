@@ -21,6 +21,8 @@ public class DiscordAuthStrategy implements AuthStrategy {
 
     private String clientSecret = TriptopPrototypeApplication.dotenv.get("DISCORD_CLIENT_SECRET");
 
+    private RestTemplate restTemplate = new RestTemplate();
+
     private String encodeURI(String URI) {
         try {
             return URLEncoder.encode(URI, "UTF-8");
@@ -50,8 +52,6 @@ public class DiscordAuthStrategy implements AuthStrategy {
                 "&code=" + code +
                 "&redirect_uri=" + encodedRedirectURI +
                 "&scope=identify%20email";
-
-        RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -85,7 +85,6 @@ public class DiscordAuthStrategy implements AuthStrategy {
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<DiscordUserInfo> response = restTemplate.exchange(
                 userInfoURL,
                 HttpMethod.GET,
@@ -101,11 +100,11 @@ public class DiscordAuthStrategy implements AuthStrategy {
 
     @Override
     public UserInfo changeObjectToUserInfo(Map<String, Object> userInfo) {
-        UserInfo userInfo1 = new UserInfo();
-        userInfo1.setEmail((String) userInfo.get("EMAIL"));
-        userInfo1.setFirstName((String) userInfo.get("VOORNAAM"));
-        userInfo1.setLastName((String) userInfo.get("ACHTERNAAM"));
-        userInfo1.setPrefix("");
-        return userInfo1;
+        UserInfo user = new UserInfo();
+        user.setEmail((String) userInfo.get("EMAIL"));
+        user.setFirstName((String) userInfo.get("VOORNAAM"));
+        user.setLastName((String) userInfo.get("ACHTERNAAM"));
+        user.setPrefix("");
+        return user;
     }
 }

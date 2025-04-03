@@ -9,7 +9,6 @@ public class DiscordUserInfo implements UserInfoRefact {
     private String discriminator;
     private String email;
 
-    // Getters and setters
     public String getUsername() {
         return username;
     }
@@ -39,7 +38,7 @@ public class DiscordUserInfo implements UserInfoRefact {
         UserInfo userInfo = new UserInfo();
         userInfo.setFirstName(username);
         userInfo.setLastName(discriminator);
-        userInfo.setPrefix("");
+        userInfo.setPrefix(""); // Prefix wordt niet gegeven door Discord
         userInfo.setEmail(email);
         return userInfo;
     }

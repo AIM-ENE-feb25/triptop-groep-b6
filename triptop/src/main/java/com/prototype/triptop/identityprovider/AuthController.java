@@ -42,5 +42,5 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body(authService.changeObjectToUserInfo(userInfo));
     }
 
-    // Add a POST mapping for logout.
+    // Add a POST mapping for logout. Maar is voor dit prototype niet relevant
 }

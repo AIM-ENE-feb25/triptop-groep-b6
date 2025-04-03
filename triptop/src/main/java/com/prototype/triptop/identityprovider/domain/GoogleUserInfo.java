@@ -5,8 +5,8 @@ import com.prototype.triptop.identityprovider.UserInfoRefact;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GoogleUserInfo implements UserInfoRefact {
-    private String given_name;  // First name
-    private String family_name; // Last name
+    private String given_name;  // Voorname
+    private String family_name; // Achtername
     private String email;
 
     public GoogleUserInfo() {
@@ -41,7 +41,7 @@ public class GoogleUserInfo implements UserInfoRefact {
         UserInfo userInfo = new UserInfo();
         userInfo.setFirstName(given_name);
         userInfo.setLastName(family_name);
-        userInfo.setPrefix("");
+        userInfo.setPrefix(""); // Prefix wordt niet gegeven door Google
         userInfo.setEmail(email);
         return userInfo;
     }
