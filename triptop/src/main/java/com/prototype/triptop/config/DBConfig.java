@@ -1,4 +1,4 @@
-package com.prototype.triptop.misc;
+package com.prototype.triptop.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
