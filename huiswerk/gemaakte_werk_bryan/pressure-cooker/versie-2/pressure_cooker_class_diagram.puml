@@ -1,0 +1,97 @@
+@startuml
+
+title Class Diagram - TripTop Application
+
+' Application class
+class TriptopPrototypeApplication {
+    +main(args: String[]): void
+}
+
+' Controller
+class BookingController {
+    +searchHotels(destinationId: String, adults: int, children: int, rooms: int, checkInDate: String, checkOutDate: String): ResponseEntity<HotelSearchResponseDTO>
+}
+
+' Facade
+class BookingFacade {
+    +searchHotels(request: HotelSearchRequestDTO): HotelSearchResponseDTO
+}
+
+' Service layer
+class BookingService {
+    +searchHotels(request: HotelSearchRequestDTO): HotelSearchResponseDTO
+}
+
+' API service
+class ExternalApiService {
+    +searchHotels(request: HotelSearchRequestDTO, apiKey: String): HotelSearchResponseDTO
+}
+
+' Utility
+class HotelResponseParser {
+    +parseHotelsResponse(jsonResponse: String): List<Hotel>
+    -parseHotel(hotelNode: JsonNode): Hotel
+}
+
+' DTO classes
+class HotelSearchRequestDTO {
+    -destinationId: String
+    -adults: int
+    -children: int
+    -rooms: int
+    -checkInDate: String
+    -checkOutDate: String
+}
+
+class HotelSearchResponseDTO {
+    -hotels: List<Hotel>
+}
+
+' Domain class
+class Hotel {
+    -name: String
+    -location: String
+    -latitude: String
+    -longitude: String
+    -checkinFromTime: String
+    -checkinUntilTime: String
+    -checkoutFromTime: String
+    -checkoutUntilTime: String
+    -reviewScore: double
+    -reviewScoreWord: String
+    -reviewCount: int
+    -proposedAccommodation: String
+    -priceDetailsGross: BigDecimal
+    -priceDetailsInfo: BigDecimal
+}
+
+' Config and API client
+class TripTopConfigProvider {
+    +getBookingApiKey(): String
+}
+
+class ExternalApiClient {
+    +callApi(endpoint: String, params: Map<String, String>, apiKey: String): String
+}
+
+' Application configuration
+class AppConfig {
+    +restTemplate(): RestTemplate
+}
+
+' Relationships
+TriptopPrototypeApplication --> BookingController
+BookingController --> BookingFacade
+BookingFacade --> BookingService
+BookingService --> ExternalApiService
+ExternalApiService --> ExternalApiClient
+ExternalApiService --> HotelResponseParser
+ExternalApiService --> TripTopConfigProvider
+BookingFacade --> HotelSearchRequestDTO
+BookingFacade --> HotelSearchResponseDTO
+ExternalApiService --> HotelSearchResponseDTO
+HotelResponseParser --> Hotel
+HotelSearchResponseDTO --> Hotel
+AppConfig --> RestTemplate
+
+@enduml

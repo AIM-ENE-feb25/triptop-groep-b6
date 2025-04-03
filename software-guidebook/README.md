@@ -287,11 +287,43 @@ uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/develop
 
 ##### 7.3.2. Uitwerking Ontwerpvraag Thieme Wijgman
 
-[Klassediagram Thieme Wijgman]()
+| ![Klassediagram Thieme Wijgman](./diagrammen/classDiagram-oauth2-thieme.svg) |
+|------------------------------------------------------------------------------|
+| Het verbeterde klasse diagram van Thieme.                                    |
 
-> [IMPORTANT]
-> INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
-[Sequentiediagram Julius Morselt]()
+Hierboven is mijn klasse diagram te zien. Hierin zitten alle klasses waar ik de code heb uitgewerkt. Hieronder zou ik
+mijn eerste versie weergeven.
+
+| ![1e versie klassendiagram Thieme Wijgman](./diagrammen/classdiagramOauth21eversie-thieme.svg) |
+|------------------------------------------------------------------------------------------------|
+| De eerste versie klassendiagram van Thieme.                                                    |
+
+Om een helderder beeld te geven van de functionaliteit van mijn prototype en een klein beeld welke data deze nodig heeft
+heb ik een sequentie diagram gemaakt. Dit diagram laat zien hoe de data door de applicatie heen gaat en welke
+functionaliteit er aan te pas komt.
+
+| ![sequentiediagram Thieme Wijgman Oauth2](./diagrammen/SQD-Oauth2-google.svg)                                 |
+|---------------------------------------------------------------------------------------------------------------|
+| ![sequentiediagram Thieme Wijgman Oauth2 discord](./diagrammen/SQD-Oauth2-Google-foutief-discord-correct.svg) |
+| Het sequentiediagram van Thieme.                                                                              |
+
+###### Antwoord op mijn ontwerpvraag
+
+Om mijn ontwerpvraag`*` te beantwoorden heb ik ervoor gekozen om 2 API's te gebruiken voor het authoriseren van
+gebruikers.
+Deze API's zijn Google en Discord. Dit staat tevens al beschreven in een ADR waarom er voor deze API's zijn gekozen.
+
+Voor het beantwoorden van mijn ontwerpvraag heb ik gekozen voor het design pattern Strategy (uitgelegd in ADR ...), de
+reden waarvoor ik deze heb gekozen is omdat deze goed aansluit op mijn ontwerpvraag. Het flexibel opvangen van een
+wijziging in een API. In het sequentie diagram hierboven kunt u de 2 manieren van Oauth beknopt zien. De gebruiker logt
+in via de normale route, maar voordat deze wordt doorgestuurd naar de daadwerkelijke login pagina van de betreffende API
+wordt er eerst bekeken of deze API beschikbaar is. Indien deze niet beschikbaar is wordt de gebruiker overgeplaatst naar
+de 2e Oauth API (Discord). Doordat er gebruik wordt gemaakt van een strategy interface kan de backend flexibel te werk
+gaan met het afhandelen van een API wijziging.
+
+`*` -> Mijn ontwerpvraag: Hoe zorg je dat een wijziging in een of meerdere API's niet leidt tot een grote wijziging in
+de applicatie? Specifieker: hoe zorg je ervoor dat een wijziging in de API van een externe service niet leidt tot een
+wijziging in de front-end maar flexibel kan worden opgevangen door de backend.
 
 ##### 7.3.3. Uitwerking Ontwerpvraag Bryan Velthuizen
 
