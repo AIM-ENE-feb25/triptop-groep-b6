@@ -3,20 +3,20 @@ package com.prototype.triptop.domain;
 import java.math.BigDecimal;
 
 public class Hotel {
-    private String name;
-    private String location;
-    private String latitude;
-    private String longitude;
-    private String checkinFromTime;
-    private String checkinUntilTime;
-    private String checkoutFromTime;
-    private String checkoutUntilTime;
-    private double reviewScore;
-    private String reviewScoreWord;
-    private int reviewCount;
-    private String proposedAccommodation;
-    private BigDecimal priceDetailsGross;
-    private BigDecimal priceDetailsInfo;
+    private final String name;
+    private final String location;
+    private final String latitude;
+    private final String longitude;
+    private final String checkinFromTime;
+    private final String checkinUntilTime;
+    private final String checkoutFromTime;
+    private final String checkoutUntilTime;
+    private final double reviewScore;
+    private final String reviewScoreWord;
+    private final int reviewCount;
+    private final String proposedAccommodation;
+    private final BigDecimal priceDetailsGross;
+    private final BigDecimal priceDetailsInfo;
 
     public Hotel(String name, String location, String latitude, String longitude,
                  String checkinFromTime, String checkinUntilTime, String checkoutFromTime,
@@ -67,12 +67,12 @@ public class Hotel {
         return checkoutFromTime;
     }
 
-    public String getCheckoutUntilTime() {
-        return checkoutUntilTime;
-    }
-
     public double getReviewScore() {
         return reviewScore;
+    }
+
+    public String getCheckoutUntilTime() {
+        return checkoutUntilTime;
     }
 
     public String getReviewScoreWord() {
