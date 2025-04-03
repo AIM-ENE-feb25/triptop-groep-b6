@@ -1,6 +1,6 @@
-package com.prototype.triptop.domain;
+package com.prototype.triptop.dto;
 
-public class HotelSearchRequest {
+public class HotelSearchRequestDTO {
         private String destinationId;
         private int adults;
         private int children;
@@ -8,7 +8,7 @@ public class HotelSearchRequest {
         private String checkInDate;
         private String checkOutDate;
 
-        public HotelSearchRequest(String destinationId, int adults, int children, int rooms, String checkInDate, String checkOutDate) {
+    public HotelSearchRequestDTO(String destinationId, int adults, int children, int rooms, String checkInDate, String checkOutDate) {
             this.destinationId = destinationId;
             this.adults = adults;
             this.children = children;

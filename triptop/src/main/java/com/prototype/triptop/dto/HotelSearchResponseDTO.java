@@ -1,11 +1,13 @@
-package com.prototype.triptop.domain;
+package com.prototype.triptop.dto;
+
+import com.prototype.triptop.domain.Hotel;
 
 import java.util.List;
 
-public class HotelSearchResponse {
+public class HotelSearchResponseDTO {
     private List<Hotel> hotels;
 
-    public HotelSearchResponse(List<Hotel> hotels) {
+    public HotelSearchResponseDTO(List<Hotel> hotels) {
         this.hotels = hotels;
     }
 

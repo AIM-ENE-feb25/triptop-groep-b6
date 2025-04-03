@@ -1,9 +1,9 @@
-package com.prototype.triptop.service;
+package com.prototype.triptop.service.booking;
 
 import com.prototype.triptop.config.TripTopConfigProvider;
-import com.prototype.triptop.domain.HotelSearchRequest;
-import com.prototype.triptop.domain.HotelSearchResponse;
-import org.springframework.beans.factory.annotation.Value;
+import com.prototype.triptop.dto.HotelSearchRequestDTO;
+import com.prototype.triptop.dto.HotelSearchResponseDTO;
+import com.prototype.triptop.service.api.ExternalApiService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +17,7 @@ public class BookingService {
         this.bookingApiKey = configProvider.getBookingApiKey();
     }
 
-    public HotelSearchResponse searchHotels(HotelSearchRequest request) {
+    public HotelSearchResponseDTO searchHotels(HotelSearchRequestDTO request) {
         return externalApiService.searchHotels(request, bookingApiKey);
     }
 }

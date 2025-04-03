@@ -1,4 +1,3 @@
-// AppConfig.java
 package com.prototype.triptop.config;
 
 import org.springframework.context.annotation.Bean;

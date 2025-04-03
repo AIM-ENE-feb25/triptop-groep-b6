@@ -1,8 +1,7 @@
-// BookingFacade.java
-package com.prototype.triptop.service;
+package com.prototype.triptop.service.booking;
 
-import com.prototype.triptop.domain.HotelSearchRequest;
-import com.prototype.triptop.domain.HotelSearchResponse;
+import com.prototype.triptop.dto.HotelSearchRequestDTO;
+import com.prototype.triptop.dto.HotelSearchResponseDTO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +12,7 @@ public class BookingFacade {
         this.bookingService = bookingService;
     }
 
-    public HotelSearchResponse searchHotels(HotelSearchRequest request) {
+    public HotelSearchResponseDTO searchHotels(HotelSearchRequestDTO request) {
         return bookingService.searchHotels(request);
     }
 }

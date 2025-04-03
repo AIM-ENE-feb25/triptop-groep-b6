@@ -1,9 +1,9 @@
-package com.prototype.triptop.service;
+package com.prototype.triptop.service.api;
 
 import com.prototype.triptop.client.ExternalApiClient;
 import com.prototype.triptop.domain.Hotel;
-import com.prototype.triptop.domain.HotelSearchRequest;
-import com.prototype.triptop.domain.HotelSearchResponse;
+import com.prototype.triptop.dto.HotelSearchRequestDTO;
+import com.prototype.triptop.dto.HotelSearchResponseDTO;
 import com.prototype.triptop.util.HotelResponseParser;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class ExternalApiService {
         this.hotelResponseParser = hotelResponseParser;
     }
 
-    public HotelSearchResponse searchHotels(HotelSearchRequest request, String apiKey) {
+    public HotelSearchResponseDTO searchHotels(HotelSearchRequestDTO request, String apiKey) {
         String endpoint = "https://booking-com.p.rapidapi.com/v1/hotels/search";
         Map<String, String> params = new HashMap<>();
         params.put("locale", "en-us");
@@ -39,6 +39,6 @@ public class ExternalApiService {
         String response = externalApiClient.callApi(endpoint, params, apiKey);
         List<Hotel> hotels = hotelResponseParser.parseHotelsResponse(response);
 
-        return new HotelSearchResponse(hotels);
+        return new HotelSearchResponseDTO(hotels);
     }
 }

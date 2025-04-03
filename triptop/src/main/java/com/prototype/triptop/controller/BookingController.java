@@ -1,9 +1,8 @@
-// BookingController.java
 package com.prototype.triptop.controller;
 
-import com.prototype.triptop.domain.HotelSearchRequest;
-import com.prototype.triptop.domain.HotelSearchResponse;
-import com.prototype.triptop.service.BookingFacade;
+import com.prototype.triptop.dto.HotelSearchRequestDTO;
+import com.prototype.triptop.dto.HotelSearchResponseDTO;
+import com.prototype.triptop.service.booking.BookingFacade;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,7 @@ public class BookingController {
     }
 
     @GetMapping("/hotels")
-    public ResponseEntity<HotelSearchResponse> searchHotels(
+    public ResponseEntity<HotelSearchResponseDTO> searchHotels(
             @RequestParam String destinationId,
             @RequestParam int adults,
             @RequestParam int children,
@@ -28,8 +27,8 @@ public class BookingController {
             @RequestParam String checkInDate,
             @RequestParam String checkOutDate) {
 
-        HotelSearchRequest request = new HotelSearchRequest(destinationId, adults, children, rooms, checkInDate, checkOutDate);
-        HotelSearchResponse response = bookingFacade.searchHotels(request);
+        HotelSearchRequestDTO request = new HotelSearchRequestDTO(destinationId, adults, children, rooms, checkInDate, checkOutDate);
+        HotelSearchResponseDTO response = bookingFacade.searchHotels(request);
         return ResponseEntity.ok(response);
     }
 }
