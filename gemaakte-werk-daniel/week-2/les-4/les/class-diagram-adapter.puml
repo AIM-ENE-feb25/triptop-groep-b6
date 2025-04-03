@@ -2,56 +2,127 @@
 
 title Class diagram voor betalingssysteem binnen TripTop
 
-Class Payment {
-    - amount: double
-    - currency: String
-    - userId: int
+frame "Domain" {
+    Class Payment {
+        - paymentId: int
+        - amount: int
+        - currency: String
+        - userId: int
+    }
+    note right of Payment
+        Heeft getters en setters
+    end note
+
+    Enum Currencies {
+        - GBP: String
+        - EUR: String
+        - USD: String
+    }
+}
+
+
+frame "Data Access" {
+    Class PaymentDAO {
+        - jdbcTemplate: JdbcTemplate
+        - rowMapper: PaymentRowMapper
+        + insertPayment(amount: int, currency: String, userId: int): void
+        + getAllPayments(): List<Payment>
+    }
+
+    Class PaymentRowMapper {
+        + mapRow(rs: ResultSet, rowNum: int): Payment
+    }
+
+    Interface RowMapper {
+
+    }
+    note right of RowMapper
+        RowMapper van Spring boot
+    end note
+
+    Class JdbcTemplate {
+
+    }
+    note right of JdbcTemplate
+        JdbcTemplate van Spring boot
+    end note
+}
+
+
+
+frame "Exceptions" {
+    Class InvalidPaymentException {
+        + InvalidPaymentException(message: String)
+    }
+
+    Class PaymentRequestException {
+        + PaymentRequestException(message: String)
+    }
+
+    Class GlobalExceptionHandler {
+        + createErrorResponse(title: String, error: String): HashMap<String, String>
+        + handleInvalidPaymentException(ex: InvalidPaymentException): ResponseEntity<HashMap<String, String>>
+        + handlePaymentRequestException(ex: PaymentRequestException): ResponseEntity<HashMap<String, String>>
+    }
+
+    Class RuntimeException {
+
+    }
+    note left of RuntimeException
+        RuntimeException van Java
+    end note
+
 }
 
 class PaymentController {
     - paymentService: PaymentService
-    + processPayment(amount: Double, currency: String, userId: int): void
+    - paymentDAO: PaymentDAO
+    + processPayment(payment: Payment): ResponseEntity<String>
+    + getAllPayments(): List<Payment>
 }
 
 Class PaymentService {
-    - authService: AuthService
-    - paymentRepository: PaymentRepository
+    - paymentDAO: PaymentDAO
     - paymentAdapterInterface: PaymentAdapterInterface
-    + pay(payment: Payment): void
+    + pay(payment: Payment): ResponseEntity<String>
+    + handlePaymentRequest(payment: Payment): ResponseEntity<String>
+    + verifyPayment(payment: Payment): void
+    + isCurrencyValid(uncheckedCurrency: String): boolean
+}
+frame "Adapter" {
+    Class StripeAdapter {
+        - STRIPE_API_KEY: String
+        - STRIPE_URL: String
+        + processPayment(payment: Payment): ResponseEntity<String>
+    }
+
+
+    Interface PaymentAdapterInterface {
+        + processPayment(payment: Payment): ResponseEntity<String>
+    }
 }
 
-Class StripeAdapter {
-    - stripeBaseURL: String
-    + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
-    + processPayment(payment: Payment, userId: int): void
-    + checkPayment(payment: Payment): Boolean
-}
-
-Interface PaymentAdapterInterface {
-    + IsEnoughMoney(payment: Payment, currentTaxPercentage: double, price: Price): Boolean
-    + processPayment(payment: Payment, userId: int): void
-    + checkPayment(payment: Payment): Boolean
-}
-
-Class PaymentRepository {
-    + CRUDrepositoryImplementation: CRUDrepository
-}
-
-Interface CRUDrepository {
-    
-}
-
-note left of PaymentRepository
-  Implementatie van de CRUD repo
-end note
 
 PaymentController --> PaymentService
-PaymentService --> PaymentRepository
 PaymentService --> Payment
-PaymentService -->  PaymentAdapterInterface
+PaymentAdapterInterface --> PaymentService  
+' PaymentService -->  PaymentAdapterInterface
+
+PaymentService --> PaymentDAO
+PaymentService --> Currencies
+PaymentService --> InvalidPaymentException
+PaymentService --> PaymentRequestException
+GlobalExceptionHandler --> InvalidPaymentException
+GlobalExceptionHandler --> PaymentRequestException
+InvalidPaymentException --|> RuntimeException
+PaymentRequestException --|> RuntimeException
+PaymentDAO --> PaymentRowMapper
+PaymentDAO --> JdbcTemplate
+PaymentDAO --> Payment
+PaymentRowMapper --> Payment
+PaymentRowMapper ..|> RowMapper
 StripeAdapter ..|> PaymentAdapterInterface
-StripeAdapter --> Payment
-PaymentRepository ..|> CRUDrepository
+' PaymentRepository ..|> CRUDrepository
 
 @enduml
 
