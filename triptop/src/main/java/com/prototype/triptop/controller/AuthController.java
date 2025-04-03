@@ -1,8 +1,9 @@
-package com.prototype.triptop.identityprovider;
+package com.prototype.triptop.controller;
 
-import com.prototype.triptop.identityprovider.exceptions.AuthenticationServicesUnavailableException;
-import com.prototype.triptop.identityprovider.exceptions.InvalidRequestOriginException;
-import com.prototype.triptop.identityprovider.exceptions.NoAuthCodeException;
+import com.prototype.triptop.exception.AuthenticationServicesUnavailableException;
+import com.prototype.triptop.exception.InvalidRequestOriginException;
+import com.prototype.triptop.exception.NoAuthCodeException;
+import com.prototype.triptop.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

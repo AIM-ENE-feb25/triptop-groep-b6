@@ -1,4 +1,4 @@
-package com.prototype.triptop.identityprovider.domain;
+package com.prototype.triptop.domain;
 
 public class UserInfo {
     private String firstName;

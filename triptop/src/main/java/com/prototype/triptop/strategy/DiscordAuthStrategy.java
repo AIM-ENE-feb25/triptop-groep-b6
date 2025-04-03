@@ -1,12 +1,12 @@
-package com.prototype.triptop.identityprovider.strategy;
+package com.prototype.triptop.strategy;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prototype.triptop.TriptopPrototypeApplication;
-import com.prototype.triptop.identityprovider.domain.Authorizationtokens;
-import com.prototype.triptop.identityprovider.domain.DiscordUserInfo;
-import com.prototype.triptop.identityprovider.domain.UserInfo;
+import com.prototype.triptop.domain.Authorizationtokens;
+import com.prototype.triptop.domain.DiscordUserInfo;
+import com.prototype.triptop.domain.UserInfo;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

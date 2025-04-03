@@ -1,13 +1,15 @@
-package com.prototype.triptop.identityprovider;
+package com.prototype.triptop.service;
 
-import com.prototype.triptop.identityprovider.domain.Authorizationtokens;
-import com.prototype.triptop.identityprovider.domain.UserInfo;
-import com.prototype.triptop.identityprovider.exceptions.AuthenticationServicesUnavailableException;
-import com.prototype.triptop.identityprovider.exceptions.InvalidRequestOriginException;
-import com.prototype.triptop.identityprovider.exceptions.NoAuthCodeException;
-import com.prototype.triptop.identityprovider.strategy.AuthStrategy;
-import com.prototype.triptop.identityprovider.strategy.DiscordAuthStrategy;
-import com.prototype.triptop.identityprovider.strategy.GoogleAuthStrategy;
+import com.prototype.triptop.repository.AuthRepository;
+import com.prototype.triptop.misc.ExternalAPIAvailabilityCheck;
+import com.prototype.triptop.domain.Authorizationtokens;
+import com.prototype.triptop.domain.UserInfo;
+import com.prototype.triptop.exception.AuthenticationServicesUnavailableException;
+import com.prototype.triptop.exception.InvalidRequestOriginException;
+import com.prototype.triptop.exception.NoAuthCodeException;
+import com.prototype.triptop.strategy.AuthStrategy;
+import com.prototype.triptop.strategy.DiscordAuthStrategy;
+import com.prototype.triptop.strategy.GoogleAuthStrategy;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;

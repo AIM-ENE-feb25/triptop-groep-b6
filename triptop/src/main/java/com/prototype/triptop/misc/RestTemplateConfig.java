@@ -1,4 +1,4 @@
-package com.prototype.triptop.identityprovider;
+package com.prototype.triptop.misc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

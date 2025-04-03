@@ -1,7 +1,7 @@
-package com.prototype.triptop.identityprovider.strategy;
+package com.prototype.triptop.strategy;
 
-import com.prototype.triptop.identityprovider.domain.Authorizationtokens;
-import com.prototype.triptop.identityprovider.domain.UserInfo;
+import com.prototype.triptop.domain.Authorizationtokens;
+import com.prototype.triptop.domain.UserInfo;
 
 import java.util.Map;
 

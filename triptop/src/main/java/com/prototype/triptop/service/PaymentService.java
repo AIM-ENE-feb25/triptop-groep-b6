@@ -7,6 +7,7 @@ import com.prototype.triptop.domain.Payment;
 import com.prototype.triptop.exception.InvalidPaymentException;
 import com.prototype.triptop.exception.PaymentRequestException;
 import com.prototype.triptop.repository.PaymentDAO;
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,12 @@ import org.springframework.stereotype.Service;
 public class PaymentService {
     private PaymentAdapterInterface adapter = new StripeAdapter();
     private PaymentDAO paymentDAO;
+    private AuthService authService;
 
     @Autowired
-    public PaymentService(PaymentDAO paymentDAO) {
+    public PaymentService(PaymentDAO paymentDAO, AuthService authService) {
         this.paymentDAO = paymentDAO;
+        this.authService = authService;
     }
 
     public ResponseEntity pay(Payment payment) {
@@ -30,8 +33,10 @@ public class PaymentService {
     private ResponseEntity<String> handlePaymentRequest(Payment payment) {
         try {
             ResponseEntity<String> response = adapter.processPayment(payment);
+            if (!authService.verifyToken(payment.getToken())) throw new AuthenticationException("Token is invalid");
+            int userID = authService.fetchUserIDFromToken(payment.getToken());
             if (response.getStatusCode().is2xxSuccessful()) { //Post success
-                paymentDAO.insertPayment(payment.getAmount(), payment.getCurrency(), payment.getUserId());
+                paymentDAO.insertPayment(payment.getAmount(), payment.getCurrency(), userID);
                 return ResponseEntity.ok(response.getBody());
             } else { //Post worked, but wasnt 200 code
                 throw new PaymentRequestException("Unexpected response code: " + response.getStatusCode());

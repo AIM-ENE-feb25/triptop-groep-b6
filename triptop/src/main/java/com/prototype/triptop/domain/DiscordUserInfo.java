@@ -1,7 +1,7 @@
-package com.prototype.triptop.identityprovider.domain;
+package com.prototype.triptop.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.prototype.triptop.identityprovider.UserInfoRefact;
+import com.prototype.triptop.strategy.UserInfoRefact;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DiscordUserInfo implements UserInfoRefact {

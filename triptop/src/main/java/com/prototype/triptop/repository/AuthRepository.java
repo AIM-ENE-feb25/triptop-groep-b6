@@ -1,6 +1,6 @@
-package com.prototype.triptop.identityprovider;
+package com.prototype.triptop.repository;
 
-import com.prototype.triptop.identityprovider.domain.UserInfo;
+import com.prototype.triptop.domain.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

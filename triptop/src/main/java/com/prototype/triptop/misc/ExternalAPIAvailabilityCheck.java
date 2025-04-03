@@ -1,4 +1,4 @@
-package com.prototype.triptop.identityprovider;
+package com.prototype.triptop.misc;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
