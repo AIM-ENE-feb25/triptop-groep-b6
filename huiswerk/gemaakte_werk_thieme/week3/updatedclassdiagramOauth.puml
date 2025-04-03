@@ -1,0 +1,161 @@
+@startuml
+
+class AuthController {
+    + login() : ResponseEntity<Void>
+    + callback() : ResponseEntity<String>
+    + getUser() :ResponseEntity<?>
+    - authService : AuthService
+}
+
+class AuthService {
+    - authStrategy : AuthStrategy
+    - authRepository : AuthRepository
+    - availabilityService : ExternalAPIAvailabilityCheck
+    - SECRET_KEY : String
+    - userTokens : Map<String, UserInfo>
+    + AuthService() : Constructor
+    + getAuthorizationURL() : String
+    + getTokens(code : String) :AuthorizationTokens
+    + getUserInfo(accessToken : String) : UserInfo
+    + getUserFromRepository(email : String) : Map<String, Object>
+    + setAuthStrategy(authStrategy : AuthStrategy) : void
+    + checkRequestOrigin(origin : String) : void
+    + checkAPIStability() : void
+    + userExists(email : String) : boolean
+    + updateUser(userInfo : UserInfo, accessToken : String) : void
+    + saveUser(userInfo : UserInfo, accessToken : String) : void
+    + handleAuthCallback(code : String, state : String) : String
+    + createJWTToken(userInfo : UserInfo) : String
+    + verifyToken(token : String) : boolean
+    + fetchEmailFromToken(token : String) : String
+    + fetchUserIDFromToken(token : String) : int
+    + changeObjectIntoUserInfo(userInfo : Map<String, Object> ) : UserInfo
+}
+
+class AuthRepository {
+    - jdbcTemplate : JdbcTemplate
+    + saveUser(userInfo : UserInfo, accessToken : String) : void
+    + getUser(email : String) : Map<String, Object>
+    + userExists(email : String) : boolean
+    + updateUser(userInfo : UserInfo, accessToken : String) : void
+}
+
+class ExternalAPIAvailabilityCheck {
+    - restTemplate : RestTemplate
+    - GOOGLE_JWK_SET_URI : String
+    - DISCORD_JWK_SET_URI : String
+    + ExternalAPIAvailabilityCheck(restTemplate : RestTemplate) : Constructor
+    + isGoogleAvailable() : boolean
+    + isDiscordAvailable() : boolean
+    + isAPIAvailable(uri : String) : String
+}
+
+interface AuthStrategy {
+    + getAuthorizationURL() : String
+    + getTokens(code : String) : AuthorizationTokens
+    + getUserInfo(accessToken : String) : UserInfo
+    + changeObjectIntoUserInfo(userInfo : Map<String, Object>) :UserInfo
+}
+
+class DiscordAuthStrategy {
+    - clientId : String
+    - clientSecret : String
+    - encodedRedirectURI : String
+    - restTemplate : RestTemplate
+    - encodeURI(URI : String) :String
+    + getAuthorizationURL() : String
+    + getTokens(code : String) : AuthorizationTokens
+    + getUserInfo(accessToken : String) : UserInfo
+    + changeObjectIntoUserInfo(userInfo : Map<String, Object>) : UserInfo
+}
+
+class GoogleAuthStrategy {
+    - clientId : String
+    - clientSecret : String
+    - encodedRedirectURI : String
+    - restTemplate : RestTemplate
+    - encodeURI(URI : String) :String
+    + getAuthorizationURL() : String
+    + getTokens(code : String) : AuthorizationTokens
+    + getUserInfo(accessToken : String) : UserInfo
+    + changeObjectIntoUserInfo(userInfo : Map<String, Object>) : UserInfo
+}
+
+class AuthorizationTokens {
+    - access_token : String
+    - refresh_token : String
+    + AuthorizationTokens() : Constructor
+    + getAccessToken() : String
+    + getRefreshToken() : String
+    + setAccessToken(access_token : String) : void
+    + setRefreshToken(refresh_token : String) : void
+}
+
+class DiscordUserInfo {
+    - username : String
+    - discriminator : String
+    - email : String
+    + getUsername() : String
+    + getDiscriminator() : String
+    + getEmail() : String
+    + setUsername(username : String) : void
+    + setDiscriminator(discriminator : String) : void
+    + setEmail(email : String) : void
+    + toUserInfo() : UserInfo
+}
+
+class GoogleUserInfo {
+    - given_name : String
+    - family_name : String
+    - email : String
+    + GoogleUserInfo() : Constructor
+    + getGivenName() : String
+    + getFamilyName() : String
+    + getEmail() : String
+    + setGivenName(given_name : String) : void
+    + setFamilyName(family_name : String) : void
+    + setEmail(email : String) : void
+    + toUserInfo() : UserInfo
+}
+
+interface UserInfoRefact {
+   + toUserInfo() : UserInfo
+}
+
+class UserInfo {
+    - firstName : String
+    - lastName : String
+    - email : String
+    - prefix : String
+    + UserInfo() : Constructor
+    + UserInfo(firstName : String, lastName : String, email : String, prefix : String) : Constructor
+    + getFirstName() : String
+    + getLastName() : String
+    + getEmail() : String
+    + getPrefix() : String
+    + setFirstName(firstName : String) : void
+    + setLastName(lastName : String) : void
+    + setEmail(email : String) : void
+    + setPrefix(prefix : String) : void
+}
+
+AuthController "1  " --> "1  " AuthService : uses
+AuthService "1  " --> "1  " AuthRepository : uses
+AuthService "1  " --> "1  " ExternalAPIAvailabilityCheck : uses
+AuthService "1  " --> "1  " AuthStrategy : uses
+AuthService "1  " --> "1  " UserInfo : uses
+DiscordAuthStrategy "1  " --> "1  " DiscordUserInfo : uses
+GoogleAuthStrategy "1  " --> "1  " GoogleUserInfo : uses
+AuthService "1  " --> "1  " AuthorizationTokens : uses
+AuthRepository "1  " --> "1  " JdbcTemplate : uses
+AuthStrategy <|-- DiscordAuthStrategy
+AuthStrategy <|-- GoogleAuthStrategy
+
+UserInfoRefact <|-- DiscordUserInfo
+UserInfoRefact <|-- GoogleUserInfo
+
+
+
+
+
+@enduml
