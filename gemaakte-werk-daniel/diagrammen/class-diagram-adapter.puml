@@ -8,6 +8,7 @@ frame "Domain" {
         - amount: int
         - currency: String
         - userId: int
+        - token: String
     }
     note right of Payment
         Heeft getters en setters
@@ -48,8 +49,6 @@ frame "Data Access" {
     end note
 }
 
-
-
 frame "Exceptions" {
     Class InvalidPaymentException {
         + InvalidPaymentException(message: String)
@@ -83,6 +82,7 @@ class PaymentController {
 
 Class PaymentService {
     - paymentDAO: PaymentDAO
+    - authService: AuthService
     - paymentAdapterInterface: PaymentAdapterInterface
     + pay(payment: Payment): ResponseEntity<String>
     + handlePaymentRequest(payment: Payment): ResponseEntity<String>
