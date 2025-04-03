@@ -1,9 +1,10 @@
 package com.prototype.triptop.identityprovider.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.prototype.triptop.identityprovider.UserInfoRefact;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GoogleUserInfo {
+public class GoogleUserInfo implements UserInfoRefact {
     private String given_name;  // First name
     private String family_name; // Last name
     private String email;
@@ -35,6 +36,7 @@ public class GoogleUserInfo {
         this.email = email;
     }
 
+    @Override
     public UserInfo toUserInfo() {
         UserInfo userInfo = new UserInfo();
         userInfo.setFirstName(given_name);

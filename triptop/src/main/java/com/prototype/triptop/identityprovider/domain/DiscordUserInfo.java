@@ -1,9 +1,10 @@
 package com.prototype.triptop.identityprovider.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.prototype.triptop.identityprovider.UserInfoRefact;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DiscordUserInfo {
+public class DiscordUserInfo implements UserInfoRefact {
     private String username;
     private String discriminator;
     private String email;
@@ -33,6 +34,7 @@ public class DiscordUserInfo {
         this.email = email;
     }
 
+    @Override
     public UserInfo toUserInfo() {
         UserInfo userInfo = new UserInfo();
         userInfo.setFirstName(username);
