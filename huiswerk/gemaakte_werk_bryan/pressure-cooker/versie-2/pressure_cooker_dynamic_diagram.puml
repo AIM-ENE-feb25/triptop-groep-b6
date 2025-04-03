@@ -1,0 +1,37 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+left to right direction
+
+title Dynamic Diagram - TripTop (Backend only)
+
+Person(User, "User", "Gebruiker van de TripTop-applicatie")
+
+System_Boundary("triptop_boundary", "TripTop Applicatie", $tags="") {
+    Container(Backend, "Backend", "Spring Boot", "Backend van de applicatie")
+    Component(BookingController, "BookingController", "Spring Boot", "Verwerkt gebruikersverzoeken")
+    Component(BookingFacade, "BookingFacade", "Spring Boot", "Centrale toegang tot de zoekfunctionaliteit")
+    Component(BookingService, "BookingService", "Spring Boot", "Beheert de logica voor het zoeken van hotels")
+    Component(ExternalApiService, "ExternalApiService", "Spring Boot", "Beheert de communicatie met de externe Booking.com API")
+    Component(ExternalApiClient, "ExternalApiClient", "Spring Boot", "Verzorgt de werkelijke API-aanroepen naar Booking.com")
+    Component(TripTopConfigProvider, "TripTopConfigProvider", "Spring Boot", "Verzorgt de API-sleutel voor de externe API")
+}
+
+System_Ext(BookingAPI, "Booking.com API", "Externe service voor hotelboekingen")
+
+Rel_D(User, Backend, "1. Gebruiker zoekt hotels", $techn="HTTP(S)")
+Rel_D(Backend, BookingController, "2. Handelt verzoek af")
+Rel_D(BookingController, BookingFacade, "3. Roept Facade aan voor verwerking")
+Rel_D(BookingFacade, BookingService, "4. Roept BookingService aan voor zoekopdracht")
+Rel_D(BookingService, TripTopConfigProvider, "5. Vraagt API key op")
+Rel(TripTopConfigProvider, BookingService, "6. Levert API-sleutel voor externe API", "Configuratie")
+Rel_D(BookingService, ExternalApiService, "7. Roept ExternalApiService aan en geeft api-key door")
+Rel_D(ExternalApiService, ExternalApiClient, "8. Roept ExternalApiClient aan voor API-aanroep en geeft api-key door")
+Rel(ExternalApiClient, BookingAPI, "9. Verstuurt zoekopdracht naar Booking.com API met api-key", "HTTP/JSON")
+Rel_U(BookingAPI, ExternalApiClient, "10. Retourneert hotelgegevens", "JSON")
+Rel_U(ExternalApiClient, ExternalApiService, "11. Retourneert API-response", "JSON")
+Rel_U(ExternalApiService, BookingService, "12. Verwerkt en retourneert gegevens")
+Rel_U(BookingService, BookingFacade, "13. Verwerkt en retourneert hotelgegevens")
+Rel_U(BookingFacade, BookingController, "14. Stuurt gegevens terug naar controller")
+Rel_U(BookingController, User, "15. Stuurt gegevens naar de gebruiker")
+
+@enduml
