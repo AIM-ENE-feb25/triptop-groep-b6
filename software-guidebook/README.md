@@ -42,30 +42,63 @@ een brede groep reizigers die zelf hun reis / trip willen samenstellen.
 |--------------------------------------------------------------------------------------------- 
 | Het context diagram                                                                         |
 
-Zoals er in het context diagram te zien is, is de Triptop-applicatie het centrale punt van de software. De applicatie
-heeft meerdere externe systemen waarmee het communiceert, deze sytemen zijn van belang voor het correct functioneren van
-de Triptop-applicatie. De externe systemen waarvan de Triptop-applicatie afhankelijk zijn, zijn zichtbaar in het context
-diagram. Hier wordt ook per extern systeem een korte uitleg gegeven wat deze inhoudt én enkele voorbeelden van externe
-systemen.
+#### Toelichting op het context diagram
+
+In het diagram valt te zien hoe het Triptop-systeem in elkaar zit. Het systeem bestaat uit de Triptop-applicatie, die de
+centrale rol speelt in het systeem. De Triptop-applicatie communiceert met verschillende externe systemen, die van
+belang
+zijn voor het correct functioneren van de Triptop-applicatie. De applicatie biedt meerdere functionaliteiten aan voor
+gebruikers die binnen Nederland willen reizen. De belangrijkste functionaliteiten die het systeem biedt worden hieronder
+benoemd:
+
+* Reizen plannen: Gebruikers kunnen een reis smanestellen met transport, activiteiten, overnachtingen en autoverhuur.
+* Betalingen verwerken: Voor bepaalde services kunnen betalingen worden gedaan via externe providers zoals Stripe of
+  IDeal.
+* Gebruikersbeheer: Accountbeheer gebeurt via een externe identity provider. Neem als voorbeeld Google, Microsoft of
+  Discord.
+* Informatie ophalen: Informatie over reizen, vervoersmogelijkheden en kaarten worden opgehaald via de externe systemen
+  zoals Google Maps, Google Transit, 9292 en NS.
+
+Voor het Triptop systeem worden 2 soorten gebruikers onderscheiden, beide gebruikers maken gebruik van het systeem maar
+op een andere manier, hieronder wordt dit kort beschreven:
+
+* Reiziger
+    * De reiziger is de eindgebruiker van het systeem. De reiziger kan een reis samenstellen, boeken, betalen, annuleren
+      en de reisstatus bewaren. De reiziger kan ook de bouwstenen van de reis flexibel uitbreiden.
+* Reisagent
+    * De reisagent is een tweedelijns ondersteuning voor reizigers die vastlopen op het plannen van hun reis via
+      Triptop. De reisagent kan de reiziger helpen met het plannen van de reis.
+
+Beide gebruikers hebben toegang tot de Triptop-applicatie, maar hun precieze rechten en rollen verschillen.
+
+Om dit alles correct te laten functioneren maakt Triptop gebruik van externe systemen zoals Google Maps. Hieronder volgt
+een kort lijstje over de meest belangrijkste Externe systemen die worden gebruikt:
+
+* Betalings API: Verwerkt betalingen voor de reizen (bijv. via Stripe of iDEAL).
+* Identityprovider API: Beheert gebruikersaccounts (bijv. Google, Microsoft of Discord).
+* Maps API: Biedt kaarten, locaties en routebeschrijvingen aan (bijv. Google Maps of Apple Maps).
 
 > [!IMPORTANT]
+> // TODO DIT HIERONDER VERWIJDEREN
+
+
+
 > Werk zelf dit hoofdstuk uit met context diagrammen en een beschrijving van de context van de software.
+>
+>
+>
+> In dit deelhoofdstuk wordt er een korte toelichting gegeven op de externe systemen die van belang zijn voor de
+> Triptop-applicatie. Hierbij worden enkele voorbeelden gegeven maar ook wat de verwachte functionaliteit van de externe
+> systemen zijn.
 
-#### Toelichting op de functionaliteit
+> Toelichting op de context van de software inclusief System Context Diagram:
 
-#### Toelichting op de gebruikers
+> * Functionaliteit
+>* Gebruikers
+>* Externe systemen
 
-#### Externe systemen
 
-In dit deelhoofdstuk wordt er een korte toelichting gegeven op de externe systemen die van belang zijn voor de
-Triptop-applicatie. Hierbij worden enkele voorbeelden gegeven maar ook wat de verwachte functionaliteit van de externe
-systemen zijn.
-
-Toelichting op de context van de software inclusief System Context Diagram:
-
-* Functionaliteit
-* Gebruikers
-* Externe systemen
+> // EINDE TODO---------------------------------------
 
 ## 3. Functional Overview
 
@@ -143,7 +176,10 @@ als belangrijk:
 Hier worden algemene constraints benoemd binnen het project.
 
 #### Proof of concept
-Het project loopt van 31-03-2025 tot 04-04-2025, waarbij de laatste week gericht is op het bouwen van functionaliteit. Deze korte tijdsduur beperkt de hoeveelheid functionaliteit die uitgewerkt kan worden. Het eindresultaat is een proof of concept, zodat mogelijke uitdagingen en sterke punten gevonden kunnen worden.
+
+Het project loopt van 31-03-2025 tot 04-04-2025, waarbij de laatste week gericht is op het bouwen van functionaliteit.
+Deze korte tijdsduur beperkt de hoeveelheid functionaliteit die uitgewerkt kan worden. Het eindresultaat is een proof of
+concept, zodat mogelijke uitdagingen en sterke punten gevonden kunnen worden.
 
 Het project loopt van 31-03-2025 tot 04-04-2025, waarbij de laatste week gericht is op het bouwen van functionaliteit.
 Deze korte tijdsduur beperkt de hoeveelheid functionaliteit die uitgewerkt kan worden. Het eindresultaat is een proof of
@@ -202,8 +238,6 @@ De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toega
 
 ![Container Diagram](./diagrammen/container-diagram-Container_diagram_van_____voor_Triptop_systeem.png)
 
-
-
 #### 7.1.1 Dynamic Diagram 1: Inloggen
 
 ![Dynamic diagram Inloggen](./diagrammen/dynamicLogin-Dynamic_diagram_van_Inloggen_voor_de_Triptop_Applicatie.png)
@@ -220,7 +254,6 @@ De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toega
 > [!IMPORTANT]
 > Voeg toe: Component Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
 
-
 #### 7.2.2 Backend component diagram
 
 ![Backend component diagram]()
@@ -231,7 +264,54 @@ De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toega
 
 ### 7.3. Design & Code
 
+#### Ontwerpvragen
+
+Voor het ontwerp van de software zijn de volgende ontwerpvragen opgesteld, deze vragen worden per deelhoofdstuk
+uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/developer:
+
+| Student/Developer | Ontwerpvraag                                                                                                                                                                                                                                                                                      | Design Pattern | Uitwerkingshoofdstuk |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|----------------------|
+| Julius Morselt    | Hoe kunnen we dynamisch beslissen of een bouwsteen geboekt moet worden via een externe service of intern beheerd moet worden?                                                                                                                                                                     | Factory        | 7.3.1                |
+| Thieme Wijgman    | Hoe zorg je dat een wijziging in een of meerdere API's niet leidt tot een grote wijziging in de applicatie? Specifieker: hoe zorg je ervoor dat een wijziging in de API van een externe service niet leidt tot een wijziging in de front-end maar flexibel kan worden opgevangen door de backend. | Strategy       | 7.3.2                |
+| Bryan Velthuizen  | Wie roept een specifieke externe service aan, gebeurt dat vanuit de front-end of vanuit de backend? Welke redenen zijn er om voor de ene of de andere aanpak te kiezen?                                                                                                                           | Facade         | 7.3.3                |
+| Daniel Sung       | Hoe ga je om met het aanroepen van externe services die niet beschikbaar zijn en toch verwacht dat er waardevolle output gegeven wordt?                                                                                                                                                           | Adapter        | 7.3.4                |
+
+##### 7.3.1. Uitwerking Ontwerpvraag Julius Morselt
+
+[Klassediagram Julius Morselt]()
+
+
+> [IMPORTANT]
+> INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
+[Sequentiediagram Julius Morselt]()
+
+##### 7.3.2. Uitwerking Ontwerpvraag Thieme Wijgman
+
+[Klassediagram Thieme Wijgman]()
+
+> [IMPORTANT]
+> INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
+[Sequentiediagram Julius Morselt]()
+
+##### 7.3.3. Uitwerking Ontwerpvraag Bryan Velthuizen
+
+[Klassediagram Bryan Velthuizen]()
+
+> [IMPORTANT]
+> INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
+[Sequentiediagram Julius Morselt]()
+
+##### 7.3.4. Uitwerking Ontwerpvraag Daniel Sung
+
+[Klassediagram Daniel Sung]()
+
+> [IMPORTANT]
+> INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
+[Sequentiediagram Julius Morselt]()
+
 > [!IMPORTANT]
+>
+>
 > Voeg toe: Per ontwerpvraag een Class Diagram plus een Sequence Diagram van een aantal scenario's inclusief
 > begeleidende tekst.
 
@@ -381,7 +461,6 @@ worden gewist na het opnieuw opstarten van de applicatie.
 
 ### 8.5. ADR-005: Design pattern keuze 1: Strategy
 
-
 #### Status
 
 Accepted
@@ -421,22 +500,26 @@ dynamisch de juiste implementatie kiezen op basis van de configuratie.
 
 #### Context
 
-Ons systeem maakt gebruik van externe API’s zoals Google Maps, Stripe, Google OAuth2, Booking, Autoverhuur en Activiteiten. Directe communicatie vanuit de front-end verhoogt de complexiteit, brengt beveiligingsrisico’s met zich mee en kan de performance beïnvloeden. Een alternatieve aanpak is om de back-end als tussenlaag te laten fungeren, waarbij het Facade Design Pattern wordt toegepast.
+Ons systeem maakt gebruik van externe API’s zoals Google Maps, Stripe, Google OAuth2, Booking, Autoverhuur en
+Activiteiten. Directe communicatie vanuit de front-end verhoogt de complexiteit, brengt beveiligingsrisico’s met zich
+mee en kan de performance beïnvloeden. Een alternatieve aanpak is om de back-end als tussenlaag te laten fungeren,
+waarbij het Facade Design Pattern wordt toegepast.
 
 #### Considered Options
 
-| Eigenschap                      | Front-end direct | Back-end via Facade |
-|---------------------------------|------------------|---------------------|
-| Beveiliging                     | --               | ++                  |
-| Onderhoudbaarheid               | --               | ++                  |
-| Front-end complexiteit          | --               | ++                  |
-| API-wijzigingen doorvoeren      | --               | ++                  |
-| Serverbelasting                 | ++               | --                  |
-| Responsiviteit                  | ++               | --                  |
+| Eigenschap                 | Front-end direct | Back-end via Facade |
+|----------------------------|------------------|---------------------|
+| Beveiliging                | --               | ++                  |
+| Onderhoudbaarheid          | --               | ++                  |
+| Front-end complexiteit     | --               | ++                  |
+| API-wijzigingen doorvoeren | --               | ++                  |
+| Serverbelasting            | ++               | --                  |
+| Responsiviteit             | ++               | --                  |
 
 #### Decision
 
-We implementeren een facade in de back-end om externe API-aanroepen af te handelen. Dit biedt betere beveiliging, verlaagt de complexiteit in de front-end en maakt onderhoud eenvoudiger.
+We implementeren een facade in de back-end om externe API-aanroepen af te handelen. Dit biedt betere beveiliging,
+verlaagt de complexiteit in de front-end en maakt onderhoud eenvoudiger.
 
 #### Status
 
@@ -444,27 +527,35 @@ Geaccepteerd
 
 #### Consequences
 
-Deze aanpak verhoogt de beveiliging en onderhoudbaarheid en zorgt voor een gestandaardiseerde communicatie met externe services. De front-end hoeft zich niet bezig te houden met API-authenticatie of wijzigingen. De keerzijde is dat er extra serverbelasting en ontwikkeltijd nodig is voor de facade-implementatie.
+Deze aanpak verhoogt de beveiliging en onderhoudbaarheid en zorgt voor een gestandaardiseerde communicatie met externe
+services. De front-end hoeft zich niet bezig te houden met API-authenticatie of wijzigingen. De keerzijde is dat er
+extra serverbelasting en ontwikkeltijd nodig is voor de facade-implementatie.
 
 ### 8.7. ADR-007 Factory Design Pattern
 
 #### Context
 
-Ons systeem moet dynamisch kunnen beslissen of een bouwsteen geboekt wordt via een externe service of intern beheerd wordt. Dit vereist een flexibele architectuur die afhankelijk van de situatie de juiste methode kiest. Directe koppelingen maken de code minder onderhoudbaar en beperken de uitbreidbaarheid. Een Factory Design Pattern kan deze complexiteit verminderen door een centrale instantie verantwoordelijk te maken voor het aanmaken van de juiste boekingsstrategie.
+Ons systeem moet dynamisch kunnen beslissen of een bouwsteen geboekt wordt via een externe service of intern beheerd
+wordt. Dit vereist een flexibele architectuur die afhankelijk van de situatie de juiste methode kiest. Directe
+koppelingen maken de code minder onderhoudbaar en beperken de uitbreidbaarheid. Een Factory Design Pattern kan deze
+complexiteit verminderen door een centrale instantie verantwoordelijk te maken voor het aanmaken van de juiste
+boekingsstrategie.
 
 #### Considered Options
 
-| Eigenschap                      | Hardgecodeerde logica| Factory Design Pattern |
-|---------------------------------|----------------------|------------------------|
-| Flexibiliteit                   | --                   | ++                     |
-| Onderhoudbaarheid               | --                   | ++                     |
-| Uitbreidbaarheid                | --                   | ++                     |
-| Complexiteit                    | ++                   | --                     |
-| Testbaarheid                    | --                   | ++                     |
+| Eigenschap        | Hardgecodeerde logica | Factory Design Pattern |
+|-------------------|-----------------------|------------------------|
+| Flexibiliteit     | --                    | ++                     |
+| Onderhoudbaarheid | --                    | ++                     |
+| Uitbreidbaarheid  | --                    | ++                     |
+| Complexiteit      | ++                    | --                     |
+| Testbaarheid      | --                    | ++                     |
 
 #### Decision
 
-We implementeren het Factory Design Pattern om dynamisch te bepalen of een bouwsteen via een externe service of intern beheerd wordt. Dit zorgt voor betere onderhoudbaarheid en uitbreidbaarheid zonder de kernlogica van het systeem te wijzigen.
+We implementeren het Factory Design Pattern om dynamisch te bepalen of een bouwsteen via een externe service of intern
+beheerd wordt. Dit zorgt voor betere onderhoudbaarheid en uitbreidbaarheid zonder de kernlogica van het systeem te
+wijzigen.
 
 #### Status
 
@@ -472,10 +563,9 @@ Geaccepteerd
 
 #### Consequences
 
-Deze aanpak verhoogt de flexibiliteit en testbaarheid, waardoor toekomstige uitbreidingen eenvoudiger worden. De code blijft modulair en gestructureerd, wat onderhoud vergemakkelijkt. De keerzijde is dat de initiële implementatie complexer is dan een hardgecodeerde oplossing.
-
-
-
+Deze aanpak verhoogt de flexibiliteit en testbaarheid, waardoor toekomstige uitbreidingen eenvoudiger worden. De code
+blijft modulair en gestructureerd, wat onderhoud vergemakkelijkt. De keerzijde is dat de initiële implementatie
+complexer is dan een hardgecodeerde oplossing.
 
 ## 9. Deployment, Operation and Support
 
