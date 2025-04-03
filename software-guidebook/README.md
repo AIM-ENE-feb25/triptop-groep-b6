@@ -39,8 +39,8 @@ een brede groep reizigers die zelf hun reis / trip willen samenstellen.
 ### Context diagram
 
 | ![Context diagram](diagrammen/context-diagram-Context_diagram_voor_het_TripTop_systeem.svg) |
-|--------------------------------------------------------------------------------------------- 
-| Het context diagram                                                                         |
+|---------------------------------------------------------------------------------------------
+| Het context diagram |
 
 #### Toelichting op het context diagram
 
@@ -51,41 +51,37 @@ zijn voor het correct functioneren van de Triptop-applicatie. De applicatie bied
 gebruikers die binnen Nederland willen reizen. De belangrijkste functionaliteiten die het systeem biedt worden hieronder
 benoemd:
 
-* Reizen plannen: Gebruikers kunnen een reis smanestellen met transport, activiteiten, overnachtingen en autoverhuur.
-* Betalingen verwerken: Voor bepaalde services kunnen betalingen worden gedaan via externe providers zoals Stripe of
+- Reizen plannen: Gebruikers kunnen een reis smanestellen met transport, activiteiten, overnachtingen en autoverhuur.
+- Betalingen verwerken: Voor bepaalde services kunnen betalingen worden gedaan via externe providers zoals Stripe of
   IDeal.
-* Gebruikersbeheer: Accountbeheer gebeurt via een externe identity provider. Neem als voorbeeld Google, Microsoft of
+- Gebruikersbeheer: Accountbeheer gebeurt via een externe identity provider. Neem als voorbeeld Google, Microsoft of
   Discord.
-* Informatie ophalen: Informatie over reizen, vervoersmogelijkheden en kaarten worden opgehaald via de externe systemen
+- Informatie ophalen: Informatie over reizen, vervoersmogelijkheden en kaarten worden opgehaald via de externe systemen
   zoals Google Maps, Google Transit, 9292 en NS.
 
 Voor het Triptop systeem worden 2 soorten gebruikers onderscheiden, beide gebruikers maken gebruik van het systeem maar
 op een andere manier, hieronder wordt dit kort beschreven:
 
-* Reiziger
-    * De reiziger is de eindgebruiker van het systeem. De reiziger kan een reis samenstellen, boeken, betalen, annuleren
-      en de reisstatus bewaren. De reiziger kan ook de bouwstenen van de reis flexibel uitbreiden.
-* Reisagent
-    * De reisagent is een tweedelijns ondersteuning voor reizigers die vastlopen op het plannen van hun reis via
-      Triptop. De reisagent kan de reiziger helpen met het plannen van de reis.
+- Reiziger
+  - De reiziger is de eindgebruiker van het systeem. De reiziger kan een reis samenstellen, boeken, betalen, annuleren
+    en de reisstatus bewaren. De reiziger kan ook de bouwstenen van de reis flexibel uitbreiden.
+- Reisagent
+  - De reisagent is een tweedelijns ondersteuning voor reizigers die vastlopen op het plannen van hun reis via
+    Triptop. De reisagent kan de reiziger helpen met het plannen van de reis.
 
 Beide gebruikers hebben toegang tot de Triptop-applicatie, maar hun precieze rechten en rollen verschillen.
 
 Om dit alles correct te laten functioneren maakt Triptop gebruik van externe systemen zoals Google Maps. Hieronder volgt
 een kort lijstje over de meest belangrijkste Externe systemen die worden gebruikt:
 
-* Betalings API: Verwerkt betalingen voor de reizen (bijv. via Stripe of iDEAL).
-* Identityprovider API: Beheert gebruikersaccounts (bijv. Google, Microsoft of Discord).
-* Maps API: Biedt kaarten, locaties en routebeschrijvingen aan (bijv. Google Maps of Apple Maps).
+- Betalings API: Verwerkt betalingen voor de reizen (bijv. via Stripe of iDEAL).
+- Identityprovider API: Beheert gebruikersaccounts (bijv. Google, Microsoft of Discord).
+- Maps API: Biedt kaarten, locaties en routebeschrijvingen aan (bijv. Google Maps of Apple Maps).
 
 > [!IMPORTANT]
 > // TODO DIT HIERONDER VERWIJDEREN
 
-
-
 > Werk zelf dit hoofdstuk uit met context diagrammen en een beschrijving van de context van de software.
->
->
 >
 > In dit deelhoofdstuk wordt er een korte toelichting gegeven op de externe systemen die van belang zijn voor de
 > Triptop-applicatie. Hierbij worden enkele voorbeelden gegeven maar ook wat de verwachte functionaliteit van de externe
@@ -93,10 +89,9 @@ een kort lijstje over de meest belangrijkste Externe systemen die worden gebruik
 
 > Toelichting op de context van de software inclusief System Context Diagram:
 
-> * Functionaliteit
->* Gebruikers
->* Externe systemen
-
+> - Functionaliteit
+> - Gebruikers
+> - Externe systemen
 
 > // EINDE TODO---------------------------------------
 
@@ -152,17 +147,17 @@ helemaal kan aanpassen aan mijn wensen.
 Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgende ISO 25010 kwaliteitsattributen benoemd
 als belangrijk:
 
-* Compatibility -> Interoperability (Degree to which a system, product or component can exchange information with other
+- Compatibility -> Interoperability (Degree to which a system, product or component can exchange information with other
   products and mutually use the information that has been exchanged)
-* Reliability -> Fault Tolerance (Degree to which a system or component operates as intended despite the presence of
+- Reliability -> Fault Tolerance (Degree to which a system or component operates as intended despite the presence of
   hardware or software faults)
-* Maintainability -> Modularity (Degree to which a system or computer program is composed of discrete components such
+- Maintainability -> Modularity (Degree to which a system or computer program is composed of discrete components such
   that a change to one component has minimal impact on other components)
-* Maintainability -> Modifiability (Degree to which a product or system can be effectively and efficiently modified
+- Maintainability -> Modifiability (Degree to which a product or system can be effectively and efficiently modified
   without introducing defects or degrading existing product quality)
-* Security -> Integrity (Degree to which a system, product or component ensures that the state of its system and data
+- Security -> Integrity (Degree to which a system, product or component ensures that the state of its system and data
   are protected from unauthorized modification or deletion either by malicious action or computer error)
-* Security -> Confidentiality (Degree to which a system, product or component ensures that data are accessible only to
+- Security -> Confidentiality (Degree to which a system, product or component ensures that data are accessible only to
   those authorized to have access)
 
 ## 5. Constraints
@@ -229,19 +224,23 @@ De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toega
 
 ## 6. Design principles
 
-## Inleiding  
+## Inleiding
+
 Design principles zijn erg belangrijk binnen een project in software development. Het bevat de fundamentele regels waar iedereen in het project aan vast kan houden. Zo verminder je de kans op onleesbare inconsitente code. Door afspraken te maken blijft de code voor iedereen leesbaar en kan iedereen
 zo snel mogelijk bugs achterhalen. Dit verminderd dus ook de kans op bugs. De code blijft consistent en net.
 
-## 6.1 KISS(Keep It Simple, Stupid)  
+## 6.1 KISS(Keep It Simple, Stupid)
+
 KISS oftewel Keep It Simple, Stupid is één van de meest belangrijke design principles die we hanteren. Deze vinden we belangrijk, omdat we te maken hebben met prototypes. Het moet allemaal niet te complex worden, maar juist simpel en functioneel zodat we puur kunnen testen of de API naar wens werkt.
 Bij het gebruik van KISS proberen we de oplossing dus de eenvoudig mogelijk te houden dus "Less is more".
 
-## 6.2  YAGNI (You Aren't Gonna Need It)  
+## 6.2 YAGNI (You Aren't Gonna Need It)
+
 We hebben er ook voor gekozen YAGNI (You Aren't Gonna Need It) te hanteren. Dit sluit goed aan bij het simpel houden van de applicatie. Bij dit principe hanteer je namelijk dat je geen functionaliteiten gaat maken die we niet binnenkort nodig hebben. Dit zorgt ervoor dat we de applicatie simpel kunnen
 houden.
 
-## 6.3 Separation of Concerns (SoC)  
+## 6.3 Separation of Concerns (SoC)
+
 Bij Separation of Concerns (SoC) zorg je ervoor dat het systeem verdeelt wordt over verschillende onderdelen. Elk deel richt zich op één specifiek aspect van de functionaliteit. Dit maakt het systeem makkelijker te begrijpen, te onderhouden en uit te breiden.
 
 ## 7. Software Architecture
@@ -282,7 +281,7 @@ Voor het ontwerp van de software zijn de volgende ontwerpvragen opgesteld, deze 
 uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/developer:
 
 | Student/Developer | Ontwerpvraag                                                                                                                                                                                                                                                                                      | Design Pattern | Uitwerkingshoofdstuk |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|----------------------|
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------- |
 | Julius Morselt    | Hoe kunnen we dynamisch beslissen of een bouwsteen geboekt moet worden via een externe service of intern beheerd moet worden?                                                                                                                                                                     | Factory        | 7.3.1                |
 | Thieme Wijgman    | Hoe zorg je dat een wijziging in een of meerdere API's niet leidt tot een grote wijziging in de applicatie? Specifieker: hoe zorg je ervoor dat een wijziging in de API van een externe service niet leidt tot een wijziging in de front-end maar flexibel kan worden opgevangen door de backend. | Strategy       | 7.3.2                |
 | Bryan Velthuizen  | Wie roept een specifieke externe service aan, gebeurt dat vanuit de front-end of vanuit de backend? Welke redenen zijn er om voor de ene of de andere aanpak te kiezen?                                                                                                                           | Facade         | 7.3.3                |
@@ -292,22 +291,21 @@ uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/develop
 
 [Klassediagram Julius Morselt]()
 
-
 > [IMPORTANT]
 > INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
-[Sequentiediagram Julius Morselt]()
+> [Sequentiediagram Julius Morselt]()
 
 ##### 7.3.2. Uitwerking Ontwerpvraag Thieme Wijgman
 
 | ![Klassediagram Thieme Wijgman](./diagrammen/classDiagram-oauth2-thieme.svg) |
-|------------------------------------------------------------------------------|
+| ---------------------------------------------------------------------------- |
 | Het verbeterde klasse diagram van Thieme.                                    |
 
 Hierboven is mijn klasse diagram te zien. Hierin zitten alle klasses waar ik de code heb uitgewerkt. Hieronder zou ik
 mijn eerste versie weergeven.
 
 | ![1e versie klassendiagram Thieme Wijgman](./diagrammen/classdiagramOauth21eversie-thieme.svg) |
-|------------------------------------------------------------------------------------------------|
+| ---------------------------------------------------------------------------------------------- |
 | De eerste versie klassendiagram van Thieme.                                                    |
 
 Om een helderder beeld te geven van de functionaliteit van mijn prototype en een klein beeld welke data deze nodig heeft
@@ -315,7 +313,7 @@ heb ik een sequentie diagram gemaakt. Dit diagram laat zien hoe de data door de 
 functionaliteit er aan te pas komt.
 
 | ![sequentiediagram Thieme Wijgman Oauth2](./diagrammen/SQD-Oauth2-google.svg)                                 |
-|---------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------------------------------------------------------------------- |
 | ![sequentiediagram Thieme Wijgman Oauth2 discord](./diagrammen/SQD-Oauth2-Google-foutief-discord-correct.svg) |
 | Het sequentiediagram van Thieme.                                                                              |
 
@@ -343,18 +341,236 @@ wijziging in de front-end maar flexibel kan worden opgevangen door de backend.
 
 > [IMPORTANT]
 > INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
-[Sequentiediagram Julius Morselt]()
+> [Sequentiediagram Julius Morselt]()
 
 ##### 7.3.4. Uitwerking Ontwerpvraag Daniel Sung
 
-[Klassediagram Daniel Sung]()
+**Ontwerpvraag:** Hoe ga je om met het aanroepen van externe services die niet beschikbaar zijn en toch verwacht dat er waardevolle output gegeven wordt?
+
+**Design pattern:** Adapter
+
+**Prototype:** Betalingssysteem met Stripe API
+
+#### Diagrammen WIP (afbeelding zijn lage resolutie + toelichting)
+Klassendiagram Daniel Sung
+![alt text](../software-guidebook/diagrammen-daniel/class-diagram-daniel.png)
+
+Sequence diagram Daniel Sung
+![alt text](../software-guidebook/diagrammen-daniel/sequence-diagram-daniel.png)
+Sequence diagram
+
+Dynamic component diagram Daniel Sung
+![alt text](../software-guidebook/diagrammen-daniel/dynamic-component-daniel.png)
+Dynamic component diagram
+
+#### Uitwerking van Design Pattern "Adapter" WIP (niet uitgebreid)
+
+Om de Adapter design pattern te gebruiken, heb ik een adapter klasse aangemaakt die POST requests specifiek voor Stripe uitvoert gemaakt. De StripeAdapter klasse implementeert een interface "PaymentAdapterInterface". Dit wordt dan gebruikt in mijn PaymentService. 
+
+PaymentService weet dus niet hoe de Stripe API werkt, dit zorgt ook nog voor loose coupling en seperation of concerns.
+
+Hieronder staan code voorbeelden met wat commentaar als toelichting:
+
+**PaymentService**
+Deze klasse maakt gebruik van de Stripe Adapter om een betaling te maken. Heeft geen details over hoe communiceren met de Stripe API werkt.
+```java
+//com/prototype/triptop/service/PaymentService.java
+
+@Service
+public class PaymentService {
+
+    //Hier wordt een adapter aangemaakt
+    private PaymentAdapterInterface adapter = new StripeAdapter();
+    private PaymentDAO paymentDAO;
+    private AuthService authService;
+
+    //Deze methode wordt gebruikt door de controller om betaling uit te voeren
+    public ResponseEntity pay(Payment payment) {
+        verifyPayment(payment);
+        return handlePaymentRequest(payment);
+    }
+
+    //Dit is specifiek voor een POST request maken via de adapter
+    private ResponseEntity<String> handlePaymentRequest(Payment payment) {
+        try {
+
+            //Hier wordt de request uitgevoerd door simpelweg de "processPayment" aan te roepen van de interface
+            ResponseEntity<String> response = adapter.processPayment(payment);
+
+        } catch (Exception e) {
+           //Opvangen van een post die niet werkte
+        }
+    }
+
+    //...
+}
+```
+
+**PaymentAdapterInterface**
+Adapter interface, dit zorgt voor loose coupling. Een betaalmethode kan altijd veranderd worden, zolang het gebruik maakt van deze interface. StripeAdapter implementeert dit om de adapter pattern toe te passen.
+
+```java
+//com/prototype/triptop/adapter/PaymentAdapterInterface.java
+
+public interface PaymentAdapterInterface {
+    ResponseEntity<String> processPayment(Payment payment) throws IOException;
+}
+```
+
+**StripeAdapter**
+Deze klasse is verantwoordelijk voor het uitvoeren van een http request naar de Stripe API. Voert alleen de HTTP request uit, doet verder niks met de response.
+```java
+//com/prototype/triptop/adapter/StripeAdapter.java
+public class StripeAdapter implements PaymentAdapterInterface {
+    private final String STRIPE_API_KEY = TriptopPrototypeApplication.dotenv.get("STRIPE_API_KEY");
+    private final String STRIPE_URL = "https://api.stripe.com/v1/payment_intents";
+
+    @Override
+    public ResponseEntity<String> processPayment(Payment payment) {
+        RestTemplate template = new RestTemplate();
+        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+        requestBody.add("amount", String.valueOf(payment.getAmount()));
+        requestBody.add("currency", payment.getCurrency());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.set("Authorization", "Bearer " + STRIPE_API_KEY);
+
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+
+        //Hier wordt de POST uitgevoerd
+        ResponseEntity<String> response = template.postForEntity(STRIPE_URL, requestEntity, String.class);
+
+        System.out.println("Stripe response: " + response.getStatusCode());
+
+        return response;
+    }
+}
+```
+
+#### Uitwerking van ontwerpvraag "Fault tolerance"
+
+Om ervoor te zorgen dat foute responses van externe services op te vangen, heb ik gebruik gemaakt van custom exceptions en een GlobalExceptionHandler. In de exceptionhandler heb ik ook nog een functie die een custom response aanmaakt zodat de frontend meer nut heeft van foutmeldingen. De PaymentService maakt hier dan gebruik van.
+
+
+**GlobalExceptionHandler:**
+De createErrorResponse methode maakt een HashMap aan (wordt door Spring Boot geparsed naar JSON). Hierin kan een titel en een foutmelding in staan. De titel wordt gebruikt om een de naam van een exception door te geven, de error value geeft de daadwerkelijke error mee.
+
+```java
+//com/prototype/triptop/exception/GlobalExceptionHandler.java
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+    public HashMap<String, String> createErrorResponse(String title, String error) {
+        HashMap<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("title", title);
+        errorResponse.put("error", error);
+        return errorResponse;
+    }
+
+    @ExceptionHandler(InvalidPaymentException.class)
+    public ResponseEntity<HashMap<String, String>> handleInvalidPaymentException(InvalidPaymentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(createErrorResponse("InvalidPaymentException", ex.getMessage()));
+    }
+
+    @ExceptionHandler(PaymentRequestException.class)
+    public ResponseEntity<HashMap<String, String>> handlePaymentFailedException(PaymentRequestException ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(createErrorResponse("PaymentRequestException", ex.getMessage()));
+    }
+
+    //Andere excepions
+}
+```
+
+**Custom exceptions:**
+
+- InvalidPaymentException: wordt gethrowed als de betaling ongeldige data bevat, bv. een negatieve bedrag.
+
+```java
+//com/prototype/triptop/exception/InvalidPaymentException.java
+
+public class InvalidPaymentException extends RuntimeException {
+    public InvalidPaymentException(String message) {
+        super(message);
+    }
+}
+
+```
+
+- PaymentRequestException: wordt gethrowed als een POST request niet lukt
+```java
+//com/prototype/triptop/exception/PaymentRequestException.java
+
+public class PaymentRequestException extends RuntimeException {
+    public PaymentRequestException(String message) {
+        super(message);
+    }
+}
+
+```
+
+Hier zijn wat voorbeelden van een error response die gebruik maakt van createErrorResponse:
+
+```JSON
+// Dit is een response als een datatype van de payment ongeldig is
+
+// BAD_REQUEST
+{
+    "title": "InvalidPaymentException",
+    "error": "Currency is invalid: aEUR"
+}
+
+//Dit is een reseponse als de POST mislukt (bv. Stripe werkt niet meer)
+
+// INTERNAL_SERVER_ERROR
+{
+    "title": "PaymentRequestException",
+    "error": "Payment request failed: I/O error on POST request for \"https://asdfaapi.stripe.com/v1/payment_intents\": asdfaapi.stripe.com"
+}
+```
+Hiermee kan de frontend de fouten afhandelen door gebruik te maken van de HTTP response en titel van de error. Het leek mij overbodig om meer informatie terug te sturen, de backend is namelijk verantwoordelijk voor dit soort fouten.
+
+**Implementatie van de exceptions**
+PaymentService gebruikt de exceptions om ongeldige payments en uitgevallen externe services op te vangen.
+```java
+//com/prototype/triptop/service/PaymentService.java
+
+@Service
+public class PaymentService {
+
+    //...
+
+    private ResponseEntity<String> handlePaymentRequest(Payment payment) {
+      try {
+            ResponseEntity<String> response = adapter.processPayment(payment);
+            
+            //...
+
+            if (response.getStatusCode().is2xxSuccessful()) { //Post success
+                paymentDAO.insertPayment(payment.getAmount(), payment.getCurrency(), userID);
+                return ResponseEntity.ok(response.getBody());
+            } else { //Post worked, but wasnt 200 code
+                
+                //Hier wordt een exception gegooid als de response geen 200 is
+                throw new PaymentRequestException("Unexpected response code: " + response.getStatusCode());
+            }
+        } catch (Exception e) { //Post failed
+            //Als de request mislukt wordt dat hier opgevangen
+            throw new PaymentRequestException("Payment request failed: " + e.getMessage());
+        }
+    }
+
+  //...
+
+}
+```
+
 
 > [IMPORTANT]
 > INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
-[Sequentiediagram Julius Morselt]()
+> [Sequentiediagram Julius Morselt]()
 
 > [!IMPORTANT]
->
 >
 > Voeg toe: Per ontwerpvraag een Class Diagram plus een Sequence Diagram van een aantal scenario's inclusief
 > begeleidende tekst.
@@ -373,7 +589,7 @@ Wij willen ervoor zorgen dat de eindgebruiker een interactieve map tot zijn of h
 #### Considered Options
 
 | Eigenschap | Google Maps | Mapbox |
-|------------|-------------|--------|
+| ---------- | ----------- | ------ |
 | Limiet     | --          | ++     |
 | Per uur    | --          | +      |
 | Kosten     | ++          | ++     |
@@ -413,10 +629,10 @@ Oauth2.
 ##### Considered Options
 
 | Forces                 | Google Oauth2 | Microsoft Oauth2 | Discord Oauth2 |
-|------------------------|---------------|------------------|----------------|
+| ---------------------- | ------------- | ---------------- | -------------- |
 | Populariteit           | ++            | +                | +`*`           |
 | Gebruikers informatie  | ++            | +                | -              |
-| Beveiliging            | ++            | ++               | 0 `**`         | 
+| Beveiliging            | ++            | ++               | 0 `**`         |
 | Eenvoudige intergratie | +             | 0                | ++             |
 | Kosten                 | 0             | 0                | +              |
 
@@ -432,7 +648,7 @@ dat Google de identityprovider van Triptop wordt.
 
 ##### Consequences
 
-* Bij het veranderen van de scope naar een professionelere setting dan een Reisboekings applicatie wordt het door het
+- Bij het veranderen van de scope naar een professionelere setting dan een Reisboekings applicatie wordt het door het
   team aangeraden om te veranderen van Google Oauth2 naar Microsoft Oauth2.
 
 ### 8.3. ADR-003: Gebruik van public transit API
@@ -448,7 +664,7 @@ Voor ons project hebben we een API nodig die openbaar vervoersgegevens kan lever
 ##### Considered Options
 
 | Force                             | Google Transit API | NS API | 9292 API |
-|-----------------------------------|--------------------|--------|----------|
+| --------------------------------- | ------------------ | ------ | -------- |
 | **Dekking**                       | ++                 | -      | +        |
 | **Realtime data**                 | ++                 | +      | +        |
 | **Kosten**                        | -                  | 0      | 0        |
@@ -481,7 +697,7 @@ gebruikersgegevens/reisinformatie opgeslagen worden.
 ##### Considered Options
 
 | **Forces**            | Microsoft SQL | No-SQL | H2 in memory |
-|-----------------------|---------------|--------|--------------|
+| --------------------- | ------------- | ------ | ------------ |
 | Eenvoudigheid         | +             | +      | +            |
 | Snelheid              | -             | +      | ++           |
 | Ease of development   | 0             | 0      | +            |
@@ -522,9 +738,9 @@ de API-interacties loskoppelt van de interne logica en de frontend.
 #### Considered Options
 
 | Forces                                                                       | Strategy Pattern | Adapter Pattern | Observer Pattern |
-|------------------------------------------------------------------------------|------------------|-----------------|------------------|
+| ---------------------------------------------------------------------------- | ---------------- | --------------- | ---------------- |
 | Flexibiliteit; Hoe past het patroon zich aan bij API-wijzigingen?            | ++               | +               | ++               |
-| Onderhoudbaarheid; Hoe eenvoudig is het om uitbreidingen te maken?           | +                | ++              | +                |  
+| Onderhoudbaarheid; Hoe eenvoudig is het om uitbreidingen te maken?           | +                | ++              | +                |
 | Complexiteit; Hoeveel extra code en beheer is er nodig?                      | -                | 0               | -                |
 | Runtime-selectie; Ondersteunt het een dynamische selectie van implementaties | ++               | -               | ++               |
 
@@ -537,8 +753,8 @@ dynamisch de juiste implementatie kiezen op basis van de configuratie.
 
 #### Consequences
 
-* Verhoogde flexibiliteit en minder impact bij API-wijzigingen.
-* Extra complexiteit in het beheren van strategieën en configuraties.
+- Verhoogde flexibiliteit en minder impact bij API-wijzigingen.
+- Extra complexiteit in het beheren van strategieën en configuraties.
 
 ### 8.6. ADR-006 Design Strategy Pattern
 
@@ -552,7 +768,7 @@ waarbij het Facade Design Pattern wordt toegepast.
 #### Considered Options
 
 | Eigenschap                 | Front-end direct | Back-end via Facade |
-|----------------------------|------------------|---------------------|
+| -------------------------- | ---------------- | ------------------- |
 | Beveiliging                | --               | ++                  |
 | Onderhoudbaarheid          | --               | ++                  |
 | Front-end complexiteit     | --               | ++                  |
@@ -588,7 +804,7 @@ boekingsstrategie.
 #### Considered Options
 
 | Eigenschap        | Hardgecodeerde logica | Factory Design Pattern |
-|-------------------|-----------------------|------------------------|
+| ----------------- | --------------------- | ---------------------- |
 | Flexibiliteit     | --                    | ++                     |
 | Onderhoudbaarheid | --                    | ++                     |
 | Uitbreidbaarheid  | --                    | ++                     |
