@@ -10,16 +10,21 @@ public class Payment {
     private int paymentId;
     private int amount;
     private String currency;
+    private String token;
     private int userId;
 
-    public Payment(int paymentId, int amount, String currency, int userId) {
+    public Payment(int paymentId, int amount, String currency, String token, int userId) {
         this.paymentId = paymentId;
         this.amount = amount;
         this.currency = currency;
+        this.token = token;
         this.userId = userId;
     }
 
-    public Payment() {};
+    public Payment() {
+    }
+
+    ;
 
     public int getAmount() {
         return amount;
@@ -38,15 +43,23 @@ public class Payment {
     }
 
     public int getUserId() {
-        return userId;
+        return this.userId;
     }
 
     public void setUserId(int userId) {
         this.userId = userId;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public String toString() {
-        return "Payment{" + "amount=" + amount + ", currency='" + currency  + ", userId=" + userId + '}';
+        return "Payment{" + "amount=" + amount + ", currency='" + currency + ", userId=" + userId + '}';
     }
 
     public void setPaymentId(int paymentId) {

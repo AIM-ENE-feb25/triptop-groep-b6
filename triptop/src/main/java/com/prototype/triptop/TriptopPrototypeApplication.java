@@ -8,8 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TriptopPrototypeApplication {
 
 	public static Dotenv dotenv;
+  
 	public static void main(String[] args) {
-
+    
 		dotenv = Dotenv.load();
 
 		SpringApplication.run(TriptopPrototypeApplication.class, args);

@@ -4,7 +4,8 @@ CREATE TABLE TriptopGebruiker
     achternaam     varchar(265) NOT NULL,
     tussenvoegsels varchar(265) NULL,
     email          varchar(265) NOT NULL,
-    gebruikersId   INT PRIMARY KEY
+    access_token   varchar(MAX) NOT NULL,
+    gebruikersId   INT AUTO_INCREMENT PRIMARY KEY
 );
 
 CREATE TABLE Betaling
