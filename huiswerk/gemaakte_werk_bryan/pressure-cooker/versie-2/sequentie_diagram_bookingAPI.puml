@@ -1,0 +1,27 @@
+@startuml
+actor User as "Gebruiker"
+participant Backend as "Backend (Spring Boot)"
+participant BookingController as "BookingController"
+participant BookingFacade as "BookingFacade"
+participant BookingService as "BookingService"
+participant TripTopConfigProvider as "TripTopConfigProvider"
+participant ExternalApiService as "ExternalApiService"
+participant ExternalApiClient as "ExternalApiClient"
+participant BookingAPI as "Booking.com API"
+
+User -> Backend : 1. Gebruiker zoekt hotels
+Backend -> BookingController : 2. Handelt verzoek af
+BookingController -> BookingFacade : 3. Roept Facade aan voor verwerking
+BookingFacade -> BookingService : 4. Roept BookingService aan voor zoekopdracht
+BookingService -> TripTopConfigProvider : 5. Vraagt API key op
+TripTopConfigProvider -> BookingService : 6. Levert API-sleutel voor externe API
+BookingService -> ExternalApiService : 7. Roept ExternalApiService aan en geeft api-key door
+ExternalApiService -> ExternalApiClient : 8. Roept ExternalApiClient aan voor API-aanroep en geeft api-key door
+ExternalApiClient -> BookingAPI : 9. Verstuurt zoekopdracht naar Booking.com API met api-key
+BookingAPI -> ExternalApiClient : 10. Retourneert hotelgegevens
+ExternalApiClient -> ExternalApiService : 11. Retourneert API-response
+ExternalApiService -> BookingService : 12. Verwerkt en retourneert gegevens
+BookingService -> BookingFacade : 13. Verwerkt en retourneert hotelgegevens
+BookingFacade -> BookingController : 14. Stuurt gegevens terug naar controller
+BookingController -> User : 15. Stuurt gegevens naar de gebruiker
+@enduml
