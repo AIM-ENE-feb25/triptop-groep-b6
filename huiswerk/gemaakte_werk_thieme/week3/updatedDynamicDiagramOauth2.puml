@@ -1,0 +1,37 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+left to right direction
+
+title Dynamic diagram Oauth2 via Google Oauth2
+
+Person(User, "Gebruiker", "De gebruiker van de applicatie")
+
+
+System_Boundary("key_boundary", "Triptop Applicatie", $tags="") {
+System(Frontend, "Frontend", "React.js")
+System_Boundary("Backend", "Backend Applicatie", $tags="") {
+    Component(AuthController, "AuthController", "Spring Boot", "Controller voor authenticatie")
+    Component(AuthService, "AuthService", "Spring Boot", "Service voor authenticatie")
+    Component(AuthRepository, "AuthRepository", "Spring Boot", "Repository voor authenticatie")
+    Component(ExternalAPICheck, "ExternalAPICheck", "Spring Boot", "Controller voor externe API controle")
+}
+}
+System_Ext(Google, "Google Oauth2", "Google Oauth2")
+
+Rel_D(User, Frontend, "1. Gebruiker navigeert naar /login", $techn="HTTP(S)")
+Rel_D(Frontend, AuthController, "2. Stuur gebruiker naar de loginEndpoint op de backend", $techn="HTTP(S)")
+Rel(AuthController, AuthService, "3. Roept de AuthService aan om de gebruiker door te sturen naar Google Oauth2")
+Rel_L(AuthService, ExternalAPICheck, "4. De AuthService delegeert de taak van het testen van de verbinding naar de ExternalAPICheck")
+Rel_D(ExternalAPICheck, Google, "5. Stuur een verzoek naar de JWK_SET van Google om de verbinding te testen", "HTTP/JSON")
+Rel_U(Google, ExternalAPICheck, "6. Google Oauth2 stuurt een JWK_SET terug", "JSON")
+Rel_R(ExternalAPICheck, AuthService, "7. Stuurt terug naar de AuthService dat er een goede verbinding is", "boolean")
+Rel(AuthService, Google, "8. Stuur gebruiker naar Google Oauth2", "HTTP/JSON")
+Rel_U(Google, AuthService, "9. Google Oauth2 stuurt een OAuth token terug", "JSON")
+Rel_D(AuthService, Google, "10. Roept Google Oauth2 aan om de gebruikersinformatie op te halen met het Oauth token", "HTTP/JSON")
+Rel_U(Google, AuthService, "11. Google Oauth2 stuurt de gebruikersinformatie terug", "JSON")
+Rel_R(AuthService, AuthRepository, "12. Slaat de gebruiker op in de database", "JDBC")
+Rel_U(AuthService, AuthController, "13. Geeft een JTW token terug obv de email\n")
+Rel_U(AuthController, Frontend, "14. Stuur de gebruiker naar de frontend met het JWT token", "HTTP(S)")
+
+@enduml
