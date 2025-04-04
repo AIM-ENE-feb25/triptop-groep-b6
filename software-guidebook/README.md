@@ -252,7 +252,7 @@ Bij Separation of Concerns (SoC) zorg je ervoor dat het systeem verdeelt wordt o
 
 #### 7.1.1 Dynamic Diagram 1: Inloggen
 
-![Dynamic diagram Inloggen](./diagrammen/dynamicLogin-Dynamic_diagram_van_Inloggen_voor_de_Triptop_Applicatie.png)
+![Dynamic diagram Inloggen](diagrammen/thieme/dynamicLogin-Dynamic_diagram_van_Inloggen_voor_de_Triptop_Applicatie.png)
 
 > [!IMPORTANT]
 > Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
@@ -272,7 +272,7 @@ Bij Separation of Concerns (SoC) zorg je ervoor dat het systeem verdeelt wordt o
 
 #### 7.2.3. Dynamic diagram 2: Google Oauth2
 
-![](./diagrammen/dynamicdiagramOauth2-Dynamic_diagram_Oauth2_0_Google.png)
+![](diagrammen/thieme/dynamicdiagramOauth2-Dynamic_diagram_Oauth2_0_Google.png)
 
 ### 7.3. Design & Code
 
@@ -299,14 +299,14 @@ uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/develop
 
 ##### 7.3.2. Uitwerking Ontwerpvraag Thieme Wijgman
 
-| ![Klassediagram Thieme Wijgman](./diagrammen/classDiagram-oauth2-thieme.svg) |
+| ![Klassediagram Thieme Wijgman](diagrammen/thieme/classDiagram-oauth2-thieme.svg) |
 |------------------------------------------------------------------------------|
 | Het verbeterde klasse diagram van Thieme.                                    |
 
 Hierboven is mijn klasse diagram te zien. Hierin zitten alle klasses waar ik de code heb uitgewerkt. Hieronder zou ik
 mijn eerste versie weergeven.
 
-| ![1e versie klassendiagram Thieme Wijgman](./diagrammen/classdiagramOauth21eversie-thieme.svg) |
+| ![1e versie klassendiagram Thieme Wijgman](diagrammen/thieme/classdiagramOauth21eversie-thieme.svg) |
 |------------------------------------------------------------------------------------------------|
 | De eerste versie klassendiagram van Thieme.                                                    |
 
@@ -314,9 +314,9 @@ Om een helderder beeld te geven van de functionaliteit van mijn prototype en een
 heb ik een sequentie diagram gemaakt. Dit diagram laat zien hoe de data door de applicatie heen gaat en welke
 functionaliteit er aan te pas komt.
 
-| ![sequentiediagram Thieme Wijgman Oauth2](./diagrammen/SQD-Oauth2-google.svg)                                 |
+| ![sequentiediagram Thieme Wijgman Oauth2](diagrammen/thieme/SQD-Oauth2-google.svg)                                 |
 |---------------------------------------------------------------------------------------------------------------|
-| ![sequentiediagram Thieme Wijgman Oauth2 discord](./diagrammen/SQD-Oauth2-Google-foutief-discord-correct.svg) |
+| ![sequentiediagram Thieme Wijgman Oauth2 discord](diagrammen/thieme/SQD-Oauth2-Google-foutief-discord-correct.svg) |
 | Het sequentiediagram van Thieme.                                                                              |
 
 ###### Antwoord op mijn ontwerpvraag
@@ -339,39 +339,39 @@ wijziging in de front-end maar flexibel kan worden opgevangen door de backend.
 
 ##### 7.3.3. Uitwerking Ontwerpvraag Bryan Velthuizen
 
-| ![Klassediagram Bryan Velthuizen](./diagrammen/classDiagram-booking-fascade-versie-2-bryan.svg) |
+| ![Klassediagram Bryan Velthuizen](diagrammen/bryan/classDiagram-booking-fascade-versie-2-bryan.svg) |
 |------------------------------------------------------------------------------|
 | Het verbeterde klasse diagram van Bryan.                                    |
 
 Hierboven is mijn klasse diagram te zien. Hierin zitten alle klasses waar ik de code heb uitgewerkt. Hieronder zou ik
 mijn eerste versie weergeven.
 
-| ![Klassediagram Bryan Velthuizen](./diagrammen/classDiagram-booking-fascade-versie-1-bryan.svg) |
+| ![Klassediagram Bryan Velthuizen](diagrammen/bryan/classDiagram-booking-fascade-versie-1-bryan.svg) |
 |------------------------------------------------------------------------------|
 | De eerste versie klassendiagram van Bryan.                                   |
 
 Om een beter beeld te geven van de onderlinge interactie heb ik ook nog een dynamic diagram gemaakt. Die ziet er als volgt uit.
 
-| ![Dynamicdiagram Bryan Velthuizen](./diagrammen/dynamicDiagram-booking-fascade-versie-2-bryan.svg) |
+| ![Dynamicdiagram Bryan Velthuizen](diagrammen/bryan/dynamicDiagram-booking-fascade-versie-2-bryan.svg) |
 |------------------------------------------------------------------------------|
 | Final version van dynamic diagram                                            |
 
 Hierboven is mijn dynamic diagram te zien.
 
-| ![Dynamicdiagram Bryan Velthuizen](./diagrammen/dynamicDiagram-booking-fascade-versie-1-bryan.svg) |
+| ![Dynamicdiagram Bryan Velthuizen](diagrammen/bryan/dynamicDiagram-booking-fascade-versie-1-bryan.svg) |
 |------------------------------------------------------------------------------|
 | De 1e versie van mijn dynamic diagram voor uitwerken code                    |
 
 Om nog beter in te gaan over interacties voor begrip van mijn code heb ik een sequentie diagram gemaakt. Deze zien er alsvolgt uit.
 
 
-| ![Sequentiediagram Bryan Velthuizen](./diagrammen/sequentieDiagram-booking-fascade-versie-2-bryan.svg) |
+| ![Sequentiediagram Bryan Velthuizen](diagrammen/bryan/sequentieDiagram-booking-fascade-versie-2-bryan.svg) |
 |------------------------------------------------------------------------------|
 | De eerste versie sequentie diagram van Bryan.                                |
 
 Hierboven is mijn sequentie diagram uitgewerkt.
 
-| ![Sequentiediagram Bryan Velthuizen](./diagrammen/sequentieDiagram-booking-fascade-versie-1-bryan.svg) |
+| ![Sequentiediagram Bryan Velthuizen](diagrammen/bryan/sequentieDiagram-booking-fascade-versie-1-bryan.svg) |
 |------------------------------------------------------------------------------|
 | De eerste versie sequentie diagram van Bryan.                                |
 
