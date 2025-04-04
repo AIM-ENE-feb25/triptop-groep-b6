@@ -1,0 +1,30 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component diagram voor backend - betalingssysteem
+
+Container(frontend, "TripTop Frontend", "React, HTML, CSS", "Maakt planningen en betalingen aan en verstuurt deze.")
+
+Container_Boundary(api, "Backend van TravelExpensePro") {
+    Component(paymentcontroller, "PaymentController", "Spring Boot, Java", "Ontvangt betaalrequests.")
+    Component(paymentdao, "Payment DAO", "Spring Boot, Java, SQL", "Slaat/haalt betalingen op.")
+    Component(paymentsservice, "Payment Service", "Spring Boot, Java", "Verwerkt betalingen.")
+    Component(stripeadapter, "Stripe Adapter", "Spring Boot, Java", "Vertaalt betalingen van Stripe.")
+
+    Rel(frontend, paymentcontroller, "Stuurt betalingen naar", "JSON/HTTPS")
+    Rel(paymentcontroller, paymentsservice, "Stuurt betaling door naar", "Java")
+    Rel(paymentsservice, paymentdao, "Slaat op gemaakte betaling op via", "Java")
+}
+System_Ext(h2, "H2 Database", "Database voor reiskosten en gebruikersgegevens.", "H2, SQL")
+System_Ext(stripe, "Stripe API", "Verwerkt betalingen", "?")
+
+Rel(paymentdao, h2, "Slaat betalingen op", "JDBC")
+Rel(paymentsservice, stripeadapter, "Stuurt betaalgegevens door naar", "Java")
+Rel(stripeadapter, stripe, "Stuurt request voor betaling", "JSON")
+
+SHOW_LEGEND()
+@enduml

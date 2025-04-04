@@ -42,10 +42,12 @@ public class PaymentService {
                 throw new PaymentRequestException("Unexpected response code: " + response.getStatusCode());
             }
         } catch (Exception e) { //Post failed
+            //TODO: fix this, may accidentally be activated by the repository functions
             throw new PaymentRequestException("Payment request failed: " + e.getMessage());
         }
     }
 
+    //TODO: should check if user exists
     public void verifyPayment(Payment payment) {
         if (payment.getAmount() < 50) {
             throw new InvalidPaymentException("Amount must be 50 or more");

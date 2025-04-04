@@ -1,0 +1,49 @@
+@startuml
+title Betalingssysteem + Afhandelen van errors
+
+actor Reiziger
+participant "TripTop Frontend" as ttfe
+
+participant "PaymentController" as paymentcontroller
+participant "PaymentService" as paymentservice
+participant "PaymentDAO" as paymentdao
+participant "StripeAdapter" as stripeadapter
+participant "StripeAPI" as stripeapi
+
+database "H2 Database" as h2
+
+
+Reiziger -> ttfe : betaalt voor activiteit
+ttfe -> paymentcontroller : Stuurt HTTP request naar .../payment/process
+paymentcontroller -> paymentservice : response = paymentService.pay(payment)
+
+paymentservice -> paymentservice : pay(payment)
+note left
+    pay() roept deze methodes aan: 
+        verifyPayment()
+        isCurrencyValid()
+        handlePaymentRequest() 
+end note
+paymentservice -> paymentservice : verifyPayment(payment)
+paymentservice -> paymentservice : isCurrencyValid(payment.getCurrency())
+paymentservice -> stripeadapter : response = handlePaymentRequest(payment)
+
+stripeadapter -> stripeapi : response = processPayment(payment)
+
+opt Geen 200 response
+    stripeapi -> stripeadapter : return bad response
+    stripeadapter -> paymentservice : return response
+    paymentservice -> paymentcontroller : throw new PaymentRequestException(...);
+end
+
+opt 200 response
+    paymentservice -> paymentdao : paymentDAO.insertPayment(payment)
+    paymentdao -> h2 : insert(payment)
+    paymentservice -> paymentcontroller : return response
+end
+
+paymentcontroller -> ttfe : return response
+ttfe -> Reiziger : toont succes/fout melding
+
+
+@enduml

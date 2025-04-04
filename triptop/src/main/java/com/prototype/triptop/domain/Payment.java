@@ -3,7 +3,6 @@ package com.prototype.triptop.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-//TODO: change sql to fit this? might be unnecessary if payments dont need to be saved
 @Table("Betaling")
 public class Payment {
     @Id
@@ -23,8 +22,6 @@ public class Payment {
 
     public Payment() {
     }
-
-    ;
 
     public int getAmount() {
         return amount;

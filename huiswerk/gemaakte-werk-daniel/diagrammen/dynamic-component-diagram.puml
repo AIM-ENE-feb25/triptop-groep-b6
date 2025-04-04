@@ -1,0 +1,35 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Dynamic component diagram voor backend van TripTop
+
+Container(frontend, "TripTop Frontend", "React, HTML, CSS", "Maakt planningen en betalingen aan en verstuurt deze.")
+
+Container_Boundary(api, "Backend van TravelExpensePro") {
+    Component(paymentcontroller, "PaymentController", "Spring Boot, Java", "Ontvangt betaalrequests.")
+    Component(paymentdao, "Payment DAO", "Spring Boot, Java, SQL", "Slaat/haalt betalingen op.")
+    Component(paymentsservice, "Payment Service", "Spring Boot, Java", "Verwerkt betalingen.")
+    Component(stripeadapter, "Stripe Adapter", "Spring Boot, Java", "Vertaalt betalingen van Stripe.")
+
+    Rel(frontend, paymentcontroller, "1. Stuurt betalingen naar", "JSON/HTTPS")
+       Rel(paymentcontroller, paymentsservice, "2. Stuurt betaalgegevens door naar", "Java")
+    Rel(paymentsservice, paymentdao, "7. Slaat op gemaakte betaling op in", "Java")
+
+    Rel(paymentsservice, paymentcontroller, "9. Stuurt succes naar", "Java")
+    Rel(paymentcontroller, frontend, "10. Stuurt succes response naar", "JSON/HTTPS")
+}
+System_Ext(h2, "H2 Database", "Database voor reiskosten en gebruikersgegevens.", "H2, SQL")
+System_Ext(stripe, "Stripe API", "Verwerkt betalingen", "?")
+
+Rel(paymentdao, h2, "8. Slaat betalingen op", "JDBC")
+Rel(paymentsservice, stripeadapter, "3. Stuurt betaalgegevens door naar", "Java")
+Rel(stripeadapter, stripe, "4. Stuurt betaalgegevens door naar", "JSON")
+
+Rel(stripeadapter, paymentsservice, "6. Stuurt betaal status naar", "Java")
+Rel(stripe, stripeadapter, "5. Stuurt betaal status naar", "JSON")
+SHOW_LEGEND()
+@enduml
