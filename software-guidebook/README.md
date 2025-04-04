@@ -339,47 +339,75 @@ wijziging in de front-end maar flexibel kan worden opgevangen door de backend.
 
 ##### 7.3.3. Uitwerking Ontwerpvraag Bryan Velthuizen
 
-| ![Klassediagram Bryan Velthuizen](diagrammen/bryan/classDiagram-booking-fascade-versie-2-bryan.svg) |
-|------------------------------------------------------------------------------|
-| Het verbeterde klasse diagram van Bryan.                                    |
+| ![Klassediagram Bryan Velthuizen](./diagrammen/bryan/classDiagram-booking-fascade-versie-2-bryan.svg) |
+|-------------------------------------------------------------------------------------------------------|
+| Het verbeterde klasse diagram van Bryan.                                                              |
 
 Hierboven is mijn klasse diagram te zien. Hierin zitten alle klasses waar ik de code heb uitgewerkt. Hieronder zou ik
 mijn eerste versie weergeven.
 
-| ![Klassediagram Bryan Velthuizen](diagrammen/bryan/classDiagram-booking-fascade-versie-1-bryan.svg) |
-|------------------------------------------------------------------------------|
-| De eerste versie klassendiagram van Bryan.                                   |
+| ![Klassediagram Bryan Velthuizen](./diagrammen/bryan/classDiagram-booking-fascade-versie-1-bryan.svg) |
+|-------------------------------------------------------------------------------------------------------|
+| De eerste versie klassendiagram van Bryan.                                                            |
 
 Om een beter beeld te geven van de onderlinge interactie heb ik ook nog een dynamic diagram gemaakt. Die ziet er als volgt uit.
 
-| ![Dynamicdiagram Bryan Velthuizen](diagrammen/bryan/dynamicDiagram-booking-fascade-versie-2-bryan.svg) |
-|------------------------------------------------------------------------------|
-| Final version van dynamic diagram                                            |
+| ![Dynamicdiagram Bryan Velthuizen](./diagrammen/bryan/dynamicDiagram-booking-fascade-versie-2-bryan.svg) |
+|----------------------------------------------------------------------------------------------------------|
+| Final version van dynamic diagram                                                                        |
 
 Hierboven is mijn dynamic diagram te zien.
 
-| ![Dynamicdiagram Bryan Velthuizen](diagrammen/bryan/dynamicDiagram-booking-fascade-versie-1-bryan.svg) |
-|------------------------------------------------------------------------------|
-| De 1e versie van mijn dynamic diagram voor uitwerken code                    |
+| ![Dynamicdiagram Bryan Velthuizen](./diagrammen/bryan/dynamicDiagram-booking-fascade-versie-1-bryan.svg) |
+|----------------------------------------------------------------------------------------------------------|
+| De 1e versie van mijn dynamic diagram voor uitwerken code                                                |
 
 Om nog beter in te gaan over interacties voor begrip van mijn code heb ik een sequentie diagram gemaakt. Deze zien er alsvolgt uit.
 
 
-| ![Sequentiediagram Bryan Velthuizen](diagrammen/bryan/sequentieDiagram-booking-fascade-versie-2-bryan.svg) |
-|------------------------------------------------------------------------------|
-| De eerste versie sequentie diagram van Bryan.                                |
+| ![Sequentiediagram Bryan Velthuizen](./diagrammen/bryan/sequentieDiagram-booking-fascade-versie-2-bryan.svg) |
+|--------------------------------------------------------------------------------------------------------------|
+| De eerste versie sequentie diagram van Bryan.                                                                |
 
 Hierboven is mijn sequentie diagram uitgewerkt.
 
-| ![Sequentiediagram Bryan Velthuizen](diagrammen/bryan/sequentieDiagram-booking-fascade-versie-1-bryan.svg) |
-|------------------------------------------------------------------------------|
-| De eerste versie sequentie diagram van Bryan.                                |
+| ![Sequentiediagram Bryan Velthuizen](./diagrammen/bryan/sequentieDiagram-booking-fascade-versie-1-bryan.svg) |
+|--------------------------------------------------------------------------------------------------------------|
+| De eerste versie sequentie diagram van Bryan.                                                                |
 
+Mijn ontwerpvraag was: Wie roept een specifieke externe service aan, gebeurt dat vanuit de front-end of vanuit de back-end? Welke redenen zijn er om voor de ene of de andere aanpak te kiezen?
 
+Om mijn ontwerpvraag te beantwoorden heb ik ervoor gekozen om een facade pattern te gebruiken. Dit is een design pattern die
+een interface biedt voor een complex subsysteem. Dit maakt het makkelijker om met dat subsysteem te werken zoals bijvoorbeeld
+de BOOKING.com API.
 
-> [IMPORTANT]
-> INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
-[Sequentiediagram Julius Morselt]()
+Ik heb een ADR geschreven waarin ik uitleg waarom ik voor dit design pattern heb gekozen. Het is een 
+handig design pattern om mee te werken als je gebruik maakt van externe API's.
+
+### Booking naar backend of frontend
+
+#### Context
+Booking is een applicatie die het mogelijk maakt om een hotelkamer te boeken. De vraag is of de api via de frontend of backend moet lopen.
+
+#### Considered Options
+| Criteria                     | Frontend | Backend |
+|------------------------------|----------|---------|
+| **Beveiliging**              | -        | ++      |
+| **Controle en validatie**    | 0        | ++      |
+| **Prestaties (Latency)**     | ++       | -       |
+| **Schaalbaarheid**          | -        | ++      |
+| **Makkelijk te beheren**     | 0        | +       |
+| **Complexiteit**            | +        | 0       |
+| **Netwerkverkeer**          | ++       | 0       |
+| **Schaalbaarheid**          | -        | ++      |
+
+#### Decision
+Backend-aanroepen is voor ons de beste keuze omdat we het beheren van externe services vooral via de backend willen laten lopen, omdat het soms complexe logica vereisen of we informatie willen opslaan in eigen database.
+
+#### Consequences
+De gevolgen van deze beslissing zijn dat we de API-aanroepen via de backend moeten laten lopen. Dit biedt meer controle over de gegevens en betere beveiliging door exceptions etc.
+
+|--------------------------------------------------------------------------------------------------------------|
 
 ##### 7.3.4. Uitwerking Ontwerpvraag Daniel Sung
 
