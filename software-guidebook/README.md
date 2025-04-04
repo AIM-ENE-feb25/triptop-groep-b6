@@ -277,9 +277,6 @@ productie.
 Er is specifiek gekozen om de MapBox API in de frontend te gebruiken. Dit is gedaan omdat er anders onnodig veel
 verzoeken worden gedaan naar de backend voor het ophalen van een kaart / locatie.
 
-> [!IMPORTANT]
-> Voeg toe: Component Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
-
 #### 7.2.2 Backend component diagram
 
 ![Backend component diagram](./diagrammen/componentdiagram_backend-Component_Diagram_van_de_Triptop_Applicatie_Backend.svg)
@@ -351,10 +348,10 @@ Om een helderder beeld te geven van de functionaliteit van mijn prototype en een
 heb ik een sequentie diagram gemaakt. Dit diagram laat zien hoe de data door de applicatie heen gaat en welke
 functionaliteit er aan te pas komt.
 
-| ![sequentiediagram Thieme Wijgman Oauth2](diagrammen/thieme/SQD-Oauth2-google.svg)                                 |
-|--------------------------------------------------------------------------------------------------------------------|
-| ![sequentiediagram Thieme Wijgman Oauth2 discord](diagrammen/thieme/SQD-Oauth2-Google-foutief-discord-correct.svg) |
-| Het sequentiediagram van Thieme.                                                                                   |
+| ![sequentiediagram Thieme Wijgman Oauth2](diagrammen/thieme/SQD-Oauth2-google.svg)                                                                                                    |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![sequentiediagram Thieme Wijgman Oauth2 discord](./diagrammen/thieme/sequentieDiagramDiscordOauth-Sequence_Diagram__OAuth2_Poging_via_Google_Oauth2_faalt__Discord_Oauth2_werkt.svg) |
+| Het sequentiediagram van Thieme.                                                                                                                                                      |
 
 ###### Antwoord op mijn ontwerpvraag
 

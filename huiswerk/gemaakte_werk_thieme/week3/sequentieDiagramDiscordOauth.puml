@@ -19,18 +19,24 @@ ExternalAPICheck -> Google: Vraagt JWK_SET op (HTTP/JSON)
 Google -> ExternalAPICheck: Geeft een foutstatus (HTTP)
 ExternalAPICheck -> AuthService: Verbinding is gefaald (boolean)
 
+alt Google geeft geen 200 response
+
 AuthService -> ExternalAPICheck : Controleert de verbinding van de discord API
 ExternalAPICheck -> Google: Vraagt JWK_SET op (HTTP/JSON)
 Google -> ExternalAPICheck: Geeft een foutstatus (HTTP)
 ExternalAPICheck -> AuthService: Verbinding is succesvol (boolean)
+end
+
 
 AuthService -> Google: Stuurt gebruiker naar Discord OAuth2 (HTTP/JSON)
 Google -> AuthService: Stuurt OAuth token terug (JSON)
 AuthService -> Google: Haalt gebruikersinformatie op (HTTP/JSON)
 Google -> AuthService: Gebruikersinformatie terug (JSON)
 
+
 AuthService -> AuthRepository: 12. Sla gebruiker op (JDBC)
 AuthService -> AuthController: 13. Genereert JWT token obv email
 AuthController -> Frontend: 14. Stuur gebruiker terug met JWT token (HTTP)
+
 
 @enduml
