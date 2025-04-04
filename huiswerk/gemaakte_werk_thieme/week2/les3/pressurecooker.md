@@ -39,7 +39,7 @@ flexibel kan worden opgevangen door de back-end?
 
 # Dynamic diagram
 
-![Dynamic diagram](../../../../software-guidebook/diagrammen/dynamicdiagramOauth2-Dynamic_diagram_Oauth2_0_Google.png)
+![Dynamic diagram](../../../../software-guidebook/diagrammen/thieme/dynamicdiagramOauth2-Dynamic_diagram_Oauth2_0_Google.png)
 
 # Class diagram
 

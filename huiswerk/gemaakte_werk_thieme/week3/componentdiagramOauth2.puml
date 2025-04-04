@@ -1,0 +1,37 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title C4 Component diagram Ontwerpvraag Thieme
+
+left to right direction
+
+Person("User", "Gebruiker", "De gebruiker van de applicatie")
+
+System_Boundary(c0, "Triptop Applicatie") {
+Container("Frontend", "Frontend", "React.js", "Handles user interaction and displays data")
+
+Container_Boundary(c1, "Backend") {
+    Component("AuthController", "AuthController", "Spring Boot", "Handles authentication requests")
+    Component("AuthService", "AuthService", "Spring Boot", "Handles authentication logic")
+    Component("AuthRepository", "AuthRepository", "Spring Boot", "Handles database interaction for authentication")
+    Component("ExternalAPIAvailabilityCheck", "ExternalAPIAvailabilityCheck", "Spring Boot", "Handles external API availability check")
+}
+
+ContainerDb("Database", "Database", "SQL", "Stores user data")
+
+}
+
+System_Ext("OAuth2", "OAuth2", "External OAuth2 provider for authentication")
+
+Rel_D("User", "Frontend", " Navigeert naar /login", "HTTP(S)")
+
+Rel_D("Frontend", "AuthController", "Logt in")
+Rel_D("AuthController", "AuthService", "Delegeert de taak\nom in te loggen naar")
+Rel_L("AuthService", ExternalAPIAvailabilityCheck, "Test de oauth2\nverbinding met")
+Rel_D("ExternalAPIAvailabilityCheck", "OAuth2", "Stuurt een verbindingstest")
+Rel_D("AuthService", "OAuth2", "Stuur gebruiker naar om in te loggen")
+Rel_R("AuthService", "AuthRepository", "Slaat de gebruiker op in de database")
+Rel_U("AuthRepository", "Database", "Opslaan van de gebruiker in de database")
+
+SHOW_LEGEND()
+
+@enduml
