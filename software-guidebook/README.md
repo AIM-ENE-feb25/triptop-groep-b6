@@ -290,7 +290,11 @@ omdat er anders een conflict kan ontstaan zodra er meer classes worden toegevoeg
 
 #### 7.2.3. Dynamic diagram 2: Google Oauth2
 
-![](diagrammen/thieme/dynamicdiagramOauth2-Dynamic_diagram_Oauth2_0_Google.png)
+![Dynamic diagram Oauth2 2e versie](diagrammen/thieme/dynamicdiagramOauth2-Dynamic_diagram_Oauth2_0_Google.png)
+
+Hierboven is de 2e versie van het inloggen te zien. De eerste versie van dit diagram is te vinden in hoofdstuk 7.1.1. De
+belangrijkste aanpassingen die gedaan zijn aan het diagram is dat er meer in diepgang wordt ingegaan op wat de Oauth
+provider (in dit diagram Google) specifiek doet.
 
 #### 7.2.4 Mapping van domeinmodel
 
