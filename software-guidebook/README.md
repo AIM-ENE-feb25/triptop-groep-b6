@@ -282,7 +282,11 @@ verzoeken worden gedaan naar de backend voor het ophalen van een kaart / locatie
 
 #### 7.2.2 Backend component diagram
 
-![Backend component diagram]()
+![Backend component diagram](./diagrammen/componentdiagram_backend-Component_Diagram_van_de_Triptop_Applicatie_Backend.svg)
+
+Hierboven is het backend component diagram zichtbaar. Hierbij is het belangrijk om te vermelden dat er in de applicatie
+een GlobalExceptionHandler is geïmplementeerd alleen deze wordt niet weergegeven in het Component diagram van de backend
+omdat er anders een conflict kan ontstaan zodra er meer classes worden toegevoegd die "gebruik" maken van deze Handler.
 
 #### 7.2.3. Dynamic diagram 2: Google Oauth2
 
