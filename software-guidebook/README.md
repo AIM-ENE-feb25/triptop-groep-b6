@@ -248,12 +248,14 @@ onzekerheden en eventuele vragen beantwoord om een betere beeld te geven van het
 | Wordt er gebruik gemaakt van caching om een overmaat aan API-gebruik te voorkomen? | Nee, er wordt niet gebruik gemaakt van een caching systeem. Dit doordat de uitgewerkte code een PoC is en dus niet gebruikt wordt op een productie server.             | 
 
 #### 7.1.1 Dynamic Container Diagram 1: Inloggen
+
 ![Dynamic Container Diagram Login](./diagrammen/thieme/dynamicLogin-Dynamic_diagram_van_Inloggen_voor_de_Triptop_Applicatie.png)
 
 Hierboven is de 1e versie van het dynamic diagram over Inloggen te zien. Dit diagram is aan het begin van het project
 bedacht en bevat dus niet alle "requirements" die geïmplementeerd zijn in de meest recente versie.
 
 #### 7.1.2 Dynamic Container Diagram 2: Booking
+
 ![Dynamic Container Diagram Booking](./diagrammen/bryan/dynamic_container_diagram_booking-Globaal_Dynamic_Container_Diagram___Booking_com_API_Integratie.svg)
 
 ### 7.2. Components
@@ -261,6 +263,16 @@ bedacht en bevat dus niet alle "requirements" die geïmplementeerd zijn in de me
 #### 7.2.1. Frontend component diagram
 
 ![Frontend component diagram](./diagrammen/FEcomponentdiagram-C4_Component_diagram_FSWD.svg)
+
+Hierboven is het componentdiagram van de frontend te zien. Dit diagram laat zien hoe de frontend is opgebouwd en hoe
+deze communiceert met de backend. Het diagram laat ook zien welke componenten er zijn en hoe deze met elkaar verbonden
+zijn. Verder staat er in het diagram dat een "search component" gerenderd wordt alleen hierbij wordt niet aangegeven
+hoe. Dit is een bewuste keuze omdat dit niet relevant is voor het component diagram.
+
+In het diagram wordt er gekozen om de hoofdgebruiker als reiziger te benoemen. Hiermee wordt aangeduid dat deze eerst in
+ingelogd moet zijn voordat zij gebruik kunnen maken van de website. In de applicatie is er momenteel niet rekening
+gehouden met een reisagent. Dit doordat de gemaakte applicatie puur een proof of concept is en niet wordt gebruikt voor
+productie.
 
 > [!IMPORTANT]
 > Voeg toe: Component Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
@@ -297,7 +309,7 @@ Voor het ontwerp van de software zijn de volgende ontwerpvragen opgesteld, deze 
 uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/developer:
 
 | Student/Developer | Ontwerpvraag                                                                                                                                                                                                                                                                                      | Design Pattern | Uitwerkingshoofdstuk |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------- |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|----------------------|
 | Julius Morselt    | Hoe kunnen we dynamisch beslissen of een bouwsteen geboekt moet worden via een externe service of intern beheerd moet worden?                                                                                                                                                                     | Factory        | 7.3.1                |
 | Thieme Wijgman    | Hoe zorg je dat een wijziging in een of meerdere API's niet leidt tot een grote wijziging in de applicatie? Specifieker: hoe zorg je ervoor dat een wijziging in de API van een externe service niet leidt tot een wijziging in de front-end maar flexibel kan worden opgevangen door de backend. | Strategy       | 7.3.2                |
 | Bryan Velthuizen  | Wie roept een specifieke externe service aan, gebeurt dat vanuit de front-end of vanuit de backend? Welke redenen zijn er om voor de ene of de andere aanpak te kiezen?                                                                                                                           | Facade         | 7.3.3                |
@@ -439,7 +451,8 @@ over de gegevens en betere beveiliging door exceptions etc.
 
 ##### 7.3.4. Uitwerking Ontwerpvraag Daniel Sung
 
-**Ontwerpvraag:** Hoe ga je om met het aanroepen van externe services die niet beschikbaar zijn en toch verwacht dat er waardevolle output gegeven wordt?
+**Ontwerpvraag:** Hoe ga je om met het aanroepen van externe services die niet beschikbaar zijn en toch verwacht dat er
+waardevolle output gegeven wordt?
 
 **Design pattern:** Adapter
 
@@ -447,7 +460,8 @@ over de gegevens en betere beveiliging door exceptions etc.
 
 ###### Diagrammen van de betalingssysteem
 
-PUML voor de diagrammen staat in: [triptop-groep-b6\huiswerk\gemaakte-werk-daniel\diagrammen](triptop-groep-b6\huiswerk\gemaakte-werk-daniel\diagrammen)
+PUML voor de diagrammen staat
+in: [triptop-groep-b6\huiswerk\gemaakte-werk-daniel\diagrammen](triptop-groep-b6\huiswerk\gemaakte-werk-daniel\diagrammen)
 
 **Klassendiagram Daniel Sung**
 ![alt text](../software-guidebook/diagrammen/diagrammen-daniel/class-diagram-adapter-v2-Class_diagram_voor_betalingssysteem_binnen_TripTop.png)
@@ -457,9 +471,10 @@ STRIPE_API_KEY wordt opgehaald via een .env, het staat dus niet hardcoded.
 
 **Sequence diagram Daniel Sung**
 ![alt text](../software-guidebook/diagrammen/diagrammen-daniel/sequence-diagram-betalingssysteem-daniel-Betalingssysteem___Afhandelen_van_errors.png)
-De controller hoort alleen de "pay" functie aan te roepen, dit checkt dan ook voor validatie en voert daarna de handlePaymentRequest aan.
-Alleen response met 200 als HTTP status worden gezien als een succesresponse. Ook alleen daarbij worden gegevens opgeslagen in de H2 database.
-
+De controller hoort alleen de "pay" functie aan te roepen, dit checkt dan ook voor validatie en voert daarna de
+handlePaymentRequest aan.
+Alleen response met 200 als HTTP status worden gezien als een succesresponse. Ook alleen daarbij worden gegevens
+opgeslagen in de H2 database.
 
 **Component diagram Daniel Sung**
 ![alt text](../software-guidebook/diagrammen/diagrammen-daniel/component-diagram-Component_diagram_voor_backend___betalingssysteem.png)
@@ -468,16 +483,23 @@ Alleen response met 200 als HTTP status worden gezien als een succesresponse. Oo
 ![alt text](../software-guidebook/diagrammen/diagrammen-daniel/dynamic-component-diagram-Dynamic_component_diagram_voor_backend_van_TripTop.png)
 
 ###### Uitwerking van Design Pattern "Adapter"
-De adapter pattern past goed bij mijn ontwerpvraag omdat ik fouten moet afhandelen van externe services. Met een adapter kan ik de externe service vertalen naar iets dat mijn systeem begrijpt. Zo wordt het eenvoudiger om de service aan te roepen en om te gaan met de responses.
 
-Om de Adapter design pattern te gebruiken, heb ik een adapter klasse aangemaakt die POST requests specifiek voor Stripe uitvoert gemaakt. De StripeAdapter klasse implementeert een interface "PaymentAdapterInterface". Dit wordt dan gebruikt in mijn PaymentService. 
+De adapter pattern past goed bij mijn ontwerpvraag omdat ik fouten moet afhandelen van externe services. Met een adapter
+kan ik de externe service vertalen naar iets dat mijn systeem begrijpt. Zo wordt het eenvoudiger om de service aan te
+roepen en om te gaan met de responses.
+
+Om de Adapter design pattern te gebruiken, heb ik een adapter klasse aangemaakt die POST requests specifiek voor Stripe
+uitvoert gemaakt. De StripeAdapter klasse implementeert een interface "PaymentAdapterInterface". Dit wordt dan gebruikt
+in mijn PaymentService.
 
 PaymentService weet dus niet hoe de Stripe API werkt, dit zorgt ook nog voor loose coupling en seperation of concerns.
 
 Hieronder staan code voorbeelden met wat commentaar als toelichting:
 
 **PaymentService**
-Deze klasse maakt gebruik van de Stripe Adapter om een betaling te maken. Heeft geen communicatie met de Stripe API en maakt gebruik van een adapter om dit te doen.
+Deze klasse maakt gebruik van de Stripe Adapter om een betaling te maken. Heeft geen communicatie met de Stripe API en
+maakt gebruik van een adapter om dit te doen.
+
 ```java
 //com/prototype/triptop/service/PaymentService.java
 
@@ -503,7 +525,7 @@ public class PaymentService {
             ResponseEntity<String> response = adapter.processPayment(payment);
 
         } catch (Exception e) {
-           //Opvangen van een post die niet werkte
+            //Opvangen van een post die niet werkte
         }
     }
 
@@ -512,7 +534,8 @@ public class PaymentService {
 ```
 
 **PaymentAdapterInterface**
-Adapter interface, dit zorgt voor loose coupling. Een betaalmethode kan altijd veranderd worden, zolang het gebruik maakt van deze interface. StripeAdapter implementeert dit om de adapter pattern toe te passen.
+Adapter interface, dit zorgt voor loose coupling. Een betaalmethode kan altijd veranderd worden, zolang het gebruik
+maakt van deze interface. StripeAdapter implementeert dit om de adapter pattern toe te passen.
 
 ```java
 //com/prototype/triptop/adapter/PaymentAdapterInterface.java
@@ -523,7 +546,9 @@ public interface PaymentAdapterInterface {
 ```
 
 **StripeAdapter**
-Deze klasse is verantwoordelijk voor het uitvoeren van een http request naar de Stripe API. Voert alleen de HTTP request uit, doet verder niks met de response.
+Deze klasse is verantwoordelijk voor het uitvoeren van een http request naar de Stripe API. Voert alleen de HTTP request
+uit, doet verder niks met de response.
+
 ```java
 //com/prototype/triptop/adapter/StripeAdapter.java
 public class StripeAdapter implements PaymentAdapterInterface {
@@ -554,11 +579,15 @@ public class StripeAdapter implements PaymentAdapterInterface {
 ```
 
 ###### Uitwerking van ontwerpvraag "Fault tolerance"
-Om ervoor te zorgen dat foute responses van externe services op te vangen, heb ik gebruik gemaakt van custom exceptions en een GlobalExceptionHandler. In de exceptionhandler heb ik ook nog een functie die een custom response aanmaakt zodat de frontend meer nut heeft van foutmeldingen. De PaymentService maakt hier dan gebruik van.
 
+Om ervoor te zorgen dat foute responses van externe services op te vangen, heb ik gebruik gemaakt van custom exceptions
+en een GlobalExceptionHandler. In de exceptionhandler heb ik ook nog een functie die een custom response aanmaakt zodat
+de frontend meer nut heeft van foutmeldingen. De PaymentService maakt hier dan gebruik van.
 
 **GlobalExceptionHandler:**
-De createErrorResponse methode maakt een HashMap aan (wordt door Spring Boot geparsed naar JSON, wat vervolgens terug gestuurd wordt). Hierin kan een titel en een foutmelding in staan. De titel wordt gebruikt om een de naam van een exception door te geven, de error value geeft de daadwerkelijke error mee.
+De createErrorResponse methode maakt een HashMap aan (wordt door Spring Boot geparsed naar JSON, wat vervolgens terug
+gestuurd wordt). Hierin kan een titel en een foutmelding in staan. De titel wordt gebruikt om een de naam van een
+exception door te geven, de error value geeft de daadwerkelijke error mee.
 
 ```java
 //com/prototype/triptop/exception/GlobalExceptionHandler.java
@@ -602,6 +631,7 @@ public class InvalidPaymentException extends RuntimeException {
 ```
 
 - PaymentRequestException: wordt gethrowed als een POST request niet lukt.
+
 ```java
 //com/prototype/triptop/exception/PaymentRequestException.java
 
@@ -620,22 +650,25 @@ Hier zijn wat voorbeelden van een error response die gebruik maakt van createErr
 
 // BAD_REQUEST
 {
-    "title": "InvalidPaymentException",
-    "error": "Currency is invalid: aEUR"
+  "title": "InvalidPaymentException",
+  "error": "Currency is invalid: aEUR"
 }
 
 //Dit is een reseponse als de POST mislukt (bv. Stripe werkt niet meer)
 
 // INTERNAL_SERVER_ERROR
 {
-    "title": "PaymentRequestException",
-    "error": "Payment request failed: I/O error on POST request for \"https://asdfaapi.stripe.com/v1/payment_intents\": asdfaapi.stripe.com"
+  "title": "PaymentRequestException",
+  "error": "Payment request failed: I/O error on POST request for \"https://asdfaapi.stripe.com/v1/payment_intents\": asdfaapi.stripe.com"
 }
 ```
-Hiermee kan de frontend de fouten afhandelen door gebruik te maken van de HTTP response en titel van de error. Het leek mij overbodig om meer informatie terug te sturen, de backend is namelijk verantwoordelijk voor dit soort fouten.
+
+Hiermee kan de frontend de fouten afhandelen door gebruik te maken van de HTTP response en titel van de error. Het leek
+mij overbodig om meer informatie terug te sturen, de backend is namelijk verantwoordelijk voor dit soort fouten.
 
 **Implementatie van de exceptions**
 PaymentService gebruikt de exceptions om ongeldige payments en uitgevallen externe services op te vangen.
+
 ```java
 //com/prototype/triptop/service/PaymentService.java
 
@@ -645,16 +678,16 @@ public class PaymentService {
     //...
 
     private ResponseEntity<String> handlePaymentRequest(Payment payment) {
-      try {
+        try {
             ResponseEntity<String> response = adapter.processPayment(payment);
-            
+
             //...
 
             if (response.getStatusCode().is2xxSuccessful()) {
                 paymentDAO.insertPayment(payment.getAmount(), payment.getCurrency(), userID);
                 return ResponseEntity.ok(response.getBody());
             } else {
-                
+
                 //Hier wordt een exception gegooid als de response geen 200 is
                 throw new PaymentRequestException("Unexpected response code: " + response.getStatusCode());
             }
@@ -664,7 +697,7 @@ public class PaymentService {
         }
     }
 
-  //...
+    //...
 
 }
 ```
@@ -683,7 +716,7 @@ Wij willen ervoor zorgen dat de eindgebruiker een interactieve map tot zijn of h
 #### Considered Options
 
 | Eigenschap | Google Maps | Mapbox |
-| ---------- | ----------- | ------ |
+|------------|-------------|--------|
 | Limiet     | --          | ++     |
 | Per uur    | --          | +      |
 | Kosten     | ++          | ++     |
@@ -723,7 +756,7 @@ Oauth2.
 ##### Considered Options
 
 | Forces                 | Google Oauth2 | Microsoft Oauth2 | Discord Oauth2 |
-| ---------------------- | ------------- | ---------------- | -------------- |
+|------------------------|---------------|------------------|----------------|
 | Populariteit           | ++            | +                | +`*`           |
 | Gebruikers informatie  | ++            | +                | -              |
 | Beveiliging            | ++            | ++               | 0 `**`         |
@@ -758,7 +791,7 @@ Voor ons project hebben we een API nodig die openbaar vervoersgegevens kan lever
 ##### Considered Options
 
 | Force                             | Google Transit API | NS API | 9292 API |
-| --------------------------------- | ------------------ | ------ | -------- |
+|-----------------------------------|--------------------|--------|----------|
 | **Dekking**                       | ++                 | -      | +        |
 | **Realtime data**                 | ++                 | +      | +        |
 | **Kosten**                        | -                  | 0      | 0        |
@@ -791,7 +824,7 @@ gebruikersgegevens/reisinformatie opgeslagen worden.
 ##### Considered Options
 
 | **Forces**            | Microsoft SQL | No-SQL | H2 in memory |
-| --------------------- | ------------- | ------ | ------------ |
+|-----------------------|---------------|--------|--------------|
 | Eenvoudigheid         | +             | +      | +            |
 | Snelheid              | -             | +      | ++           |
 | Ease of development   | 0             | 0      | +            |
@@ -832,7 +865,7 @@ de API-interacties loskoppelt van de interne logica en de frontend.
 #### Considered Options
 
 | Forces                                                                       | Strategy Pattern | Adapter Pattern | Observer Pattern |
-| ---------------------------------------------------------------------------- | ---------------- | --------------- | ---------------- |
+|------------------------------------------------------------------------------|------------------|-----------------|------------------|
 | Flexibiliteit; Hoe past het patroon zich aan bij API-wijzigingen?            | ++               | +               | ++               |
 | Onderhoudbaarheid; Hoe eenvoudig is het om uitbreidingen te maken?           | +                | ++              | +                |
 | Complexiteit; Hoeveel extra code en beheer is er nodig?                      | -                | 0               | -                |
@@ -862,7 +895,7 @@ waarbij het Facade Design Pattern wordt toegepast.
 #### Considered Options
 
 | Eigenschap                 | Front-end direct | Back-end via Facade |
-| -------------------------- | ---------------- | ------------------- |
+|----------------------------|------------------|---------------------|
 | Beveiliging                | --               | ++                  |
 | Onderhoudbaarheid          | --               | ++                  |
 | Front-end complexiteit     | --               | ++                  |
@@ -898,7 +931,7 @@ boekingsstrategie.
 #### Considered Options
 
 | Eigenschap        | Hardgecodeerde logica | Factory Design Pattern |
-| ----------------- | --------------------- | ---------------------- |
+|-------------------|-----------------------|------------------------|
 | Flexibiliteit     | --                    | ++                     |
 | Onderhoudbaarheid | --                    | ++                     |
 | Uitbreidbaarheid  | --                    | ++                     |
