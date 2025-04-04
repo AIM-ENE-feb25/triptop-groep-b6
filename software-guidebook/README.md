@@ -460,12 +460,11 @@ public class StripeAdapter implements PaymentAdapterInterface {
 ```
 
 ###### Uitwerking van ontwerpvraag "Fault tolerance"
-
 Om ervoor te zorgen dat foute responses van externe services op te vangen, heb ik gebruik gemaakt van custom exceptions en een GlobalExceptionHandler. In de exceptionhandler heb ik ook nog een functie die een custom response aanmaakt zodat de frontend meer nut heeft van foutmeldingen. De PaymentService maakt hier dan gebruik van.
 
 
 **GlobalExceptionHandler:**
-De createErrorResponse methode maakt een HashMap aan (wordt door Spring Boot geparsed naar JSON). Hierin kan een titel en een foutmelding in staan. De titel wordt gebruikt om een de naam van een exception door te geven, de error value geeft de daadwerkelijke error mee.
+De createErrorResponse methode maakt een HashMap aan (wordt door Spring Boot geparsed naar JSON, wat vervolgens terug gestuurd wordt). Hierin kan een titel en een foutmelding in staan. De titel wordt gebruikt om een de naam van een exception door te geven, de error value geeft de daadwerkelijke error mee.
 
 ```java
 //com/prototype/triptop/exception/GlobalExceptionHandler.java
@@ -508,7 +507,7 @@ public class InvalidPaymentException extends RuntimeException {
 
 ```
 
-- PaymentRequestException: wordt gethrowed als een POST request niet lukt
+- PaymentRequestException: wordt gethrowed als een POST request niet lukt.
 ```java
 //com/prototype/triptop/exception/PaymentRequestException.java
 
@@ -557,15 +556,15 @@ public class PaymentService {
             
             //...
 
-            if (response.getStatusCode().is2xxSuccessful()) { //Post success
+            if (response.getStatusCode().is2xxSuccessful()) {
                 paymentDAO.insertPayment(payment.getAmount(), payment.getCurrency(), userID);
                 return ResponseEntity.ok(response.getBody());
-            } else { //Post worked, but wasnt 200 code
+            } else {
                 
                 //Hier wordt een exception gegooid als de response geen 200 is
                 throw new PaymentRequestException("Unexpected response code: " + response.getStatusCode());
             }
-        } catch (Exception e) { //Post failed
+        } catch (Exception e) {
             //Als de request mislukt wordt dat hier opgevangen
             throw new PaymentRequestException("Payment request failed: " + e.getMessage());
         }
