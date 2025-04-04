@@ -78,28 +78,6 @@ een kort lijstje over de meest belangrijkste Externe systemen die worden gebruik
 * Identityprovider API: Beheert gebruikersaccounts (bijv. Google, Microsoft of Discord).
 * Maps API: Biedt kaarten, locaties en routebeschrijvingen aan (bijv. Google Maps of Apple Maps).
 
-> [!IMPORTANT]
-> // TODO DIT HIERONDER VERWIJDEREN
-
-
-
-> Werk zelf dit hoofdstuk uit met context diagrammen en een beschrijving van de context van de software.
->
->
->
-> In dit deelhoofdstuk wordt er een korte toelichting gegeven op de externe systemen die van belang zijn voor de
-> Triptop-applicatie. Hierbij worden enkele voorbeelden gegeven maar ook wat de verwachte functionaliteit van de externe
-> systemen zijn.
-
-> Toelichting op de context van de software inclusief System Context Diagram:
-
-> * Functionaliteit
->* Gebruikers
->* Externe systemen
-
-
-> // EINDE TODO---------------------------------------
-
 ## 3. Functional Overview
 
 Om de belangrijkste features toe te lichten zijn er user stories en twee domain stories gemaakt en een overzicht van het
@@ -166,10 +144,6 @@ als belangrijk:
   those authorized to have access)
 
 ## 5. Constraints
-
-> [!IMPORTANT]
-> Beschrijf zelf de beperkingen die op voorhand bekend zijn die invloed hebben op keuzes die wel of niet gemaakt kunnen
-> of mogen worden.
 
 ### Het project
 
@@ -281,12 +255,6 @@ bedacht en bevat dus niet alle "requirements" die geïmplementeerd zijn in de me
 
 #### 7.1.2 Dynamic Container Diagram 2: Booking
 ![Dynamic Container Diagram Booking](./diagrammen/bryan/dynamic_container_diagram_booking-Globaal_Dynamic_Container_Diagram___Booking_com_API_Integratie.svg)
-
-Hierboven is de 1e versie van het dynamic diagram over Inloggen te zien. Dit diagram is aan het begin van het project
-bedacht en bevat dus niet alle "requirements" die geïmplementeerd zijn in de meest recente versie.
-
-> [!IMPORTANT]
-> Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
 
 ### 7.2. Components
 
