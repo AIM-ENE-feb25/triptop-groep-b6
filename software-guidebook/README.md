@@ -267,11 +267,11 @@ onderhouden en uit te breiden.
 In het diagram kunnen eventuele onzekerheden onstaan als je niet bekend bent met het systeem. Hieronder worden de
 onzekerheden en eventuele vragen beantwoord om een betere beeld te geven van het systeem.
 
-| Vraag                                             | Antwoord                                                                                                                                                         |
-|---------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Hoe communiceert de webapplicatie met de backend? | De webapplicatie verstuurt HTTP-verzoeken naar de backend door middel van een REST API. Hierna regelt de backend het ophalen van gegevens.                       |
-| Wordt de H2 database gebruikt voor productie?     | Nee. De H2 database is een in-memory database die alleen gebruikt wordt voor het Proof of Concept. De gegevens worden gewist na het afsluiten van de applicatie. |
-| | | 
+| Vraag                                                                              | Antwoord                                                                                                                                                               |
+|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Hoe communiceert de webapplicatie met de backend?                                  | De webapplicatie verstuurt HTTP-verzoeken naar de backend door middel van een REST API. Hierna regelt de backend het ophalen van gegevens.                             |
+| Wordt de H2 database gebruikt voor productie?                                      | Nee. De H2 database is een in-memory database die alleen gebruikt wordt voor het Proof of Concept (PoC). De gegevens worden gewist na het afsluiten van de applicatie. |
+| Wordt er gebruik gemaakt van caching om een overmaat aan API-gebruik te voorkomen? | Nee, er wordt niet gebruik gemaakt van een caching systeem. Dit doordat de uitgewerkte code een PoC is en dus niet gebruikt wordt op een productie server.             | 
 
 #### 7.1.1 Dynamic Diagram 1: Inloggen
 
@@ -323,24 +323,24 @@ uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/develop
 ##### 7.3.2. Uitwerking Ontwerpvraag Thieme Wijgman
 
 | ![Klassediagram Thieme Wijgman](diagrammen/thieme/classDiagram-oauth2-thieme.svg) |
-|------------------------------------------------------------------------------|
-| Het verbeterde klasse diagram van Thieme.                                    |
+|-----------------------------------------------------------------------------------|
+| Het verbeterde klasse diagram van Thieme.                                         |
 
 Hierboven is mijn klasse diagram te zien. Hierin zitten alle klasses waar ik de code heb uitgewerkt. Hieronder zou ik
 mijn eerste versie weergeven.
 
 | ![1e versie klassendiagram Thieme Wijgman](diagrammen/thieme/classdiagramOauth21eversie-thieme.svg) |
-|------------------------------------------------------------------------------------------------|
-| De eerste versie klassendiagram van Thieme.                                                    |
+|-----------------------------------------------------------------------------------------------------|
+| De eerste versie klassendiagram van Thieme.                                                         |
 
 Om een helderder beeld te geven van de functionaliteit van mijn prototype en een klein beeld welke data deze nodig heeft
 heb ik een sequentie diagram gemaakt. Dit diagram laat zien hoe de data door de applicatie heen gaat en welke
 functionaliteit er aan te pas komt.
 
 | ![sequentiediagram Thieme Wijgman Oauth2](diagrammen/thieme/SQD-Oauth2-google.svg)                                 |
-|---------------------------------------------------------------------------------------------------------------|
+|--------------------------------------------------------------------------------------------------------------------|
 | ![sequentiediagram Thieme Wijgman Oauth2 discord](diagrammen/thieme/SQD-Oauth2-Google-foutief-discord-correct.svg) |
-| Het sequentiediagram van Thieme.                                                                              |
+| Het sequentiediagram van Thieme.                                                                                   |
 
 ###### Antwoord op mijn ontwerpvraag
 
@@ -363,42 +363,41 @@ wijziging in de front-end maar flexibel kan worden opgevangen door de backend.
 ##### 7.3.3. Uitwerking Ontwerpvraag Bryan Velthuizen
 
 | ![Klassediagram Bryan Velthuizen](diagrammen/bryan/classDiagram-booking-fascade-versie-2-bryan.svg) |
-|------------------------------------------------------------------------------|
-| Het verbeterde klasse diagram van Bryan.                                    |
+|-----------------------------------------------------------------------------------------------------|
+| Het verbeterde klasse diagram van Bryan.                                                            |
 
 Hierboven is mijn klasse diagram te zien. Hierin zitten alle klasses waar ik de code heb uitgewerkt. Hieronder zou ik
 mijn eerste versie weergeven.
 
 | ![Klassediagram Bryan Velthuizen](diagrammen/bryan/classDiagram-booking-fascade-versie-1-bryan.svg) |
-|------------------------------------------------------------------------------|
-| De eerste versie klassendiagram van Bryan.                                   |
+|-----------------------------------------------------------------------------------------------------|
+| De eerste versie klassendiagram van Bryan.                                                          |
 
-Om een beter beeld te geven van de onderlinge interactie heb ik ook nog een dynamic diagram gemaakt. Die ziet er als volgt uit.
+Om een beter beeld te geven van de onderlinge interactie heb ik ook nog een dynamic diagram gemaakt. Die ziet er als
+volgt uit.
 
 | ![Dynamicdiagram Bryan Velthuizen](diagrammen/bryan/dynamicDiagram-booking-fascade-versie-2-bryan.svg) |
-|------------------------------------------------------------------------------|
-| Final version van dynamic diagram                                            |
+|--------------------------------------------------------------------------------------------------------|
+| Final version van dynamic diagram                                                                      |
 
 Hierboven is mijn dynamic diagram te zien.
 
 | ![Dynamicdiagram Bryan Velthuizen](diagrammen/bryan/dynamicDiagram-booking-fascade-versie-1-bryan.svg) |
-|------------------------------------------------------------------------------|
-| De 1e versie van mijn dynamic diagram voor uitwerken code                    |
+|--------------------------------------------------------------------------------------------------------|
+| De 1e versie van mijn dynamic diagram voor uitwerken code                                              |
 
-Om nog beter in te gaan over interacties voor begrip van mijn code heb ik een sequentie diagram gemaakt. Deze zien er alsvolgt uit.
-
+Om nog beter in te gaan over interacties voor begrip van mijn code heb ik een sequentie diagram gemaakt. Deze zien er
+alsvolgt uit.
 
 | ![Sequentiediagram Bryan Velthuizen](diagrammen/bryan/sequentieDiagram-booking-fascade-versie-2-bryan.svg) |
-|------------------------------------------------------------------------------|
-| De eerste versie sequentie diagram van Bryan.                                |
+|------------------------------------------------------------------------------------------------------------|
+| De eerste versie sequentie diagram van Bryan.                                                              |
 
 Hierboven is mijn sequentie diagram uitgewerkt.
 
 | ![Sequentiediagram Bryan Velthuizen](diagrammen/bryan/sequentieDiagram-booking-fascade-versie-1-bryan.svg) |
-|------------------------------------------------------------------------------|
-| De eerste versie sequentie diagram van Bryan.                                |
-
-
+|------------------------------------------------------------------------------------------------------------|
+| De eerste versie sequentie diagram van Bryan.                                                              |
 
 > [IMPORTANT]
 > INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
