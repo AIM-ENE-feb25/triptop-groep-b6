@@ -229,26 +229,49 @@ De applicatie is ontwikkeld om exclusief in Nederland te werken en is niet toega
 
 ## 6. Design principles
 
-## Inleiding  
-Design principles zijn erg belangrijk binnen een project in software development. Het bevat de fundamentele regels waar iedereen in het project aan vast kan houden. Zo verminder je de kans op onleesbare inconsitente code. Door afspraken te maken blijft de code voor iedereen leesbaar en kan iedereen
+## Inleiding
+
+Design principles zijn erg belangrijk binnen een project in software development. Het bevat de fundamentele regels waar
+iedereen in het project aan vast kan houden. Zo verminder je de kans op onleesbare inconsitente code. Door afspraken te
+maken blijft de code voor iedereen leesbaar en kan iedereen
 zo snel mogelijk bugs achterhalen. Dit verminderd dus ook de kans op bugs. De code blijft consistent en net.
 
-## 6.1 KISS(Keep It Simple, Stupid)  
-KISS oftewel Keep It Simple, Stupid is één van de meest belangrijke design principles die we hanteren. Deze vinden we belangrijk, omdat we te maken hebben met prototypes. Het moet allemaal niet te complex worden, maar juist simpel en functioneel zodat we puur kunnen testen of de API naar wens werkt.
+## 6.1 KISS(Keep It Simple, Stupid)
+
+KISS oftewel Keep It Simple, Stupid is één van de meest belangrijke design principles die we hanteren. Deze vinden we
+belangrijk, omdat we te maken hebben met prototypes. Het moet allemaal niet te complex worden, maar juist simpel en
+functioneel zodat we puur kunnen testen of de API naar wens werkt.
 Bij het gebruik van KISS proberen we de oplossing dus de eenvoudig mogelijk te houden dus "Less is more".
 
-## 6.2  YAGNI (You Aren't Gonna Need It)  
-We hebben er ook voor gekozen YAGNI (You Aren't Gonna Need It) te hanteren. Dit sluit goed aan bij het simpel houden van de applicatie. Bij dit principe hanteer je namelijk dat je geen functionaliteiten gaat maken die we niet binnenkort nodig hebben. Dit zorgt ervoor dat we de applicatie simpel kunnen
+## 6.2  YAGNI (You Aren't Gonna Need It)
+
+We hebben er ook voor gekozen YAGNI (You Aren't Gonna Need It) te hanteren. Dit sluit goed aan bij het simpel houden van
+de applicatie. Bij dit principe hanteer je namelijk dat je geen functionaliteiten gaat maken die we niet binnenkort
+nodig hebben. Dit zorgt ervoor dat we de applicatie simpel kunnen
 houden.
 
-## 6.3 Separation of Concerns (SoC)  
-Bij Separation of Concerns (SoC) zorg je ervoor dat het systeem verdeelt wordt over verschillende onderdelen. Elk deel richt zich op één specifiek aspect van de functionaliteit. Dit maakt het systeem makkelijker te begrijpen, te onderhouden en uit te breiden.
+## 6.3 Separation of Concerns (SoC)
+
+Bij Separation of Concerns (SoC) zorg je ervoor dat het systeem verdeelt wordt over verschillende onderdelen. Elk deel
+richt zich op één specifiek aspect van de functionaliteit. Dit maakt het systeem makkelijker te begrijpen, te
+onderhouden en uit te breiden.
 
 ## 7. Software Architecture
 
 ### 7.1. Containers
 
-![Container Diagram](./diagrammen/container-diagram-Container_diagram_van_____voor_Triptop_systeem.png)
+| ![Container Diagram](./diagrammen/container-diagram-Container_diagram_van_____voor_Triptop_systeem.png) |
+|---------------------------------------------------------------------------------------------------------|
+| Container Diagram van Triptop systeem                                                                   |
+
+In het diagram kunnen eventuele onzekerheden onstaan als je niet bekend bent met het systeem. Hieronder worden de
+onzekerheden en eventuele vragen beantwoord om een betere beeld te geven van het systeem.
+
+| Vraag                                                                              | Antwoord                                                                                                                                                               |
+|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Hoe communiceert de webapplicatie met de backend?                                  | De webapplicatie verstuurt HTTP-verzoeken naar de backend door middel van een REST API. Hierna regelt de backend het ophalen van gegevens.                             |
+| Wordt de H2 database gebruikt voor productie?                                      | Nee. De H2 database is een in-memory database die alleen gebruikt wordt voor het Proof of Concept (PoC). De gegevens worden gewist na het afsluiten van de applicatie. |
+| Wordt er gebruik gemaakt van caching om een overmaat aan API-gebruik te voorkomen? | Nee, er wordt niet gebruik gemaakt van een caching systeem. Dit doordat de uitgewerkte code een PoC is en dus niet gebruikt wordt op een productie server.             | 
 
 #### 7.1.1 Dynamic Diagram 1: Inloggen
 
@@ -300,24 +323,24 @@ uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/develop
 ##### 7.3.2. Uitwerking Ontwerpvraag Thieme Wijgman
 
 | ![Klassediagram Thieme Wijgman](diagrammen/thieme/classDiagram-oauth2-thieme.svg) |
-|------------------------------------------------------------------------------|
-| Het verbeterde klasse diagram van Thieme.                                    |
+|-----------------------------------------------------------------------------------|
+| Het verbeterde klasse diagram van Thieme.                                         |
 
 Hierboven is mijn klasse diagram te zien. Hierin zitten alle klasses waar ik de code heb uitgewerkt. Hieronder zou ik
 mijn eerste versie weergeven.
 
 | ![1e versie klassendiagram Thieme Wijgman](diagrammen/thieme/classdiagramOauth21eversie-thieme.svg) |
-|------------------------------------------------------------------------------------------------|
-| De eerste versie klassendiagram van Thieme.                                                    |
+|-----------------------------------------------------------------------------------------------------|
+| De eerste versie klassendiagram van Thieme.                                                         |
 
 Om een helderder beeld te geven van de functionaliteit van mijn prototype en een klein beeld welke data deze nodig heeft
 heb ik een sequentie diagram gemaakt. Dit diagram laat zien hoe de data door de applicatie heen gaat en welke
 functionaliteit er aan te pas komt.
 
 | ![sequentiediagram Thieme Wijgman Oauth2](diagrammen/thieme/SQD-Oauth2-google.svg)                                 |
-|---------------------------------------------------------------------------------------------------------------|
+|--------------------------------------------------------------------------------------------------------------------|
 | ![sequentiediagram Thieme Wijgman Oauth2 discord](diagrammen/thieme/SQD-Oauth2-Google-foutief-discord-correct.svg) |
-| Het sequentiediagram van Thieme.                                                                              |
+| Het sequentiediagram van Thieme.                                                                                   |
 
 ###### Antwoord op mijn ontwerpvraag
 
@@ -350,7 +373,8 @@ mijn eerste versie weergeven.
 |-------------------------------------------------------------------------------------------------------|
 | De eerste versie klassendiagram van Bryan.                                                            |
 
-Om een beter beeld te geven van de onderlinge interactie heb ik ook nog een dynamic diagram gemaakt. Die ziet er als volgt uit.
+Om een beter beeld te geven van de onderlinge interactie heb ik ook nog een dynamic diagram gemaakt. Die ziet er als
+volgt uit.
 
 | ![Dynamicdiagram Bryan Velthuizen](./diagrammen/bryan/dynamicDiagram-booking-fascade-versie-2-bryan.svg) |
 |----------------------------------------------------------------------------------------------------------|
@@ -364,6 +388,8 @@ Hierboven is mijn dynamic diagram te zien.
 
 Om nog beter in te gaan over interacties voor begrip van mijn code heb ik een sequentie diagram gemaakt. Deze zien er alsvolgt uit.
 
+Om nog beter in te gaan over interacties voor begrip van mijn code heb ik een sequentie diagram gemaakt. Deze zien er
+alsvolgt uit.
 
 | ![Sequentiediagram Bryan Velthuizen](./diagrammen/bryan/sequentieDiagram-booking-fascade-versie-2-bryan.svg) |
 |--------------------------------------------------------------------------------------------------------------|
@@ -678,26 +704,32 @@ complexer is dan een hardgecodeerde oplossing.
 ### ADR-008 Booking naar backend of frontend
 
 #### Context
-Booking is een applicatie die het mogelijk maakt om een hotelkamer te boeken. De vraag is of de api via de frontend of backend moet lopen.
+
+Booking is een applicatie die het mogelijk maakt om een hotelkamer te boeken. De vraag is of de api via de frontend of
+backend moet lopen.
 
 #### Considered Options
-| Criteria                     | Frontend | Backend |
-|------------------------------|----------|---------|
-| **Beveiliging**              | -        | ++      |
-| **Controle en validatie**    | 0        | ++      |
-| **Prestaties (Latency)**     | ++       | -       |
-| **Schaalbaarheid**          | -        | ++      |
-| **Makkelijk te beheren**     | 0        | +       |
-| **Complexiteit**            | +        | 0       |
-| **Netwerkverkeer**          | ++       | 0       |
-| **Schaalbaarheid**          | -        | ++      |
+
+| Criteria                  | Frontend | Backend |
+|---------------------------|----------|---------|
+| **Beveiliging**           | -        | ++      |
+| **Controle en validatie** | 0        | ++      |
+| **Prestaties (Latency)**  | ++       | -       |
+| **Schaalbaarheid**        | -        | ++      |
+| **Makkelijk te beheren**  | 0        | +       |
+| **Complexiteit**          | +        | 0       |
+| **Netwerkverkeer**        | ++       | 0       |
+| **Schaalbaarheid**        | -        | ++      |
 
 #### Decision
-Backend-aanroepen is voor ons de beste keuze omdat we het beheren van externe services vooral via de backend willen laten lopen, omdat het soms complexe logica vereisen of we informatie willen opslaan in eigen database.
+
+Backend-aanroepen is voor ons de beste keuze omdat we het beheren van externe services vooral via de backend willen
+laten lopen, omdat het soms complexe logica vereisen of we informatie willen opslaan in eigen database.
 
 #### Consequences
-De gevolgen van deze beslissing zijn dat we de API-aanroepen via de backend moeten laten lopen. Dit biedt meer controle over de gegevens en betere beveiliging door exceptions etc.
 
+De gevolgen van deze beslissing zijn dat we de API-aanroepen via de backend moeten laten lopen. Dit biedt meer controle
+over de gegevens en betere beveiliging door exceptions etc.
 
 ## 9. Deployment, Operation and Support
 
