@@ -322,11 +322,86 @@ uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/develop
 
 ##### 7.3.1. Uitwerking Ontwerpvraag Julius Morselt
 
-[Klassediagram Julius Morselt]()
+| ![Klassediagram Julius Morselt](diagrammen/julius/pressure-cooker-class-diagram.png) |
+|-----------------------------------------------------------------------------------|
+| Het eerste klasse diagram van Julius.                                         |
 
-> [IMPORTANT]
-> INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
-> [Sequentiediagram Julius Morselt]()
+In het klassendiagram van hierboven, staan de klassen en interfaces die nodig zijn om de API call te maken en data terug te krijgen.
+
+| ![Dynamic Component Diagram Julius Morselt](diagrammen/julius/pressure-cooker-dynamic-component-diagram.png) |
+|-----------------------------------------------------------------------------------|
+| Het eerste dynamische component diagram van Julius - Pressure Cooker.                                         |
+
+###### Code van het prototype, die gebruik maakt van het Factory Design Pattern?
+Hoewel deze code gesimplificeert is vergeleken met het klassendiagram, laat het vooralsnog goed zien het design pattern werkt.
+
+HttpClientFactory
+```java
+package com.prototype.triptop.factory;
+
+import com.squareup.okhttp.OkHttpClient;
+
+public class HttpClientFactory {
+    public static OkHttpClient createClient() {
+        return new OkHttpClient();
+    }
+}
+```
+
+De HttpClientFactory zorgt ervoor dat je niet elke keer een nieuwe client hoeft aan te maken, maar dat je 1 functie gebruiken om dit te doen per controller.
+
+
+TransitController
+```Java
+@RestController
+public class TransitController {
+	private final OkHttpClient client;
+
+	public TransitController() {
+		this.client = HttpClientFactory.createClient();
+	}
+
+	@GetMapping("api/getAllDepartures")
+	public String getAllDepartures(@RequestParam String fromLatitude, @RequestParam String fromLongitude, @RequestParam String departure) throws IOException {
+		String BASE_URL = "https://wikiroutes-api.p.rapidapi.com/nextDepartures?location=" + fromLatitude + ","
+				+ fromLongitude + "&radius=10&results=25&requestTime=" + departure;
+
+		Request request = new Request.Builder()
+				.url(BASE_URL)
+				.get()
+				.addHeader("x-rapidapi-key", "a074e1a2e5msh00771683f45ee6bp1aa067jsncc90ae852fdb")
+				.addHeader("x-rapidapi-host", "wikiroutes-api.p.rapidapi.com")
+				.build();
+
+		Response response = client.newCall(request).execute();
+		return response.body().string();
+
+		// Request:
+		// http://localhost:8080/api/getAllDepartures?fromLatitude=51.606776&fromLongitude=-0.185723&departure=2025-05-20T13:01:00
+	}
+
+	@GetMapping("api/getRoutes")
+	public String getRoutes(@RequestParam String fromLatitude, @RequestParam String fromLongitude, @RequestParam String toLatitude, @RequestParam String toLongitude) throws IOException {
+		String BASE_URL = "https://wikiroutes-api.p.rapidapi.com/routes?origin=" + fromLatitude + ","
+				+ fromLongitude + "&destination=" + toLatitude + "," + toLongitude + "&transfers=1";
+
+		Request request = new Request.Builder()
+				.url(BASE_URL)
+				.get()
+				.addHeader("x-rapidapi-key", "a074e1a2e5msh00771683f45ee6bp1aa067jsncc90ae852fdb")
+				.addHeader("x-rapidapi-host", "wikiroutes-api.p.rapidapi.com")
+				.build();
+
+		Response response = client.newCall(request).execute();
+		return response.body().string();
+
+		// Request:
+		// http://localhost:8080/api/getRoutes?fromLatitude=52.377956&fromLongitude=4.897070&toLatitude=52.092876&toLongitude=5.104480
+	}
+}
+```
+
+In de TransitController zie je hoe `client` bovenaan in het bestand al aangemaakt wordt en vervolgens een client gemaakt wordt door de constructor. Zonder deze methode moet je in iedere controller een nieuwe OkHttpClient aanmaken.
 
 ##### 7.3.2. Uitwerking Ontwerpvraag Thieme Wijgman
 

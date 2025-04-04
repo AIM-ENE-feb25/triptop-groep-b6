@@ -1,0 +1,35 @@
+@startuml
+
+interface ITransitService {
+    -String fromLatitude;
+    -String fromLongitude;
+    -String toLatitude;
+    -String toLongitude;
+    -String departure;
+    -JsonObject finalObject;
+
+    +GetDeparturesFromParamas(fromLatitude String, fromLongitude String, departure String): String
+    +GetRoutesFromParams(fromLatitude String, fromLongitude String, toLatitude String, toLongitude String): String
+    +FilterStringResponse(typeResponse String): JsonObject
+}
+
+class HttpClientFactory {
+    +OkHttpClient createClient(): OkHttpClient
+}
+
+class TransitController implements ITransitService{
+    -OkHttpClient client
+    +TransitController
+    +getAllDepartures(fromLatitude String, fromLongitude String, departure String): Response
+    +getRoutes(fromLatitude String, fromLongitude String, toLatitude String, toLongitude String): Response
+}
+
+class TransitDomain implements ITransitService {
+    -String placeName
+    -String placeType
+    -String placeDescription
+    -String transportType
+    -int transportId
+}
+
+@enduml
