@@ -345,10 +345,10 @@ Om een beter beeld te geven van de functionaliteit van mijn prototype en een kle
 heb ik een sequentie diagram gemaakt. Dit diagram laat zien hoe de data door de applicatie heen gaat en welke
 functionaliteit er aan te pas komt.
 
-| ![sequentiediagram Thieme Wijgman Oauth2](diagrammen/thieme/SQD-Oauth2-google.svg)                                 |
-|--------------------------------------------------------------------------------------------------------------------|
-| ![sequentiediagram Thieme Wijgman Oauth2 discord](diagrammen/thieme/SQD-Oauth2-Google-foutief-discord-correct.svg) |
-| Het sequentiediagram van Thieme.                                                                                   |
+| ![sequentiediagram Thieme Wijgman Oauth2](diagrammen/thieme/SQD-Oauth2-google.svg)                                                                                                    |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![sequentiediagram Thieme Wijgman Oauth2 discord](./diagrammen/thieme/sequentieDiagramDiscordOauth-Sequence_Diagram__OAuth2_Poging_via_Google_Oauth2_faalt__Discord_Oauth2_werkt.svg) |
+| Het sequentiediagram van Thieme.                                                                                                                                                      |
 
 ###### Antwoord op mijn ontwerpvraag
 
