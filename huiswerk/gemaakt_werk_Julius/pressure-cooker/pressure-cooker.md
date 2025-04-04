@@ -26,3 +26,10 @@ De TransitAPI, ik wil gaan kijken naar de Transit API.
 |`ITansitService`|`GetDeparturesFromParams()`|`String fromLatitude`, `String fromLongitude`, `String departure`|`String allDepartures`|
 ||`GetRoutesFromParams()`|`String fromLatitude`, `String fromLongitude`, `String toLatitude`, `String toLongitude`|`String allPossibleRoutes`|
 ||`FilterStringResponse`|`String typeResponse`|`JsonObject allDeparturesJSON` of `JsonObject allPossibleRoutesJSON`|
+
+
+## Dynamic Diagram
+![](./afbeeldingen/pressure-cooker-dynamic-component-diagram.png)
+
+## Klassen Diagram
+![](./afbeeldingen/pressure-cooker-class-diagram.png)

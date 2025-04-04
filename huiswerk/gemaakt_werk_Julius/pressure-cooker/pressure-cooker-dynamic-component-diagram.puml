@@ -1,0 +1,29 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+left to right direction
+
+title Dynamic Diagram - TripTop (Factory Pattern)
+
+System(Frontend, "Frontend", "React.js")
+
+System_Boundary("triptop_boundary", "TripTop Applicatie", $tags="") {
+    Container(Backend, "Backend", "Spring Boot", "Backend van de applicatie")
+    Component(TripTopController, "TripTopController", "Spring Boot", "Verwerkt gebruikersverzoeken")
+    Component(ServiceFactory, "TripTopServiceFactory", "Spring Boot", "Maakt services aan op basis van aanvraag")
+    Component(BookingApiService, "BookingApiService", "Spring Boot", "Beheert communicatie met Booking.com API")
+}
+
+System_Ext(BookingAPI, "Booking.com API", "Externe service voor hotelboekingen")
+
+Rel_D(User, Frontend, "1. Gebruiker zoekt hotels", $techn="HTTP(S)")
+Rel(Frontend, Backend, "2. Verstuurt zoekopdracht naar backend", $techn="HTTP(S)")
+Rel_D(Backend, TripTopController, "3. Verwerkt verzoek en vraagt service aan")
+Rel_D(TripTopController, ServiceFactory, "4. Vraagt juiste service aan")
+Rel_D(ServiceFactory, BookingApiService, "5. Retourneert instantie van BookingApiService")
+Rel_D(BookingApiService, BookingAPI, "6. Roept Booking.com API aan", "HTTP/JSON")
+Rel_U(BookingAPI, BookingApiService, "7. Retourneert hotelgegevens", "JSON")
+Rel_U(BookingApiService, TripTopController, "8. Stuurt gegevens terug naar controller")
+Rel_U(TripTopController, Frontend, "9. Stuurt gegevens naar de gebruiker")
+Rel_U(Frontend, User, "10. Toont hotelresultaten")
+
+@enduml
