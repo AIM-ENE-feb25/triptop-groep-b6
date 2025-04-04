@@ -37,8 +37,6 @@ opt Geen 200 response
 end
 
 opt 200 response
-    stripeapi -> stripeadapter : returns 200 response
-    stripeadapter -> paymentservice : return response
     paymentservice -> paymentdao : paymentDAO.insertPayment(payment)
     paymentdao -> h2 : insert(payment)
     paymentservice -> paymentcontroller : return response

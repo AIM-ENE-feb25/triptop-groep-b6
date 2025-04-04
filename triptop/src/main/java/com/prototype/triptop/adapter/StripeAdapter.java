@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 public class StripeAdapter implements PaymentAdapterInterface {
 
     private final String STRIPE_API_KEY = TriptopPrototypeApplication.dotenv.get("STRIPE_API_KEY");
-    private final String STRIPE_URL = "https://asdfaapi.stripe.com/v1/payment_intents";
+    private final String STRIPE_URL = "https://api.stripe.com/v1/payment_intents";
 
     @Override
     public ResponseEntity<String> processPayment(Payment payment) {

@@ -351,19 +351,30 @@ wijziging in de front-end maar flexibel kan worden opgevangen door de backend.
 
 **Prototype:** Betalingssysteem met Stripe API
 
-###### Diagrammen WIP (afbeelding zijn lage resolutie + toelichting)
-Klassendiagram Daniel Sung
-![alt text](../software-guidebook/diagrammen-daniel/class-diagram-daniel.png)
+###### Diagrammen van de betalingssysteem
 
-Sequence diagram Daniel Sung
-![alt text](../software-guidebook/diagrammen-daniel/sequence-diagram-daniel.png)
-Sequence diagram
+PUML voor de diagrammen staat in: [triptop-groep-b6\huiswerk\gemaakte-werk-daniel\diagrammen](triptop-groep-b6\huiswerk\gemaakte-werk-daniel\diagrammen)
 
-Dynamic component diagram Daniel Sung
-![alt text](../software-guidebook/diagrammen-daniel/dynamic-component-daniel.png)
-Dynamic component diagram
+**Klassendiagram Daniel Sung**
+![alt text](../software-guidebook/diagrammen/diagrammen-daniel/class-diagram-adapter-v2-Class_diagram_voor_betalingssysteem_binnen_TripTop.png)
 
-###### Uitwerking van Design Pattern "Adapter" WIP (niet uitgebreid)
+De "Currencies" enum wordt alleen gebruikt voor valideren van een Payment.
+STRIPE_API_KEY wordt opgehaald via een .env, het staat dus niet hardcoded.
+
+**Sequence diagram Daniel Sung**
+![alt text](../software-guidebook/diagrammen/diagrammen-daniel/sequence-diagram-betalingssysteem-daniel-Betalingssysteem___Afhandelen_van_errors.png)
+De controller hoort alleen de "pay" functie aan te roepen, dit checkt dan ook voor validatie en voert daarna de handlePaymentRequest aan.
+Alleen response met 200 als HTTP status worden gezien als een succesresponse. Ook alleen daarbij worden gegevens opgeslagen in de H2 database.
+
+
+**Component diagram Daniel Sung**
+![alt text](../software-guidebook/diagrammen/diagrammen-daniel/component-diagram-Component_diagram_voor_backend___betalingssysteem.png)
+
+**Dynamic component diagram Daniel Sung**
+![alt text](../software-guidebook/diagrammen/diagrammen-daniel/dynamic-component-diagram-Dynamic_component_diagram_voor_backend_van_TripTop.png)
+
+###### Uitwerking van Design Pattern "Adapter"
+De adapter pattern past goed bij mijn ontwerpvraag omdat ik fouten moet afhandelen van externe services. Met een adapter kan ik de externe service vertalen naar iets dat mijn systeem begrijpt. Zo wordt het eenvoudiger om de service aan te roepen en om te gaan met de responses.
 
 Om de Adapter design pattern te gebruiken, heb ik een adapter klasse aangemaakt die POST requests specifiek voor Stripe uitvoert gemaakt. De StripeAdapter klasse implementeert een interface "PaymentAdapterInterface". Dit wordt dan gebruikt in mijn PaymentService. 
 
@@ -372,7 +383,7 @@ PaymentService weet dus niet hoe de Stripe API werkt, dit zorgt ook nog voor loo
 Hieronder staan code voorbeelden met wat commentaar als toelichting:
 
 **PaymentService**
-Deze klasse maakt gebruik van de Stripe Adapter om een betaling te maken. Heeft geen details over hoe communiceren met de Stripe API werkt.
+Deze klasse maakt gebruik van de Stripe Adapter om een betaling te maken. Heeft geen communicatie met de Stripe API en maakt gebruik van een adapter om dit te doen.
 ```java
 //com/prototype/triptop/service/PaymentService.java
 
@@ -564,16 +575,6 @@ public class PaymentService {
 
 }
 ```
-
-
-> [IMPORTANT]
-> INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
-> [Sequentiediagram Julius Morselt]()
-
-> [!IMPORTANT]
->
-> Voeg toe: Per ontwerpvraag een Class Diagram plus een Sequence Diagram van een aantal scenario's inclusief
-> begeleidende tekst.
 
 ## 8. Architectural Decision Records
 
