@@ -323,19 +323,23 @@ uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/develop
 ##### 7.3.1. Uitwerking Ontwerpvraag Julius Morselt
 
 | ![Klassediagram Julius Morselt](diagrammen/julius/pressure-cooker-class-diagram.png) |
-|-----------------------------------------------------------------------------------|
-| Het eerste klasse diagram van Julius.                                         |
+|--------------------------------------------------------------------------------------|
+| Het eerste klasse diagram van Julius.                                                |
 
-In het klassendiagram van hierboven, staan de klassen en interfaces die nodig zijn om de API call te maken en data terug te krijgen.
+In het klassendiagram van hierboven, staan de klassen en interfaces die nodig zijn om de API call te maken en data terug
+te krijgen.
 
 | ![Dynamic Component Diagram Julius Morselt](diagrammen/julius/pressure-cooker-dynamic-component-diagram.png) |
-|-----------------------------------------------------------------------------------|
-| Het eerste dynamische component diagram van Julius - Pressure Cooker.                                         |
+|--------------------------------------------------------------------------------------------------------------|
+| Het eerste dynamische component diagram van Julius - Pressure Cooker.                                        |
 
 ###### Code van het prototype, die gebruik maakt van het Factory Design Pattern?
-Hoewel deze code gesimplificeert is vergeleken met het klassendiagram, laat het vooralsnog goed zien het design pattern werkt.
+
+Hoewel deze code gesimplificeert is vergeleken met het klassendiagram, laat het vooralsnog goed zien het design pattern
+werkt.
 
 HttpClientFactory
+
 ```java
 package com.prototype.triptop.factory;
 
@@ -348,60 +352,63 @@ public class HttpClientFactory {
 }
 ```
 
-De HttpClientFactory zorgt ervoor dat je niet elke keer een nieuwe client hoeft aan te maken, maar dat je 1 functie gebruiken om dit te doen per controller.
-
+De HttpClientFactory zorgt ervoor dat je niet elke keer een nieuwe client hoeft aan te maken, maar dat je 1 functie
+gebruiken om dit te doen per controller.
 
 TransitController
+
 ```Java
+
 @RestController
 public class TransitController {
-	private final OkHttpClient client;
+    private final OkHttpClient client;
 
-	public TransitController() {
-		this.client = HttpClientFactory.createClient();
-	}
+    public TransitController() {
+        this.client = HttpClientFactory.createClient();
+    }
 
-	@GetMapping("api/getAllDepartures")
-	public String getAllDepartures(@RequestParam String fromLatitude, @RequestParam String fromLongitude, @RequestParam String departure) throws IOException {
-		String BASE_URL = "https://wikiroutes-api.p.rapidapi.com/nextDepartures?location=" + fromLatitude + ","
-				+ fromLongitude + "&radius=10&results=25&requestTime=" + departure;
+    @GetMapping("api/getAllDepartures")
+    public String getAllDepartures(@RequestParam String fromLatitude, @RequestParam String fromLongitude, @RequestParam String departure) throws IOException {
+        String BASE_URL = "https://wikiroutes-api.p.rapidapi.com/nextDepartures?location=" + fromLatitude + ","
+                + fromLongitude + "&radius=10&results=25&requestTime=" + departure;
 
-		Request request = new Request.Builder()
-				.url(BASE_URL)
-				.get()
-				.addHeader("x-rapidapi-key", "a074e1a2e5msh00771683f45ee6bp1aa067jsncc90ae852fdb")
-				.addHeader("x-rapidapi-host", "wikiroutes-api.p.rapidapi.com")
-				.build();
+        Request request = new Request.Builder()
+                .url(BASE_URL)
+                .get()
+                .addHeader("x-rapidapi-key", "a074e1a2e5msh00771683f45ee6bp1aa067jsncc90ae852fdb")
+                .addHeader("x-rapidapi-host", "wikiroutes-api.p.rapidapi.com")
+                .build();
 
-		Response response = client.newCall(request).execute();
-		return response.body().string();
+        Response response = client.newCall(request).execute();
+        return response.body().string();
 
-		// Request:
-		// http://localhost:8080/api/getAllDepartures?fromLatitude=51.606776&fromLongitude=-0.185723&departure=2025-05-20T13:01:00
-	}
+        // Request:
+        // http://localhost:8080/api/getAllDepartures?fromLatitude=51.606776&fromLongitude=-0.185723&departure=2025-05-20T13:01:00
+    }
 
-	@GetMapping("api/getRoutes")
-	public String getRoutes(@RequestParam String fromLatitude, @RequestParam String fromLongitude, @RequestParam String toLatitude, @RequestParam String toLongitude) throws IOException {
-		String BASE_URL = "https://wikiroutes-api.p.rapidapi.com/routes?origin=" + fromLatitude + ","
-				+ fromLongitude + "&destination=" + toLatitude + "," + toLongitude + "&transfers=1";
+    @GetMapping("api/getRoutes")
+    public String getRoutes(@RequestParam String fromLatitude, @RequestParam String fromLongitude, @RequestParam String toLatitude, @RequestParam String toLongitude) throws IOException {
+        String BASE_URL = "https://wikiroutes-api.p.rapidapi.com/routes?origin=" + fromLatitude + ","
+                + fromLongitude + "&destination=" + toLatitude + "," + toLongitude + "&transfers=1";
 
-		Request request = new Request.Builder()
-				.url(BASE_URL)
-				.get()
-				.addHeader("x-rapidapi-key", "a074e1a2e5msh00771683f45ee6bp1aa067jsncc90ae852fdb")
-				.addHeader("x-rapidapi-host", "wikiroutes-api.p.rapidapi.com")
-				.build();
+        Request request = new Request.Builder()
+                .url(BASE_URL)
+                .get()
+                .addHeader("x-rapidapi-key", "a074e1a2e5msh00771683f45ee6bp1aa067jsncc90ae852fdb")
+                .addHeader("x-rapidapi-host", "wikiroutes-api.p.rapidapi.com")
+                .build();
 
-		Response response = client.newCall(request).execute();
-		return response.body().string();
+        Response response = client.newCall(request).execute();
+        return response.body().string();
 
-		// Request:
-		// http://localhost:8080/api/getRoutes?fromLatitude=52.377956&fromLongitude=4.897070&toLatitude=52.092876&toLongitude=5.104480
-	}
+        // Request:
+        // http://localhost:8080/api/getRoutes?fromLatitude=52.377956&fromLongitude=4.897070&toLatitude=52.092876&toLongitude=5.104480
+    }
 }
 ```
 
-In de TransitController zie je hoe `client` bovenaan in het bestand al aangemaakt wordt en vervolgens een client gemaakt wordt door de constructor. Zonder deze methode moet je in iedere controller een nieuwe OkHttpClient aanmaken.
+In de TransitController zie je hoe `client` bovenaan in het bestand al aangemaakt wordt en vervolgens een client gemaakt
+wordt door de constructor. Zonder deze methode moet je in iedere controller een nieuwe OkHttpClient aanmaken.
 
 ##### 7.3.2. Uitwerking Ontwerpvraag Thieme Wijgman
 
@@ -547,7 +554,8 @@ STRIPE_API_KEY wordt opgehaald via een .env, het staat dus niet hardcoded.
 
 **Sequence diagram Daniel Sung**
 ![alt text](../software-guidebook/diagrammen/diagrammen-daniel/sequence-diagram-betalingssysteem-daniel-Betalingssysteem___Afhandelen_van_errors.png)
-De controller hoort alleen de "pay" functie aan te roepen, dit checkt dan ook voor validatie en voert daarna de handlePaymentRequest aan.
+De controller hoort alleen de "pay" functie aan te roepen, dit checkt dan ook voor validatie en voert daarna de
+handlePaymentRequest aan.
 Alleen response met 200 als HTTP status worden gezien als een succesresponse. Ook alleen daarbij worden gegevens
 opgeslagen in de H2 database.
 
@@ -918,7 +926,7 @@ De gekozen database is in-memory, waardoor deze niet geschikt is voor een volled
 nadelig als de PoC uitgewerkt wordt. Het voordeel is dat het ontwikkelen van de applicatie versneld, doordat gegevens
 worden gewist na het opnieuw opstarten van de applicatie.
 
-### 8.5. ADR-005: Design pattern keuze 1: Strategy
+### 8.5. ADR-005: Design pattern Stategy voor Interoperability
 
 #### Status
 
@@ -955,7 +963,43 @@ dynamisch de juiste implementatie kiezen op basis van de configuratie.
 - Verhoogde flexibiliteit en minder impact bij API-wijzigingen.
 - Extra complexiteit in het beheren van strategieën en configuraties.
 
-### 8.6. ADR-006 Design Strategy Pattern
+### 8.6. ADR-006 Adapter Design Pattern voor Fault Tolerance
+
+Hoort bij ontwerpvraag:
+
+- Fault Tolerance: Hoe ga je om met aanroepen van externe services die niet beschikbaar zijn en toch verwacht wordt dat
+  er waardevolle output gegeven wordt?
+
+#### Context
+
+Voor de applicatie moet een design pattern gekozen die gemakkelijk fouten kan afhandelen als externe services niet
+bereikbaar zijn.
+
+#### Considered Options
+
+| Forces                       | Adapter Pattern | Factory Pattern | Strategy Pattern |
+|------------------------------|-----------------|-----------------|------------------|
+| Overzicht                    | +               | 0               | +                |
+| Compatibiliteit met services | ++              | -               | 0                |
+| Onderhoudbaarheid            | +               | +               | +                |
+
+#### Decision
+
+We besloten om "Adapter Pattern" toe te passen. Het laat je externe services aanroepen zonder de implementatie van de
+externe services te gebruiken. Dit versimpelt de onderhoudbaarheid en complexiteit van de code. Dit is nuttig omdat de
+applicatie afhankelijk van vele externe services is.
+
+#### Status
+
+Accepted
+
+#### Consequences
+
+De adapter pattern kan overbodig zijn voor een PoC applicatie. Voor de PoC wordt niet elk functionaliteit uitgewerkt.
+Wel is het goed voor een werkende applicatie die beschikbaar wordt gesteld voor het publiek, omdat dit onderhoudbaarheid
+versterkt.
+
+### 8.7. ADR-007 Design Strategy Pattern
 
 #### Context
 
@@ -990,7 +1034,7 @@ Deze aanpak verhoogt de beveiliging en onderhoudbaarheid en zorgt voor een gesta
 services. De front-end hoeft zich niet bezig te houden met API-authenticatie of wijzigingen. De keerzijde is dat er
 extra serverbelasting en ontwikkeltijd nodig is voor de facade-implementatie.
 
-### 8.7. ADR-007 Factory Design Pattern
+### 8.8. ADR-008 Factory Design Pattern
 
 #### Context
 
@@ -1026,7 +1070,7 @@ Deze aanpak verhoogt de flexibiliteit en testbaarheid, waardoor toekomstige uitb
 blijft modulair en gestructureerd, wat onderhoud vergemakkelijkt. De keerzijde is dat de initiële implementatie
 complexer is dan een hardgecodeerde oplossing.
 
-### 8.7 ADR-007 Booking naar backend of frontend
+### 8.9 ADR-009 Booking naar backend of frontend
 
 #### Context
 
@@ -1065,7 +1109,6 @@ Om de TripTop applicatie uit te voeren zijn er vereisten.
 - Java versie 21+
 - JAVA_HOME variabele (bv. C:\ProgramFiles\Java\jdk-21)
 - Apache Maven 3.9.9+
-
 
 **Uitvoeren van de TripTop applicatie:**
 

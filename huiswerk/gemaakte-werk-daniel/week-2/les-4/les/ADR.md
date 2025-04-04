@@ -1,8 +1,8 @@
-### 8.5. ADR-005 Adapter Design Pattern
+### 8.5. ADR-005 Adapter Design Pattern voor Fault Tolerance
 
 Hoort bij ontwerpvraag:
 - Fault Tolerance: Hoe ga je om met aanroepen van externe services die niet beschikbaar zijn en toch verwacht wordt dat er waardevolle output gegeven wordt?
-x
+
 
 
 #### Context
