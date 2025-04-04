@@ -314,7 +314,9 @@ uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/develop
 
 ##### 7.3.1. Uitwerking Ontwerpvraag Julius Morselt
 
-[Klassediagram Julius Morselt]()
+| ![Klassediagram Julius Morselt](diagrammen/julius/klassendiagram-julius-auth.png) |
+|-----------------------------------------------------------------------------------|
+| Het verbeterde klasse diagram van Julius.                                         |
 
 > [IMPORTANT]
 > INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN

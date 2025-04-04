@@ -1,0 +1,16 @@
+@startuml
+
+interface ITansitService {
+    -String fromLatitude;
+    -String fromLongitude;
+    -String toLatitude;
+    -String toLongitude;
+    -String departure;
+    -JsonObject finalObject;
+
+    +GetDeparturesFromParamas(fromLatitude String, fromLongitude String, departure String): String
+    +GetRoutesFromParams(fromLatitude String, fromLongitude String, toLatitude String, toLongitude String): String
+    +FilterStringResponse(typeResponse String): JsonObject
+}
+
+@enduml
