@@ -262,7 +262,7 @@ bedacht en bevat dus niet alle "requirements" die geïmplementeerd zijn in de me
 
 #### 7.2.1. Frontend component diagram
 
-![Frontend component diagram](./diagrammen/FEcomponentdiagram-C4_Component_diagram_FSWD.svg)
+![Frontend component diagram](./diagrammen/FEcomponentdiagram-C4_Frontend_Component_diagram_voor_de_Triptop_applicatie.svg)
 
 Hierboven is het componentdiagram van de frontend te zien. Dit diagram laat zien hoe de frontend is opgebouwd en hoe
 deze communiceert met de backend. Het diagram laat ook zien welke componenten er zijn en hoe deze met elkaar verbonden
