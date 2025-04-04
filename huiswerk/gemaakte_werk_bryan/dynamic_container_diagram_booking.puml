@@ -1,0 +1,22 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+left to right direction
+
+title Globaal Dynamic Container Diagram - Booking.com API Integratie
+
+Person(user, "User", "Gebruiker van de TripTop-app")
+
+System_Boundary(triptop, "TripTop Applicatie") {
+    Container(frontend, "Frontend", "Bijv. React / Mobile app", "Gebruikersinterface voor zoekopdrachten")
+    Container(backend, "Backend", "Spring Boot", "Verwerkt verzoeken en communiceert met externe API's")
+}
+
+System_Ext(bookingApi, "Booking.com API", "Externe hotelboekingsservice")
+
+Rel_D(user, frontend, "1. Gebruiker voert zoekopdracht in")
+Rel_D(frontend, backend, "2. Verstuurt zoekverzoek", "HTTPS")
+Rel_D(backend, bookingApi, "3. Verstuurt zoekopdracht", "HTTPS/JSON")
+Rel_U(bookingApi, backend, "4. Retourneert zoekresultaten", "JSON")
+Rel_U(backend, frontend, "5. Retourneert hoteldata naar UI", "JSON")
+
+@enduml

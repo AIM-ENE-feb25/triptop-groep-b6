@@ -277,6 +277,12 @@ onzekerheden en eventuele vragen beantwoord om een betere beeld te geven van het
 
 ![Dynamic diagram Inloggen](diagrammen/thieme/dynamicLogin-Dynamic_diagram_van_Inloggen_voor_de_Triptop_Applicatie.png)
 
+#### 7.1.1 Dynamic Container Diagram 1: Inloggen
+![Dynamic Container Diagram Login](./diagrammen/thieme/dynamicLogin-Dynamic_diagram_van_Inloggen_voor_de_Triptop_Applicatie.png)
+
+#### 7.1.2 Dynamic Container Diagram 2: Booking
+![Dynamic Container Diagram Booking](./diagrammen/bryan/dynamic_container_diagram_booking-Globaal_Dynamic_Container_Diagram___Booking_com_API_Integratie.svg)
+
 > [!IMPORTANT]
 > Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
 
