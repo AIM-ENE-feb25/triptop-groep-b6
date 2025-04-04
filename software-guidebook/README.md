@@ -39,8 +39,8 @@ een brede groep reizigers die zelf hun reis / trip willen samenstellen.
 ### Context diagram
 
 | ![Context diagram](diagrammen/context-diagram-Context_diagram_voor_het_TripTop_systeem.svg) |
-|---------------------------------------------------------------------------------------------
-| Het context diagram |
+|--------------------------------------------------------------------------------------------- 
+| Het context diagram                                                                         |
 
 #### Toelichting op het context diagram
 
@@ -62,26 +62,30 @@ benoemd:
 Voor het Triptop systeem worden 2 soorten gebruikers onderscheiden, beide gebruikers maken gebruik van het systeem maar
 op een andere manier, hieronder wordt dit kort beschreven:
 
-- Reiziger
-  - De reiziger is de eindgebruiker van het systeem. De reiziger kan een reis samenstellen, boeken, betalen, annuleren
-    en de reisstatus bewaren. De reiziger kan ook de bouwstenen van de reis flexibel uitbreiden.
-- Reisagent
-  - De reisagent is een tweedelijns ondersteuning voor reizigers die vastlopen op het plannen van hun reis via
-    Triptop. De reisagent kan de reiziger helpen met het plannen van de reis.
+* Reiziger
+    * De reiziger is de eindgebruiker van het systeem. De reiziger kan een reis samenstellen, boeken, betalen, annuleren
+      en de reisstatus bewaren. De reiziger kan ook de bouwstenen van de reis flexibel uitbreiden.
+* Reisagent
+    * De reisagent is een tweedelijns ondersteuning voor reizigers die vastlopen op het plannen van hun reis via
+      Triptop. De reisagent kan de reiziger helpen met het plannen van de reis.
 
 Beide gebruikers hebben toegang tot de Triptop-applicatie, maar hun precieze rechten en rollen verschillen.
 
 Om dit alles correct te laten functioneren maakt Triptop gebruik van externe systemen zoals Google Maps. Hieronder volgt
 een kort lijstje over de meest belangrijkste Externe systemen die worden gebruikt:
 
-- Betalings API: Verwerkt betalingen voor de reizen (bijv. via Stripe of iDEAL).
-- Identityprovider API: Beheert gebruikersaccounts (bijv. Google, Microsoft of Discord).
-- Maps API: Biedt kaarten, locaties en routebeschrijvingen aan (bijv. Google Maps of Apple Maps).
+* Betalings API: Verwerkt betalingen voor de reizen (bijv. via Stripe of iDEAL).
+* Identityprovider API: Beheert gebruikersaccounts (bijv. Google, Microsoft of Discord).
+* Maps API: Biedt kaarten, locaties en routebeschrijvingen aan (bijv. Google Maps of Apple Maps).
 
 > [!IMPORTANT]
 > // TODO DIT HIERONDER VERWIJDEREN
 
+
+
 > Werk zelf dit hoofdstuk uit met context diagrammen en een beschrijving van de context van de software.
+>
+>
 >
 > In dit deelhoofdstuk wordt er een korte toelichting gegeven op de externe systemen die van belang zijn voor de
 > Triptop-applicatie. Hierbij worden enkele voorbeelden gegeven maar ook wat de verwachte functionaliteit van de externe
@@ -89,9 +93,10 @@ een kort lijstje over de meest belangrijkste Externe systemen die worden gebruik
 
 > Toelichting op de context van de software inclusief System Context Diagram:
 
-> - Functionaliteit
-> - Gebruikers
-> - Externe systemen
+> * Functionaliteit
+>* Gebruikers
+>* Externe systemen
+
 
 > // EINDE TODO---------------------------------------
 
@@ -147,17 +152,17 @@ helemaal kan aanpassen aan mijn wensen.
 Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgende ISO 25010 kwaliteitsattributen benoemd
 als belangrijk:
 
-- Compatibility -> Interoperability (Degree to which a system, product or component can exchange information with other
+* Compatibility -> Interoperability (Degree to which a system, product or component can exchange information with other
   products and mutually use the information that has been exchanged)
-- Reliability -> Fault Tolerance (Degree to which a system or component operates as intended despite the presence of
+* Reliability -> Fault Tolerance (Degree to which a system or component operates as intended despite the presence of
   hardware or software faults)
-- Maintainability -> Modularity (Degree to which a system or computer program is composed of discrete components such
+* Maintainability -> Modularity (Degree to which a system or computer program is composed of discrete components such
   that a change to one component has minimal impact on other components)
-- Maintainability -> Modifiability (Degree to which a product or system can be effectively and efficiently modified
+* Maintainability -> Modifiability (Degree to which a product or system can be effectively and efficiently modified
   without introducing defects or degrading existing product quality)
-- Security -> Integrity (Degree to which a system, product or component ensures that the state of its system and data
+* Security -> Integrity (Degree to which a system, product or component ensures that the state of its system and data
   are protected from unauthorized modification or deletion either by malicious action or computer error)
-- Security -> Confidentiality (Degree to which a system, product or component ensures that data are accessible only to
+* Security -> Confidentiality (Degree to which a system, product or component ensures that data are accessible only to
   those authorized to have access)
 
 ## 5. Constraints
@@ -268,12 +273,11 @@ onzekerheden en eventuele vragen beantwoord om een betere beeld te geven van het
 | Wordt de H2 database gebruikt voor productie?                                      | Nee. De H2 database is een in-memory database die alleen gebruikt wordt voor het Proof of Concept (PoC). De gegevens worden gewist na het afsluiten van de applicatie. |
 | Wordt er gebruik gemaakt van caching om een overmaat aan API-gebruik te voorkomen? | Nee, er wordt niet gebruik gemaakt van een caching systeem. Dit doordat de uitgewerkte code een PoC is en dus niet gebruikt wordt op een productie server.             | 
 
-#### 7.1.1 Dynamic Diagram 1: Inloggen
-
-![Dynamic diagram Inloggen](diagrammen/thieme/dynamicLogin-Dynamic_diagram_van_Inloggen_voor_de_Triptop_Applicatie.png)
-
 #### 7.1.1 Dynamic Container Diagram 1: Inloggen
 ![Dynamic Container Diagram Login](./diagrammen/thieme/dynamicLogin-Dynamic_diagram_van_Inloggen_voor_de_Triptop_Applicatie.png)
+
+Hierboven is de 1e versie van het dynamic diagram over Inloggen te zien. Dit diagram is aan het begin van het project
+bedacht en bevat dus niet alle "requirements" die geïmplementeerd zijn in de meest recente versie.
 
 #### 7.1.2 Dynamic Container Diagram 2: Booking
 ![Dynamic Container Diagram Booking](./diagrammen/bryan/dynamic_container_diagram_booking-Globaal_Dynamic_Container_Diagram___Booking_com_API_Integratie.svg)
@@ -298,6 +302,22 @@ onzekerheden en eventuele vragen beantwoord om een betere beeld te geven van het
 
 ![](diagrammen/thieme/dynamicdiagramOauth2-Dynamic_diagram_Oauth2_0_Google.png)
 
+#### 7.2.4 Mapping van domeinmodel
+
+Hieronder is de mapping van alle (zelfgemaakte) endpoints te zien. Dit is een overzicht van de endpoints die zijn
+uitgewerkt in de applicatie.
+
+| Class:Attribute                                                                                   | Is input voor API+endpoint | Wordt gevuld door API+Endpoint | Wordt geleverd door eindgebruiker | Moet worden opgeslagen in de applicatie |
+|---------------------------------------------------------------------------------------------------|----------------------------|--------------------------------|-----------------------------------|-----------------------------------------|
+| PaymentController::processPayment(payment)                                                        | POST /payment/process      | ❌                              | ✅                                 | ✅                                       |
+| PaymentController::getAllPayments()                                                               | GET /payment/all           | ❌                              | ❌                                 | ❌                                       |
+| AuthController::login()                                                                           | GET /login                 | ❌                              | ❌                                 | ❌                                       | 
+| AuthController::callback(code, state)                                                             | GET /callback              | ❌                              | ✅                                 | ✅                                       |
+| AuthController::getUser(accessToken)                                                              | GET /user                  | ❌                              | ✅                                 | ❌                                       |
+| BookingController::searchHotel(destinationId, adults, children, rooms, checkInDate, checkOutDate) | GET /hotels                | ❌                              | ✅                                 | ❌                                       |
+| TransitController::getAllDepartures(fromLatitude, fromLongitude, departure)                       | GET /api/departures        | ❌                              | ✅                                 | ❌                                       |
+| TransitController::getRoutes(fromLatitude, fromLongitude, toLatitude, toLongitude)                | GET /api/getRoutes         | ❌                              | ✅                                 | ❌                                       |                                                                               
+
 ### 7.3. Design & Code
 
 #### Ontwerpvragen
@@ -318,7 +338,7 @@ uitgewerkt. Hieronder volgt een lijstje met de ontwerpvragen per student/develop
 
 > [IMPORTANT]
 > INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
-> [Sequentiediagram Julius Morselt]()
+[Sequentiediagram Julius Morselt]()
 
 ##### 7.3.2. Uitwerking Ontwerpvraag Thieme Wijgman
 
@@ -386,7 +406,8 @@ Hierboven is mijn dynamic diagram te zien.
 |----------------------------------------------------------------------------------------------------------|
 | De 1e versie van mijn dynamic diagram voor uitwerken code                                                |
 
-Om nog beter in te gaan over interacties voor begrip van mijn code heb ik een sequentie diagram gemaakt. Deze zien er alsvolgt uit.
+Om nog beter in te gaan over interacties voor begrip van mijn code heb ik een sequentie diagram gemaakt. Deze zien er
+alsvolgt uit.
 
 Om nog beter in te gaan over interacties voor begrip van mijn code heb ik een sequentie diagram gemaakt. Deze zien er
 alsvolgt uit.
@@ -401,37 +422,47 @@ Hierboven is mijn sequentie diagram uitgewerkt.
 |--------------------------------------------------------------------------------------------------------------|
 | De eerste versie sequentie diagram van Bryan.                                                                |
 
-Mijn ontwerpvraag was: Wie roept een specifieke externe service aan, gebeurt dat vanuit de front-end of vanuit de back-end? Welke redenen zijn er om voor de ene of de andere aanpak te kiezen?
+Mijn ontwerpvraag was: Wie roept een specifieke externe service aan, gebeurt dat vanuit de front-end of vanuit de
+back-end? Welke redenen zijn er om voor de ene of de andere aanpak te kiezen?
 
-Om mijn ontwerpvraag te beantwoorden heb ik ervoor gekozen om een facade pattern te gebruiken. Dit is een design pattern die
-een interface biedt voor een complex subsysteem. Dit maakt het makkelijker om met dat subsysteem te werken zoals bijvoorbeeld
+Om mijn ontwerpvraag te beantwoorden heb ik ervoor gekozen om een facade pattern te gebruiken. Dit is een design pattern
+die
+een interface biedt voor een complex subsysteem. Dit maakt het makkelijker om met dat subsysteem te werken zoals
+bijvoorbeeld
 de BOOKING.com API.
 
-Ik heb een ADR geschreven waarin ik uitleg waarom ik voor dit design pattern heb gekozen. Het is een 
+Ik heb een ADR geschreven waarin ik uitleg waarom ik voor dit design pattern heb gekozen. Het is een
 handig design pattern om mee te werken als je gebruik maakt van externe API's.
 
 ### Booking naar backend of frontend
 
 #### Context
-Booking is een applicatie die het mogelijk maakt om een hotelkamer te boeken. De vraag is of de api via de frontend of backend moet lopen.
+
+Booking is een applicatie die het mogelijk maakt om een hotelkamer te boeken. De vraag is of de api via de frontend of
+backend moet lopen.
 
 #### Considered Options
-| Criteria                     | Frontend | Backend |
-|------------------------------|----------|---------|
-| **Beveiliging**              | -        | ++      |
-| **Controle en validatie**    | 0        | ++      |
-| **Prestaties (Latency)**     | ++       | -       |
-| **Schaalbaarheid**          | -        | ++      |
-| **Makkelijk te beheren**     | 0        | +       |
-| **Complexiteit**            | +        | 0       |
-| **Netwerkverkeer**          | ++       | 0       |
-| **Schaalbaarheid**          | -        | ++      |
+
+| Criteria                  | Frontend | Backend |
+|---------------------------|----------|---------|
+| **Beveiliging**           | -        | ++      |
+| **Controle en validatie** | 0        | ++      |
+| **Prestaties (Latency)**  | ++       | -       |
+| **Schaalbaarheid**        | -        | ++      |
+| **Makkelijk te beheren**  | 0        | +       |
+| **Complexiteit**          | +        | 0       |
+| **Netwerkverkeer**        | ++       | 0       |
+| **Schaalbaarheid**        | -        | ++      |
 
 #### Decision
-Backend-aanroepen is voor ons de beste keuze omdat we het beheren van externe services vooral via de backend willen laten lopen, omdat het soms complexe logica vereisen of we informatie willen opslaan in eigen database.
+
+Backend-aanroepen is voor ons de beste keuze omdat we het beheren van externe services vooral via de backend willen
+laten lopen, omdat het soms complexe logica vereisen of we informatie willen opslaan in eigen database.
 
 #### Consequences
-De gevolgen van deze beslissing zijn dat we de API-aanroepen via de backend moeten laten lopen. Dit biedt meer controle over de gegevens en betere beveiliging door exceptions etc.
+
+De gevolgen van deze beslissing zijn dat we de API-aanroepen via de backend moeten laten lopen. Dit biedt meer controle
+over de gegevens en betere beveiliging door exceptions etc.
 
 |--------------------------------------------------------------------------------------------------------------|
 
