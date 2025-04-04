@@ -282,6 +282,9 @@ bedacht en bevat dus niet alle "requirements" die geïmplementeerd zijn in de me
 #### 7.1.2 Dynamic Container Diagram 2: Booking
 ![Dynamic Container Diagram Booking](./diagrammen/bryan/dynamic_container_diagram_booking-Globaal_Dynamic_Container_Diagram___Booking_com_API_Integratie.svg)
 
+Hierboven is de 1e versie van het dynamic diagram over Inloggen te zien. Dit diagram is aan het begin van het project
+bedacht en bevat dus niet alle "requirements" die geïmplementeerd zijn in de meest recente versie.
+
 > [!IMPORTANT]
 > Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
 
