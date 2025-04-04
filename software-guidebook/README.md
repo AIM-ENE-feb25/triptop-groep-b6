@@ -462,7 +462,7 @@ waardevolle output gegeven wordt?
 ###### Diagrammen van de betalingssysteem
 
 PUML voor de diagrammen staat
-in: [triptop-groep-b6\huiswerk\gemaakte-werk-daniel\diagrammen](triptop-groep-b6\huiswerk\gemaakte-werk-daniel\diagrammen)
+in: `triptop-groep-b6\huiswerk\gemaakte-werk-daniel\diagrammen`
 
 **Klassendiagram Daniel Sung**
 ![alt text](../software-guidebook/diagrammen/diagrammen-daniel/class-diagram-adapter-v2-Class_diagram_voor_betalingssysteem_binnen_TripTop.png)
@@ -472,8 +472,7 @@ STRIPE_API_KEY wordt opgehaald via een .env, het staat dus niet hardcoded.
 
 **Sequence diagram Daniel Sung**
 ![alt text](../software-guidebook/diagrammen/diagrammen-daniel/sequence-diagram-betalingssysteem-daniel-Betalingssysteem___Afhandelen_van_errors.png)
-De controller hoort alleen de "pay" functie aan te roepen, dit checkt dan ook voor validatie en voert daarna de
-handlePaymentRequest aan.
+De controller hoort alleen de "pay" functie aan te roepen, dit checkt dan ook voor validatie en voert daarna de handlePaymentRequest aan.
 Alleen response met 200 als HTTP status worden gezien als een succesresponse. Ook alleen daarbij worden gegevens
 opgeslagen in de H2 database.
 
