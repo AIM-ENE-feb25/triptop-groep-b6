@@ -274,6 +274,9 @@ ingelogd moet zijn voordat zij gebruik kunnen maken van de website. In de applic
 gehouden met een reisagent. Dit doordat de gemaakte applicatie puur een proof of concept is en niet wordt gebruikt voor
 productie.
 
+Er is specifiek gekozen om de MapBox API in de frontend te gebruiken. Dit is gedaan omdat er anders onnodig veel
+verzoeken worden gedaan naar de backend voor het ophalen van een kaart / locatie.
+
 > [!IMPORTANT]
 > Voeg toe: Component Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
 
