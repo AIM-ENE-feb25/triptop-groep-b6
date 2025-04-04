@@ -1,5 +1,6 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title C4 Backend Component Diagram voor De Triptop Applicatie
 
 top to bottom direction
 
@@ -28,7 +29,6 @@ Container_Boundary(Applicatie, "Triptop Applicatie", "Reisplanner voor Nederland
         Component(GebruikersRepository, "GebruikersRepository", "Beheert database-operaties voor gebruikers")
         Component(BetalingsRepository, "BetalingsRepository", "Beheert database-operaties voor betalingen")
 
-        Component(GlobalExceptionHandler, "GlobalExceptionHandler", "Handelt uitzonderingen af binnen de applicatie")
     }
 
     ComponentDb(H2Database, "H2 Database", "Opslag van gebruikers, reizen en betalingen")
@@ -55,14 +55,6 @@ Container_Boundary(Applicatie, "Triptop Applicatie", "Reisplanner voor Nederland
     Rel(ReisRepository, H2Database, "Opslag van reizen", "JPA")
     Rel(GebruikersRepository, H2Database, "Opslag van gebruikers", "JPA")
     Rel(BetalingsRepository, H2Database, "Opslag van betalingen", "JPA")
-
-    Rel(GlobalExceptionHandler, ReisController, "Handelt uitzonderingen af voor reizen")
-    Rel(GlobalExceptionHandler, GebruikersController, "Handelt uitzonderingen af voor gebruikers")
-    Rel(GlobalExceptionHandler, BetalingsController, "Handelt uitzonderingen af voor betalingen")
-    Rel(GlobalExceptionHandler, VervoerderController, "Handelt uitzonderingen af voor OV-informatie")
-    Rel(GlobalExceptionHandler, ActiviteitenController, "Handelt uitzonderingen af voor activiteiten")
-    Rel(GlobalExceptionHandler, OvernachtingenController, "Handelt uitzonderingen af voor overnachtingen")
-    Rel(GlobalExceptionHandler, AutoVerhuurController, "Handelt uitzonderingen af voor autoverhuur")
 
     Rel(GebruikersService, IdentityProviderAPI, "Authenticeert gebruikers", "OAuth2")
     Rel(BetalingsService, BetalingsAPI, "Verwerkt betalingen", "HTTP")
