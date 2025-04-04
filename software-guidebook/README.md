@@ -339,7 +339,43 @@ wijziging in de front-end maar flexibel kan worden opgevangen door de backend.
 
 ##### 7.3.3. Uitwerking Ontwerpvraag Bryan Velthuizen
 
-[Klassediagram Bryan Velthuizen]()
+| ![Klassediagram Bryan Velthuizen](./diagrammen/classDiagram-booking-fascade-versie-2-bryan.svg) |
+|------------------------------------------------------------------------------|
+| Het verbeterde klasse diagram van Bryan.                                    |
+
+Hierboven is mijn klasse diagram te zien. Hierin zitten alle klasses waar ik de code heb uitgewerkt. Hieronder zou ik
+mijn eerste versie weergeven.
+
+| ![Klassediagram Bryan Velthuizen](./diagrammen/classDiagram-booking-fascade-versie-1-bryan.svg) |
+|------------------------------------------------------------------------------|
+| De eerste versie klassendiagram van Bryan.                                   |
+
+Om een beter beeld te geven van de onderlinge interactie heb ik ook nog een dynamic diagram gemaakt. Die ziet er als volgt uit.
+
+| ![Dynamicdiagram Bryan Velthuizen](./diagrammen/dynamicDiagram-booking-fascade-versie-2-bryan.svg) |
+|------------------------------------------------------------------------------|
+| Final version van dynamic diagram                                            |
+
+Hierboven is mijn dynamic diagram te zien.
+
+| ![Dynamicdiagram Bryan Velthuizen](./diagrammen/dynamicDiagram-booking-fascade-versie-1-bryan.svg) |
+|------------------------------------------------------------------------------|
+| De 1e versie van mijn dynamic diagram voor uitwerken code                    |
+
+Om nog beter in te gaan over interacties voor begrip van mijn code heb ik een sequentie diagram gemaakt. Deze zien er alsvolgt uit.
+
+
+| ![Sequentiediagram Bryan Velthuizen](./diagrammen/sequentieDiagram-booking-fascade-versie-2-bryan.svg) |
+|------------------------------------------------------------------------------|
+| De eerste versie sequentie diagram van Bryan.                                |
+
+Hierboven is mijn sequentie diagram uitgewerkt.
+
+| ![Sequentiediagram Bryan Velthuizen](./diagrammen/sequentieDiagram-booking-fascade-versie-1-bryan.svg) |
+|------------------------------------------------------------------------------|
+| De eerste versie sequentie diagram van Bryan.                                |
+
+
 
 > [IMPORTANT]
 > INDIEN NODIG KUN JE HIERONDER EEN SEQUENTIEDIAGRAM TOEVOEGEN
