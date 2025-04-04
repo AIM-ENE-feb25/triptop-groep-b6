@@ -991,6 +991,7 @@ Om de TripTop applicatie uit te voeren zijn er vereisten.
 - JAVA_HOME variabele (bv. C:\ProgramFiles\Java\jdk-21)
 - Apache Maven 3.9.9+
 
+
 **Uitvoeren van de TripTop applicatie:**
 
 1. Open een terminal
