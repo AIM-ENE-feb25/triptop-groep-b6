@@ -450,8 +450,6 @@ laten lopen, omdat het soms complexe logica vereisen of we informatie willen ops
 De gevolgen van deze beslissing zijn dat we de API-aanroepen via de backend moeten laten lopen. Dit biedt meer controle
 over de gegevens en betere beveiliging door exceptions etc.
 
-|--------------------------------------------------------------------------------------------------------------|
-
 ##### 7.3.4. Uitwerking Ontwerpvraag Daniel Sung
 
 **Ontwerpvraag:** Hoe ga je om met het aanroepen van externe services die niet beschikbaar zijn en toch verwacht dat er
