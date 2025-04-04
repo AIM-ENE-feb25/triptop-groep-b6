@@ -351,7 +351,7 @@ wijziging in de front-end maar flexibel kan worden opgevangen door de backend.
 
 **Prototype:** Betalingssysteem met Stripe API
 
-#### Diagrammen WIP (afbeelding zijn lage resolutie + toelichting)
+###### Diagrammen WIP (afbeelding zijn lage resolutie + toelichting)
 Klassendiagram Daniel Sung
 ![alt text](../software-guidebook/diagrammen-daniel/class-diagram-daniel.png)
 
@@ -363,7 +363,7 @@ Dynamic component diagram Daniel Sung
 ![alt text](../software-guidebook/diagrammen-daniel/dynamic-component-daniel.png)
 Dynamic component diagram
 
-#### Uitwerking van Design Pattern "Adapter" WIP (niet uitgebreid)
+###### Uitwerking van Design Pattern "Adapter" WIP (niet uitgebreid)
 
 Om de Adapter design pattern te gebruiken, heb ik een adapter klasse aangemaakt die POST requests specifiek voor Stripe uitvoert gemaakt. De StripeAdapter klasse implementeert een interface "PaymentAdapterInterface". Dit wordt dan gebruikt in mijn PaymentService. 
 
@@ -448,7 +448,7 @@ public class StripeAdapter implements PaymentAdapterInterface {
 }
 ```
 
-#### Uitwerking van ontwerpvraag "Fault tolerance"
+###### Uitwerking van ontwerpvraag "Fault tolerance"
 
 Om ervoor te zorgen dat foute responses van externe services op te vangen, heb ik gebruik gemaakt van custom exceptions en een GlobalExceptionHandler. In de exceptionhandler heb ik ook nog een functie die een custom response aanmaakt zodat de frontend meer nut heeft van foutmeldingen. De PaymentService maakt hier dan gebruik van.
 
